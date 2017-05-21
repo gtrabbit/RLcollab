@@ -1,32 +1,48 @@
 Game.Screen = {};
 
-Game.playerClasses = [Game.FighterTemplate, Game.RogueTemplate]
+
 
 Game.Screen.startScreen = {
-    _selectedClass: Game.playerClasses[0],
-	enter: function(){console.log("entered start screen");},
+    _availableClasses: ['Fighter', 'Rogue'],
+    _selectedIndex: null,
+	enter: function(){this._selectedIndex = 0;},
 	exit: function(){console.log("exited start screen");},
 	render: function(display){
+        display.clear();
         let entermsg = 'Please Select a Class'
         let confirmMsg = "Press [Enter] to confirm selection"
 		display.drawText((Game.getScreenWidth() - entermsg.length)/2 ,1,"%c{yellow}" + entermsg);
 		display.drawText((Game.getScreenWidth() - confirmMsg.length)/2, (Game.getScreenHeight()/2)+5, confirmMsg);
+        for (let i = this._availableClasses.length-1; i>=0; i--){
+            let x = ( (i*12) + Game.getScreenWidth()/(this._availableClasses.length+1) )  ;
+            let y = Game.getScreenHeight()/2;
+            display.drawText(x, y, this._availableClasses[i]);
+            if (i === this._selectedIndex){
+
+                display.drawText(x-1, y, "%c{yellow}[");
+                display.drawText(x+this._availableClasses[i].length, y, "%c{yellow}]");
+            }
+        }
 	},
 	handleInput: function(inputType, inputData){
-        switch(inputData.keyCode){
-            case ROT.VK_A:
-                this._selectedClass = Game.playerClasses[1];
-                break;
-            case ROT.VK_B:
-                this._selectedClass = Game.playerClasses[0];
-                break;
-        }
-
-
-		if (inputType === 'keydown'){
-			if (inputData.keyCode === ROT.VK_RETURN){
-				Game.switchScreen(Game.Screen.playScreen, this._selectedClass);
-			}
+        if (inputType === 'keydown'){
+            switch(inputData.keyCode){
+                case ROT.VK_NUMPAD4:
+                    if (this._selectedIndex > 0){
+                        this._selectedIndex--;
+                        this.render(Game.getDisplay());
+                    }
+                    break;
+                case ROT.VK_NUMPAD6:
+                    if (this._selectedIndex < this._availableClasses.length-1){
+                        this._selectedIndex++;
+                        this.render(Game.getDisplay());
+                    }          
+                    break;
+                case ROT.VK_RETURN:
+                    Game.switchScreen(Game.Screen.playScreen, this._availableClasses[this._selectedIndex] +"Template");
+                    break;
+            }
 		}
 	}
 }
@@ -77,12 +93,14 @@ Game.Screen.playScreen = {
 	exit: function(){
 		console.log("exiting the play screen")
 	},
-	enter: function(){
+	enter: function(className){
+       
 		let width = 100;
 		let height = 48;
 		let depth = 6;
 		let tiles = new Game.Builder(width, height, depth).getTiles();
-		this._player = new Game.Entity(Game.PlayerTemplate);
+		this._player = new Game.Entity(Game.classTemplates[className]);
+        console.log(this._player)
 		this._map = new Game.Map.Cave(tiles, this._player);
 		this._map.getEngine().start();
 	},
