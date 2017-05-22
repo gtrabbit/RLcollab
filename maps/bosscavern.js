@@ -3,6 +3,12 @@ Game.Map.BossCavern = function() {
     // Call the Map constructor
     Game.Map.call(this, this._generateTiles(80, 24));
     this.addEntityAtRandomPosition(Game.EntityRepository.create('giant zombie'), 0);
+    for (let i = 0; i < 15; i++){
+        let slime = Game.EntityRepository.create('slime');
+        slime.giveExperience(500)
+        this.addEntityAtRandomPosition(slime, 0)
+    }
+    
  
 };
 Game.Map.BossCavern.extend(Game.Map);

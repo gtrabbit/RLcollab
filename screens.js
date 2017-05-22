@@ -3,9 +3,11 @@ Game.Screen = {};
 
 
 Game.Screen.startScreen = {
-    _availableClasses: ['Fighter', 'Rogue'],
+    _availableClasses: null,
     _selectedIndex: null,
-	enter: function(){this._selectedIndex = 0;},
+	enter: function(){
+        this._selectedIndex = 0;
+        this._availableClasses = Game.classTemplates.getAvailableClasses()},
 	exit: function(){console.log("exited start screen");},
 	render: function(display){
         display.clear();
@@ -16,11 +18,13 @@ Game.Screen.startScreen = {
         for (let i = this._availableClasses.length-1; i>=0; i--){
             let x = ( (i*12) + Game.getScreenWidth()/(this._availableClasses.length+1) )  ;
             let y = Game.getScreenHeight()/2;
-            display.drawText(x, y, this._availableClasses[i]);
+            display.drawText(x, y, this._availableClasses[i].name);
             if (i === this._selectedIndex){
 
                 display.drawText(x-1, y, "%c{yellow}[");
-                display.drawText(x+this._availableClasses[i].length, y, "%c{yellow}]");
+                display.drawText(x+this._availableClasses[i].name.length, y, "%c{yellow}]");
+                let description = this._availableClasses[i].description;
+                display.drawText((Game.getScreenWidth() - description.length)/2, (Game.getScreenHeight()/2)-5, description )
             }
         }
 	},
@@ -40,7 +44,7 @@ Game.Screen.startScreen = {
                     }          
                     break;
                 case ROT.VK_RETURN:
-                    Game.switchScreen(Game.Screen.playScreen, this._availableClasses[this._selectedIndex] +"Template");
+                    Game.switchScreen(Game.Screen.playScreen, this._availableClasses[this._selectedIndex]);
                     break;
             }
 		}
@@ -99,7 +103,7 @@ Game.Screen.playScreen = {
 		let height = 48;
 		let depth = 6;
 		let tiles = new Game.Builder(width, height, depth).getTiles();
-		this._player = new Game.Entity(Game.classTemplates[className]);
+		this._player = new Game.Entity(className);
         console.log(this._player)
 		this._map = new Game.Map.Cave(tiles, this._player);
 		this._map.getEngine().start();

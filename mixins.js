@@ -51,9 +51,10 @@ Game.Mixins.FoodConsumer = {
     modifyFullnessBy: function(points) {
         this._fullness = this._fullness + points;
         if (this._fullness <= 0) {
-            this.kill("You have died of starvation!");
+            Game.sendMessage(this, "You are dying of hunger");
+            this.setHP(this._hp + (Math.round(((this._fullness*6)-20)/50)))
         } else if (this._fullness > this._maxFullness) {
-            this.kill("You choke and die!");
+            Game.sendMessage(this, "You are already as full as you can be!");
         }
     },
     getHungerState: function() {
@@ -215,6 +216,7 @@ Game.Mixins.Attacker = {
     },
     attack: function(target){
         if (target.hasMixin('Destructible')){
+            console.log(target);
             let attack = this.getAttackValue();
             let defense = target.getDefenseValue();
             let max = Math.max(0, attack - defense);
@@ -270,7 +272,7 @@ Game.Mixins.ExperienceGainer = {
     },
     listeners: {
         onKill: function(victim) {
-            var exp = victim.getMaxHP() + victim.getDefenseValue();
+            var exp = (victim.getMaxHP()/10) + (victim.getDefenseValue()*2);
             if (victim.hasMixin('Attacker')) {
                 exp += victim.getAttackValue();
             }
@@ -280,7 +282,7 @@ Game.Mixins.ExperienceGainer = {
             }
             // Only give experience if more than 0.
             if (exp > 0) {
-                this.giveExperience(exp);
+                this.giveExperience(Math.round(exp/2));
             }
         },
         details: function() {
@@ -294,7 +296,7 @@ Game.Mixins.ExperienceGainer = {
         return this._experience;
     },
     getNextLevelExperience: function() {
-        return (this._level * this._level) * 10;
+        return (this._level * this._level) * (10 + this._level) ;
     },
     getStatPoints: function() {
         return this._statPoints;
@@ -400,11 +402,8 @@ Game.Mixins.PlayerActor = {
             Game.sendMessage(this, 'Press [enter] to die all the way')
         }
         this._acting = false;
-
-
         Game.refresh();
         this.getMap().getEngine().lock();
-       //  this.clearMessages();
     }
 }
 

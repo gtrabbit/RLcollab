@@ -6,13 +6,13 @@ Game.Map.Cave = function(tiles, player) {
     // Add random entities and items to each floor.
     for (var z = 0; z < this._depth; z++) {
         // 15 entities per floor
-        for (var i = 0; i < 15; i++) {
+        for (var i = 0; i < 5*z; i++) {
             var entity = Game.EntityRepository.createRandom();
             // Add a random entity
             this.addEntityAtRandomPosition(entity, z);
             // Level up the entity based on the floor
             if (entity.hasMixin('ExperienceGainer')) {
-                for (var level = 0; level < z; level++) {
+                for (var level = 0; level < z*2; level++) {
                     entity.giveExperience(entity.getNextLevelExperience() -
                         entity.getExperience());
                 }

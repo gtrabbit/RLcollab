@@ -1,9 +1,11 @@
+
+//this is the basic template from which all classes are built
 Game.PlayerTemplate = {
     character: '@',
     foreground: 'white',
-    maxHP: 40,
-    attackValue: 10,
-    sightRadius: 6,
+    maxHP: 20,
+    attackValue: 8,
+    sightRadius: 5,
     name: 'human (you)',
     inventorySlots: 22,
     mixins: [Game.Mixins.PlayerActor,
@@ -18,19 +20,61 @@ Game.PlayerTemplate = {
             Game.Mixins.PlayerStatGainer]
 }
 
-Game.classTemplates = {}
+Game.classTemplates = {};
+
+
+//from here, you can build classes simply by entering values.
+//I think this is all the values you can alter
+//with a description where they aren't obvious
+
+
+//statPointsPerLevel -- default 1
+//fullnessDepletionRate -- default: 1 -- how quickly hunger is added
+//maxFullness -- default: 1000 --how much you can eat
+//speed -- default: 1000
+//sightRadius -- default 7 -- how many tiles (literally) you can see
+//maxHP -- default 40
+//defenseValue -- default 0
+//attackValue -- default 10
+
+//i made a few to get started...
+
+//any values not defined in the classTemplate will default to playertemplate values
+
 
 Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
-    maxHP: 60,
-    attackValue: 15,
+    name: "Fighter",
+    maxHP: 40,
+    attackValue: 12,
     sightRadius: 5,
+    defenseValue: 3,
     speed: 800,
-    className: "Fighter"
+    description: "Standard fighter. Strong, but slow"
 
 })
 
 Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
-    speed: 1500,
+    name: "Rogue",
+    speed: 1400,
     sightRadius: 7,
-    ClassName: "Rogue"
+    description: "A Rogue. Quick, but weak"
+
 })
+
+Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Barbarian",
+    attackValue: 15,
+    defenseValue: 1,
+    fullnessDepletionRate: 3,
+    fullness: 1000,
+    description: "Hungry for blood, and food"
+})
+
+Game.classTemplates.getAvailableClasses = function() {
+    let availableClasses = [];
+    for (let i in Game.classTemplates){
+            availableClasses.push(Game.classTemplates[i]);
+    }
+        return availableClasses;
+}
+

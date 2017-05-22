@@ -2,7 +2,7 @@ Game.EntityRepository = new Game.Repository('entities', Game.Entity);
 
 
 
-
+//templates here can be created/modified very similar to the classTemplates
 
 
 Game.EntityRepository.define('fungus', {
@@ -22,8 +22,8 @@ Game.EntityRepository.define('giant zombie', {
     name: 'giant zombie', 
     character: 'Z',
     foreground: 'teal',
-    maxHp: 30,
-    attackValue: 8,
+    maxHp: 100,
+    attackValue: 12,
     defenseValue: 5,
     level: 5,
     sightRadius: 6,
