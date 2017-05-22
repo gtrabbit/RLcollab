@@ -8,7 +8,7 @@ Game.EntityRepository = new Game.Repository('entities', Game.Entity);
 Game.EntityRepository.define('fungus', {
     name: 'fungus',
     character: 'F',
-    foreground: 'green',
+    foreground: 'rgb(30,200,30)',
     maxHP: 10,
     speed: 250,
     mixins: [Game.Mixins.FungusActor,
