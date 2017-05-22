@@ -93,13 +93,13 @@ Game.EntityRepository.define('kobold', {
             Game.Mixins.RandomStatGainer]
 });
 Game.EntityRepository.define('orc', {
-	name: 'orc'
+	name: 'orc',
 	character: 'O',
 	foreground: 'DarkOliveGreen',
-	maxHP: 12
-	attackValue: 7
-	sightRadius: 5
-	tasks: ['hunt', 'wander']
+	maxHP: 12,
+	attackValue: 7,
+	sightRadius: 5,
+	tasks: ['hunt', 'wander'],
 	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,
              Game.Mixins.CorpseDropper,
