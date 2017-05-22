@@ -4,7 +4,7 @@ Game.ItemRepository.define('apple', {
     name: 'apple',
     character: '%',
     foreground: 'red',
-    foodValue: 50,
+    foodValue: 250,
     mixins: [Game.ItemMixins.Edible]
 });
 
@@ -17,15 +17,15 @@ Game.ItemRepository.define('melon', {
     name: 'melon',
     character: '%',
     foreground: 'lightGreen',
-    foodValue: 35,
-    consumptions: 4,
+    foodValue: 535,
+    consumptions: 1,
     mixins: [Game.ItemMixins.Edible]
 });
 
 Game.ItemRepository.define('corpse', {
     name: 'corpse',
     character: '%',
-    foodValue: 75,
+    foodValue: 200,
     consumptions: 1,
     mixins: [Game.ItemMixins.Edible]
 }, {
@@ -45,7 +45,7 @@ Game.ItemRepository.define('dagger', {
     disableRandomCreation: true
 });
 
-Game.ItemRepository.define('sword', {
+Game.ItemRepository.define('short sword', {
     name: 'sword',
     character: ')',
     foreground: 'white',
@@ -105,7 +105,7 @@ Game.ItemRepository.define('pumpkin', {
     name: 'pumpkin',
     character: '%',
     foreground: 'orange',
-    foodValue: 50,
+    foodValue: 350,
     attackValue: 2,
     defenseValue: 2,
     wearable: true,
