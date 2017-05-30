@@ -26,4 +26,23 @@ Game.Geometry = {
 
         return points;
     }
+
+    // getClosestTarget: function(map, point, radius){
+    //     let leftX = point.x - radius;
+    //     let topY = point.y - radius;
+    //     let rightX = point.x + radius;
+    //     let botY = point.y + radius;
+    //     let x = point.x;
+    //     let y = point.y;
+    //     let z = point.z;
+    //     let total = radius*radius;
+    //     let count = 0;
+    //     let target;
+    //     while (!target || count < total){
+    //         count++;
+    //         target = map.getTile(x, y, z);
+    //     }
+
+//will come back to this some other day....
+    // }
 };

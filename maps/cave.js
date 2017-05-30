@@ -1,6 +1,7 @@
 Game.Map.Cave = function(tiles, player) {
     // Call the Map constructor
     Game.Map.call(this, tiles);
+ 
     // Add the player
     this.addEntityAtRandomPosition(player, 0);
     // Add random entities and items to each floor.
@@ -10,6 +11,7 @@ Game.Map.Cave = function(tiles, player) {
             var entity = Game.EntityRepository.createRandom();
             // Add a random entity
             this.addEntityAtRandomPosition(entity, z);
+        
             // Level up the entity based on the floor
             if (entity.hasMixin('ExperienceGainer')) {
                 for (var level = 0; level < z*2; level++) {
@@ -35,5 +37,7 @@ Game.Map.Cave = function(tiles, player) {
     var holePosition = this.getRandomFloorPosition(this._depth - 1);
     this._tiles[this._depth - 1][holePosition.x][holePosition.y] = 
         Game.Tile.holeToCavernTile;
+
+     
 };
 Game.Map.Cave.extend(Game.Map);

@@ -9,8 +9,12 @@ Game.Entity = function(properties) {
     this._z = properties['z'] || 0;
     this._map = null;
     this._alive = true;
-
-
+    this._maxStamina = properties['maxStamina'] || 100;
+    this._stamina = this._maxStamina;
+    this._staminaRegenRate = properties['staminaRegenRate'] || 0;
+    this._healthRegenRate = properties['healthRegenRate'] || 0;
+    this._regenDelay = properties['regenDelay'] || 5;
+    this._tickCount = 0;
    
 }
 // Make entities inherit all the functionality from glyphs
@@ -19,29 +23,48 @@ Game.Entity.extend(Game.DynamicGlyph);
 Game.Entity.prototype.setSpeed = function(speed) {
     this._speed = speed;
 };
-// ...
+
 Game.Entity.prototype.getSpeed = function() {
     return this._speed;
 };
+Game.Entity.prototype.getStamina = function(){
+    return this._stamina;
+}
+Game.Entity.prototype.modifyStamina = function(amount){
+    this._stamina += amount;
+}
+Game.Entity.prototype.regen = function(){
+    if (this._stamina < this._maxStamina){
+        this.modifyStamina(this._staminaRegenRate);
+    }
+    if (this._hp < this._maxHP){
+        this.modifyHP(this._healthRegenRate);
+    }
+       
+       
+}
 
 Game.Entity.prototype.tryMove = function(x, y, z, map){
         map = this.getMap();
         let tile = map.getTile(x, y, this.getZ());
-        let target = map.getEntityAt(x, y, this.getZ());
+        if (!tile){
+            return false;
+        }
+        let target = map.getTile(x, y, this.getZ()).getOccupant();
       
         if (z < this.getZ()){
-            if (tile != Game.Tile.stairsUpTile){
+            if (tile._name != 'stairsUpTile'){
                 Game.sendMessage(this, "Climbing upward from here would be impossible");
             } else {
                 Game.sendMessage(this, "You climb to level %d", [z+1]);
                 this.setPosition(x, y, z);
             }
         } else if (z > this.getZ()){
-            if (tile === Game.Tile.holeToCavernTile &&
+            if (tile._name === 'holeToCavernTile' &&
                 this.hasMixin(Game.Mixins.PlayerActor)) {
             // Switch the entity to a boss cavern!
                 this.switchMap(new Game.Map.BossCavern());
-            } else if (tile != Game.Tile.stairsDownTile){
+            } else if (tile._name != 'stairsDownTile'){
                 Game.sendMessage(this, "There are no means to descend from here")
             } else {
                 this.setPosition(x, y, z);
@@ -60,7 +83,7 @@ Game.Entity.prototype.tryMove = function(x, y, z, map){
 
             this.setPosition(x, y, z);
             let items = this.getMap().getItemsAt(x, y, z);
-            if (items){
+            if (items.length){
                 if (items.length === 1){
                     Game.sendMessage(this, 'You see %s', [items[0].describeA()])
                 } else {
@@ -70,8 +93,15 @@ Game.Entity.prototype.tryMove = function(x, y, z, map){
             return true;
         } else if (tile.isDiggable()){
             if (this.hasMixin(Game.Mixins.PlayerActor)){
-                map.dig(x,y,z);
-                return true;
+                if (this._stamina >= 10){
+                    map.dig(x,y,z);
+                    this.modifyStamina(-10);
+                    return true;
+                } else {
+                    Game.sendMessage(this, "You are too exhausted to dig")
+                    return false
+                }
+              
             }
             return false;
 
@@ -133,8 +163,12 @@ Game.Entity.prototype.setPosition = function(x, y, z) {
     this._z = z;
 
     if (this._map){
-        this._map.updateEntityPosition(this, oldX, oldY, oldZ);
+        this._map.getTile(oldX, oldY, oldZ).setOccupant(null);
+        this._map.getTile(x, y, z).setOccupant(this)
     }
+
+
+
 }
 Game.Entity.prototype.setMap = function(map) {
     this._map = map;

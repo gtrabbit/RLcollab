@@ -8,6 +8,9 @@ Game.PlayerTemplate = {
     sightRadius: 5,
     name: 'human (you)',
     inventorySlots: 22,
+    healthRegenRate: 1,
+    staminaRegenRate: 1,
+    regenDelay: 5,
     mixins: [Game.Mixins.PlayerActor,
              Game.Mixins.Attacker,
              Game.Mixins.Destructible,
@@ -18,6 +21,7 @@ Game.PlayerTemplate = {
              Game.Mixins.Equipper,
             Game.Mixins.ExperienceGainer,
             Game.Mixins.PlayerStatGainer]
+ 
 }
 
 Game.classTemplates = {};

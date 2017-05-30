@@ -38,7 +38,7 @@ Game.Builder.prototype._removeRegion = function(region, z){
 		for (let y = 0; y < this._height; y++){
 			if (this._regions[z][x][y] == region){
 				this._regions[z][x][y] = 0;
-				this._tiles[z][x][y] = Game.Tile.wallTile;
+				this._tiles[z][x][y] = Game.TileRepository.create('wallTile');
 
 			}
 		}
@@ -70,8 +70,8 @@ Game.Builder.prototype._findRegionOverlaps = function(z, r1, r2){
 
 	for (let x = 0; x<this._width; x++){
 		for (let y = 0; y < this._height; y++){
-			if (this._tiles[z][x][y] == Game.Tile.floorTile &&
-				this._tiles[z+1][x][y] == Game.Tile.floorTile &&
+			if (this._tiles[z][x][y]._name == 'floorTile' &&
+				this._tiles[z+1][x][y]._name == 'floorTile' &&
 				this._regions[z][x][y] == r1 &&
 				this._regions[z+1][x][y] == r2){
 				matches.push({x: x, y: y})
@@ -88,8 +88,8 @@ Game.Builder.prototype._connectRegions = function(z, r1, r2){
 	}
 
 	let point = overlap[0];
-	this._tiles[z][point.x][point.y] = Game.Tile.stairsDownTile;
-	this._tiles[z+1][point.x][point.y] = Game.Tile.stairsUpTile;
+	this._tiles[z][point.x][point.y] = Game.TileRepository.create('stairsDownTile');
+	this._tiles[z+1][point.x][point.y] = Game.TileRepository.create('stairsUpTile');
 	return true;
 }
 
@@ -100,8 +100,8 @@ Game.Builder.prototype._connectAllRegions = function(){
 		for (let x = 0; x<this._width; x++){
 			for (let y=0; y<this._height; y++){
 				key = this._regions[z][x][y] + ',' + this._regions[z+1][x][y];
-				if (this._tiles[z][x][y] == Game.Tile.floorTile &&
-					this._tiles[z+1][x][y] == Game.Tile.floorTile &&
+				if (this._tiles[z][x][y]._name == 'floorTile' &&
+					this._tiles[z+1][x][y]._name == 'floorTile' &&
 					!connected[key]){
 					this._connectRegions(z, this._regions[z][x][y],
 						this._regions[z+1][x][y]);
@@ -120,6 +120,7 @@ Game.Builder.prototype._fillRegion = function(region, x, y, z){
 
 	this._regions[z][x][y] = region;
 	while (tiles.length > 0){
+
 		tile = tiles.pop();
 		neighbors = Game.getNeighborPositions(tile.x, tile.y);
 		while (neighbors.length > 0){
@@ -130,13 +131,7 @@ Game.Builder.prototype._fillRegion = function(region, x, y, z){
 				tilesFilled++;
 			}
 		}
-		// neighbors.forEach((a) => {
-		// 	if (this._canFillRegion(a.x, a.y, z)){
-		// 		this._regions[z][a.x][a.y] = region;
-		// 		tiles.push(a);
-		// 		tilesFilled++;
-		// 	}
-		// })
+	
 	}
 	return tilesFilled;
 }
@@ -157,9 +152,9 @@ Game.Builder.prototype._generateLevel = function(){
     // Smoothen it one last time and then update our map
     generator.create(function(x,y,v) {
         if (v === 1) {
-            map[x][y] = Game.Tile.floorTile;
+            map[x][y] = Game.TileRepository.create('floorTile');
         } else {
-            map[x][y] = Game.Tile.wallTile;
+            map[x][y] = Game.TileRepository.create('wallTile');
         }
     });
     return map;

@@ -12,7 +12,8 @@ Game.Map = function(tiles, player){
         this.addItemAtRandomPosition(Game.ItemRepository.create(templates[i]),
             Math.floor(this._depth * Math.random()));
     }
-    this.setupFov();
+     this.setupFov();
+  
     this._explored = new Array(this._depth);
     this._setupExploredArray();
 	this._scheduler = new ROT.Scheduler.Speed();
@@ -36,16 +37,18 @@ Game.Map.prototype.getPlayer = function() {
 Game.Map.prototype.dig = function(x, y, z) {
     // If the tile is diggable, update it to a floor
     if (this.getTile(x, y, z).isDiggable()) {
-        this._tiles[z][x][y] = Game.Tile.floorTile;
+        Game.sendMessage(this._player, "You dig into the cavern wall")
+        this._tiles[z][x][y] = Game.TileRepository.create('floorTile');
+    } else {
+        Game.sendMessage(this._player, "You dig for some time, but make no progress")
     }
 }
 
 
 Game.Map.prototype.removeEntity = function(entity){
-    let key = entity.getX() + ',' + entity.getY() + ',' + entity.getZ();
-    if (this._entities[key] == entity){
-        delete this._entities[key];
-    }
+    let tile = this.getTile(entity.getX(), entity.getY(), entity.getZ());
+    tile.setOccupant(null);
+  
 	if (entity.hasMixin('Actor')){
 		this._scheduler.remove(entity);
 	}
@@ -61,7 +64,10 @@ Game.Map.prototype.setupFov = function(){
             let depth = z;
             map._fov.push(
                 new ROT.FOV.DiscreteShadowcasting(function(x, y){
-                    return !map.getTile(x, y, depth).isBlockingLight();
+                    if (map.getTile(x, y, depth)){
+                         return !map.getTile(x, y, depth).isBlockingLight();
+                    }
+                   
                 }, {topology: 4}))
         }) ();
     }
@@ -100,18 +106,26 @@ Game.Map.prototype.getFov = function(depth){
 }
 
 Game.Map.prototype.isEmptyFloor = function(x, y, z) {
+
     // Check if the tile is floor and also has no entity
-    return this.getTile(x, y, z) == Game.Tile.floorTile &&
+    if (x >= this._width-2 || x < 3 || y > this._height-2 || y < 3){
+        return false;
+    }
+    return this.getTile(x, y, z)._name == 'floorTile' &&
            !this.getEntityAt(x, y, z);
 }
 
 Game.Map.prototype.getRandomFloorPosition = function(z) {
     // Randomly generate a tile which is a floor
-    var x, y;
-    do {
+
+    let x = Math.floor(Math.random() * this._width);
+    let y = Math.floor(Math.random() * this._height);
+    while (!this.isEmptyFloor(x, y, z)){
         x = Math.floor(Math.random() * this._width);
         y = Math.floor(Math.random() * this._height);
-    } while(!this.isEmptyFloor(x, y, z));
+    }
+
+
     return {x: x, y: y, z: z};
 }
 
@@ -120,8 +134,8 @@ Game.Map.prototype.getRandomFloorPosition = function(z) {
 Game.Map.prototype.addEntity = function(entity) {
     // Update the entity's map
     entity.setMap(this);
+    this.getTile(entity.getX(), entity.getY(), entity.getZ()).setOccupant(entity);
     // Add the entity to the list of entities
-    this.updateEntityPosition(entity);
     // Check if this entity is an actor, and if so add
     // them to the scheduler
     if (entity.hasMixin('Actor')) {
@@ -152,35 +166,22 @@ Game.Map.prototype.getEntities = function() {
 
 
 Game.Map.prototype.getEntityAt = function(x, y, z){
-    return this._entities[x+','+y+','+z];
+    return this.getTile(x, y, z).getOccupant();
 }
 
 Game.Map.prototype.getItemsAt = function(x, y, z) {
-    return this._items[x + ',' + y + ',' + z];
+    return this.getTile(x, y, z).getLoot();
 };
 
 Game.Map.prototype.setItemsAt = function(x, y, z, items) {
-    // If our items array is empty, then delete the key from the table.
-    var key = x + ',' + y + ',' + z;
-    if (items.length === 0) {
-        if (this._items[key]) {
-            delete this._items[key];
-        }
-    } else {
-        // Simply update the items at that key
-        this._items[key] = items;
-    }
+    this.getTile(x, y, z).setLoot(items)
 };
 
 Game.Map.prototype.addItem = function(x, y, z, item) {
-    // If we already have items at that position, simply append the item to the 
-    // list of items.
-    var key = x + ',' + y + ',' + z;
-    if (this._items[key]) {
-        this._items[key].push(item);
-    } else {
-        this._items[key] = [item];
+    if (typeof items != Array){
+        items = [item];
     }
+    this.getTile(x, y, z).setLoot(items)
 };
 
 Game.Map.prototype.addItemAtRandomPosition = function(item, z) {
@@ -192,44 +193,30 @@ Game.Map.prototype.addItemAtRandomPosition = function(item, z) {
 Game.Map.prototype.getEntitiesWithinRadius = function(centerX, centerY,
                                                       centerZ, radius) {
     results = [];
-    // Determine our bounds
     var leftX = centerX - radius;
     var rightX = centerX + radius;
     var topY = centerY - radius;
     var bottomY = centerY + radius;
     // Iterate through our entities, adding any which are within the bounds
-    for (let key in this._entities) {
-        let entity = this._entities[key];
-        if (entity.getX() >= leftX &&
-            entity.getX() <= rightX && 
-            entity.getY() >= topY &&
-            entity.getY() <= bottomY &&
-            entity.getZ() == centerZ) {
-            results.push(entity);
+
+//doing work here when I get back
+    thingsInRadius = [];
+    for (let x = leftX; x < rightX; x++){
+        for (let y = topY; y < bottomY; y++){
+            let tile = this.getTile(x, y, centerZ);
+            if (tile){
+                let entity = tile.getOccupant(x,y,centerZ)
+                if (entity){
+                    thingsInRadius.push(entity)
+                }
+            }
+            //need to check if there is a tile in the radius before getting occupant
+            
         }
     }
-    return results;
+    return thingsInRadius
 };
 
-Game.Map.prototype.updateEntityPosition = function(entity, oldX, oldY, oldZ){
-    if (typeof oldX === 'number'){
-        let oldKey = oldX+','+oldY+','+oldZ;
-        if (this._entities[oldKey]==entity){
-            delete this._entities[oldKey];
-        }
-    }
-
-    if (entity.getX() < 0 || entity.getX() >= this._width ||
-        entity.getY() < 0 || entity.getY() >= this._height ||
-        entity.getZ() < 0 || entity.getZ() >= this._depth){
-        throw new Error("Entity's position is out of bounds");
-    }
-    let key = entity.getX() + ',' + entity.getY() + ',' + entity.getZ();
-    if (this._entities[key]){
-        throw new Error('Tried to add an entity at an occupied position');
-    }
-    this._entities[key] = entity;
-}
 
 
 Game.Map.prototype.getTile = function(x, y, z) {
