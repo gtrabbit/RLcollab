@@ -85,6 +85,7 @@ Game.EntityRepository.define('kobold', {
     character: 'k',
     foreground: 'white',
     maxHp: 6,
+	speed: 300,
     attackValue: 4,
     sightRadius: 5,
     tasks: ['hunt', 'wander'],
@@ -94,3 +95,32 @@ Game.EntityRepository.define('kobold', {
              Game.Mixins.ExperienceGainer,
             Game.Mixins.RandomStatGainer]
 });
+
+Game.EntityRepository.define('orc', {
+	name: 'orc',
+	character: 'O',
+	foreground: 'DarkOliveGreen',
+	maxHP: 12,
+	attackValue: 7,
+	sightRadius: 5,
+	tasks: ['hunt', 'wander'],
+	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
+             Game.Mixins.Attacker, Game.Mixins.Destructible,
+             Game.Mixins.CorpseDropper,
+             Game.Mixins.ExperienceGainer,
+            Game.Mixins.RandomStatGainer]
+}};
+
+Game.EntityRepository.define('ogre', {
+	name: 'ogre',
+	character: 'O',
+	foreground: 'Chocolate',
+	maxHP: 18,
+	attackValue: 11,
+	sightRadius: 5,
+	tasks: ['hunt', 'wander'],
+	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
+             Game.Mixins.Attacker, Game.Mixins.Destructible,
+             Game.Mixins.CorpseDropper,
+             Game.Mixins.ExperienceGainer,
+            Game.Mixins.RandomStatGainer]
