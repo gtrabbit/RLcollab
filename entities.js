@@ -109,7 +109,7 @@ Game.EntityRepository.define('orc', {
              Game.Mixins.CorpseDropper,
              Game.Mixins.ExperienceGainer,
             Game.Mixins.RandomStatGainer]
-}};
+});
 
 Game.EntityRepository.define('ogre', {
 	name: 'ogre',
@@ -124,3 +124,4 @@ Game.EntityRepository.define('ogre', {
              Game.Mixins.CorpseDropper,
              Game.Mixins.ExperienceGainer,
             Game.Mixins.RandomStatGainer]
+});

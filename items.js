@@ -45,7 +45,7 @@ Game.ItemRepository.define('dagger', {
     disableRandomCreation: true
 });
 
-Game.ItemRepository.define('short sword', {
+Game.ItemRepository.define('sword', {
     name: 'sword',
     character: ')',
     foreground: 'white',
@@ -71,7 +71,7 @@ Game.ItemRepository.define('axe', {
     name: 'axe',
     character: ')',
     foreground: 'red',
-    attackValue: Math.floor(Math.random() * 15);
+    attackValue: Math.floor(Math.random() * 15),
     wieldable: true,
     mixins: [Game.ItemMixins.Equippable]
 }, {
