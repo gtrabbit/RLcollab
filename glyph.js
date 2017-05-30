@@ -5,14 +5,38 @@ Game.Glyph = function(properties){
 	this._background = properties['background'] || 'black';
 };
 
-Game.Glyph.prototype.getChar = function(){
-	return this._char;
+Game.Glyph.prototype.getChar = function(visible){
+	if (!visible){
+		return this._char;
+	}
+	if (this._occupant){
+		return this._occupant.getChar();
+	} else if (this.hasOwnProperty('_loot') && this._loot.length){
+
+		return this._loot[0].getChar();	
+	} else {
+		return this._char;
+	}
+	
 }
 Game.Glyph.prototype.getBackground = function(){
-    return this._background;
+	if (this._occupant){
+		return this._occupant.getBackground();
+	} else {
+		return this._background;
+	}
+
 }
 Game.Glyph.prototype.getForeground = function(){ 
-    return this._foreground; 
+	if (this._occupant){
+		return this._occupant.getForeground();
+	} else if (this._loot && this._loot.length){
+	
+		return this._loot[0].getForeground();	
+	} else {
+		 return this._foreground; 
+	}
+   
 }
 Game.Glyph.prototype.getRepresentation = function() {
     return '%c{' + this._foreground + '}%b{' + this._background + '}' + this._char +

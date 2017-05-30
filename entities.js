@@ -14,7 +14,9 @@ Game.EntityRepository.define('fungus', {
     mixins: [Game.Mixins.FungusActor,
             Game.Mixins.Destructible,
             Game.Mixins.ExperienceGainer,
-            Game.Mixins.RandomStatGainer]
+            Game.Mixins.RandomStatGainer,
+            Game.Mixins.Sight,
+            Game.Mixins.Attacker]
 
 });
 
