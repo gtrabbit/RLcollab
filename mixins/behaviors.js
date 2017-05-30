@@ -239,7 +239,7 @@ Game.Mixins.FungusActor = Game.extend(Game.Mixins.StationaryRangedAttacker, {
     },
     spawnFungus: function(){
         if (this._growthsRemaining > 0){
-            if (Math.random() <= 0.08){
+            if (Math.random() <= 0.04){
                 let xOffset = Math.floor(Math.random() * 3) - 1;
                 let yOffset = Math.floor(Math.random() * 3) - 1;
                 let newX = this.getX() + xOffset;
