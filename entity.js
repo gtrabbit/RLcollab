@@ -13,6 +13,7 @@ Game.Entity = function(properties) {
     this._stamina = this._maxStamina;
     this._staminaRegenRate = properties['staminaRegenRate'] || 0;
     this._healthRegenRate = properties['healthRegenRate'] || 0;
+	this._throwStat = properties['throwStat'] || 5;
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
    

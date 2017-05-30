@@ -53,7 +53,7 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     sightRadius: 5,
     defenseValue: 3,
     speed: 800,
-	throwStat: 10
+	throwStat: 10,
     description: "Standard fighter. Strong, but slow"
 
 })
@@ -62,7 +62,7 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Rogue",
     speed: 1400,
     sightRadius: 7,
-	throwStat: 40
+	throwStat: 40,
     description: "A Rogue. Quick, but weak"
 
 })
@@ -73,7 +73,7 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
     defenseValue: 1,
     fullnessDepletionRate: 3,
     fullness: 1000,
-	throwStat: 25
+	throwStat: 25,
     description: "Hungry for blood, and food"
 })
 
