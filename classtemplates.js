@@ -73,7 +73,7 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
     defenseValue: 1,
     fullnessDepletionRate: 3,
     fullness: 1000,
-	Throwstat: 25
+	throwStat: 25
     description: "Hungry for blood, and food"
 })
 
