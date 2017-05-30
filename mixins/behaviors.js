@@ -222,7 +222,7 @@ Game.Mixins.StationaryRangedAttacker = {
 
 Game.Mixins.FungusActor = Game.extend(Game.Mixins.StationaryRangedAttacker, {
     init: function(template) {
-        this._growthsRemaining = 5;
+        this._growthsRemaining = 3;
         Game.Mixins.StationaryRangedAttacker.init.call(this, Game.extend(template, {
             'tasks' : ['shoot', 'spawnFungus']
         }));
@@ -239,7 +239,7 @@ Game.Mixins.FungusActor = Game.extend(Game.Mixins.StationaryRangedAttacker, {
     },
     spawnFungus: function(){
         if (this._growthsRemaining > 0){
-            if (Math.random() <= 0.08){
+            if (Math.random() <= 0.04){
                 let xOffset = Math.floor(Math.random() * 3) - 1;
                 let yOffset = Math.floor(Math.random() * 3) - 1;
                 let newX = this.getX() + xOffset;
