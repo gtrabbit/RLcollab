@@ -153,17 +153,7 @@ Game.Screen.singleProjectile = new Game.Screen.TargetBasedScreen({
         let target = this._player.getMap().getTile(x, y, this._player.getZ());
             switch(this._properties.actionType){
                 case "throw":
-                    let projectile = this._properties.projectile;
-                    console.log(projectile)
-                    this._player.removeItem(this._player._items.indexOf(projectile))
-                    target.setLoot(projectile);
-                    let targetedEntity = target.getOccupant();
-                    if (targetedEntity && target.getOccupant().hasMixin('Destructible')){
-                        let damage = projectile._attackValue || 2;
-                        damage += Math.floor(this._player._attackValue / 4);
-                        targetedEntity.takeDamage(this._player, damage);
-                        
-                    }
+                    this._player.throw(target, this._properties.projectile);
                     break;
             }
 

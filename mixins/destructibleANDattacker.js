@@ -108,6 +108,19 @@ Game.Mixins.Attacker = {
             target.takeDamage(this, damage);
         }
     },
+    throw: function(target, projectile){
+        this.removeItem(this._items.indexOf(projectile));
+        target.setLoot(projectile);
+        let targetedEntity = target.getOccupant();
+        if (targetedEntity && target.getOccupant().hasMixin('Destructible')){
+            let damage = projectile._attackValue || 2;
+            damage += projectile._weight || 2;
+            damage += Math.floor((this.getThrowStat() || 1) / 4);
+            targetedEntity.takeDamage(this, damage);
+                        
+        }
+
+    },
     getAttackValue: function() {
         var modifier = 0;
         // If we can equip items, then have to take into 
@@ -122,6 +135,9 @@ Game.Mixins.Attacker = {
         }
         return this._attackValue + modifier;
     },
+    getThrowStat: function(){
+        return this._throwStat;
+    },
     increaseAttackValue: function(value) {
         // If no value was passed, default to 2.
         value = value || 2;
@@ -131,3 +147,7 @@ Game.Mixins.Attacker = {
     }
 
 }
+
+
+//==========================Thrower=============>>>
+
