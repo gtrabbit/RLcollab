@@ -114,7 +114,7 @@ Game.ItemRepository.define('platemail', {
     name: 'platemail',
     character: '[',
     foreground: 'aliceblue',
-	weighit: 85,
+	weight: 85,
     defenseValue: 6,
     wearable: true,
     mixins: [Game.ItemMixins.Equippable]
