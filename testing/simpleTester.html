@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tester</title>
+</head>
+<body>
+</body>
+
+<script type="text/javascript">
+	const stats = {
+		statName: 5,
+		statName2: 5
+		//change these to pass new stats to your test player. make as many basic stats as you like
+	}
+
+	const player = function(stats){
+		console.log(stats)
+		for (let key in stats){
+			this['_'+key] = stats[key];
+		}
+			//change this name as needed
+		this.getCharacteristic = function(){
+			//replace with your own code
+			return this._statName + this._statName2;
+		}
+		//make as many of these getter functions as you want. basically, you can write code for as many characteristics you want. it won't hurt anything if we don't use them right away
+		this.getOtherCharacteristic = function(){
+
+			return this._statName2 * 3;
+		}
+
+	}
+
+	let player1 = new player(stats)
+
+console.log(player1);
+//change name of function here or just make one log for each function you make 
+console.log("Characteristic is ", player1.getCharacteristic())
+console.log("OtherCharacteristic is ", player1.getOtherCharacteristic())
+//open file in browser and check developer tools to see results
+</script>
+
+
+</html>

@@ -9,7 +9,6 @@ Game.Map = function(tiles, player){
     var templates = ['dagger', 'sword', 'staff', 
         'tunic', 'chainmail', 'platemail'];
     for (var i = 0; i < templates.length; i++) {
-        console.log(templates[i])
         this.addItemAtRandomPosition(Game.ItemRepository.create(templates[i]),
             Math.floor(this._depth * Math.random()));
     }
