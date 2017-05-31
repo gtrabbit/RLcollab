@@ -12,8 +12,8 @@ Game.ItemRepository.define('apple', {
 Game.ItemRepository.define('rock', {
     name: 'rock',
     character: '*',
-    foreground: 'white'
-	weight: 5,
+    foreground: 'white',
+	weight: 5
 });
 Game.ItemRepository.define('melon', {
     name: 'melon',
