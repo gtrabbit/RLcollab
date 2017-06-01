@@ -58,7 +58,7 @@ Game.classTemplates = {};
 
 Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Fighter",
-    maxHP: 40,
+	maxHP: 40,
     attackValue: 12,
     sightRadius: 5,
     defenseValue: 3,
