@@ -8,6 +8,16 @@ Game.PlayerTemplate = {
     sightRadius: 5,
     name: 'human (you)',
     inventorySlots: 22,
+    stats: {
+        strength: 5,
+        vitality: 5,
+        willpower: 5,
+        dexterity: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 5,
+        luck: 5
+    },
     healthRegenRate: 1,
     staminaRegenRate: 1,
     regenDelay: 5,

@@ -17,9 +17,39 @@ Game.Entity = function(properties) {
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
    
+    for (let key in properties.stats){
+            this['_'+key] = properties.stats[key];
+        }
+
+
+   
 }
 // Make entities inherit all the functionality from glyphs
 Game.Entity.extend(Game.DynamicGlyph);
+
+
+//==============get functions for functional stats ============>>>>>>
+
+
+
+Game.Entity.prototype.getMagicalResist = function(){
+    let base = Math.ceil( ( ( (this._willpower *2) * .60 ) + (this._intelligence *2) *.020) + (this._luck *2) *.30);
+
+    base += this.getModifiers();
+    return base
+}
+
+
+
+
+//=====================other stuff ==========================>>>
+
+
+
+
+Game.Entity.prototype.getModifiers = function(){
+    return 0;
+};
 
 Game.Entity.prototype.setSpeed = function(speed) {
     this._speed = speed;
@@ -34,6 +64,10 @@ Game.Entity.prototype.getStamina = function(){
 Game.Entity.prototype.modifyStamina = function(amount){
     this._stamina += amount;
 }
+
+
+
+
 Game.Entity.prototype.regen = function(){
     if (this._stamina < this._maxStamina){
         this.modifyStamina(this._staminaRegenRate);
