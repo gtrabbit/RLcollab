@@ -12,6 +12,7 @@ Game.PlayerTemplate = {
         vitality: 5,
         willpower: 5,
         dexterity: 5,
+		perception: 5,
         intelligence: 5,
         arcana: 5,
         charisma: 5,
@@ -62,8 +63,9 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
         vitality: 7,
         willpower: 5,
         dexterity: 5,
-        intelligence: 4,
-        arcana: 5,
+		perception: 5,
+        intelligence: 3,
+        arcana: 2,
         charisma: 5,
         luck: 5,
     },
@@ -78,9 +80,10 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     speed: 1400,
 	stats: {
         strength: 5,
-        vitality: 5,
+        vitality: 4,
         willpower: 5,
         dexterity: 9,
+		perception: 7,
         intelligence: 5,
         arcana: 5,
         charisma: 5,
@@ -98,14 +101,47 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
         vitality: 6,
         willpower: 5,
         dexterity: 6,
-        intelligence: 4,
-        arcana: 4,
+		perception: 5,
+        intelligence: 2,
+        arcana: 1,
         charisma: 4,
         luck: 5,
     },
     fullnessDepletionRate: 3,
     fullness: 1000,
     description: "Hungry for blood, and food"
+})
+
+Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Wizard",
+	stats: {
+        strength: 3,
+        vitality: 3,
+        willpower: 6,
+        dexterity: 5,
+		perception: 6,
+        intelligence: 9,
+        arcana: 7,
+        charisma: 4,
+        luck: 5,
+    },
+    description: "Studying for decades to become a master of magic"
+})
+
+Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Cleric",
+	stats: {
+        strength: 5,
+        vitality: 6,
+        willpower: 8,
+        dexterity: 5,
+		perception: 5,
+        intelligence: 5,
+        arcana: 6,
+        charisma: 5,
+        luck: 7,
+    },
+    description: "To cleanse the dungeon in the name of their primordial god"
 })
 
 Game.classTemplates.getAvailableClasses = function() {

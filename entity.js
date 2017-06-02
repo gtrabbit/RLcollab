@@ -74,7 +74,11 @@ Game.Entity.prototype.getArcana = function(){
     base += this.getModifiers('arcana');
     return base;
 }
-
+Game.Entity.prototype.getPerception = function(){
+    let base = this._perception;
+    base += this.getModifiers('perception');
+    return base;
+}
 //==============getter functions for functional stats ============>>>>>>
 
 	Game.Entity.prototype.getMeleeDamageModifier = function(){
@@ -88,9 +92,14 @@ Game.Entity.prototype.getArcana = function(){
 	   base += this.getModifiers();
         return base
 }
+	Game.Entity.prototype.getSpellPenetration = function(){
+		let base = Math.ceil( ( ( + (this._intelligence *2) *3) + (this._luck *2) *.30) + (this._perception *1.25) );
 		
+	   base += this.getModifiers();
+        return base
+}
 	Game.Entity.prototype.getAccuracyBonus = function(){
-	   let base = Math.round(this.getDexterity() *1.5);
+	   let base = Math.round( ( (this._dexterity *3.2) + 10) + (this._perception *2.2) );
 		
 	   base += this.getModifiers();
         return base
@@ -118,7 +127,7 @@ Game.Entity.prototype.getArcana = function(){
 }
 		
 	Game.Entity.prototype.getMeleeCriticalDamageBonus = function(){
-	   let base = Math.ceil( ( (this.getStrength() *2.5) / 2 ) -10 );
+	   let base = Math.ceil( ( (this.getStrength() *1.5) / 2 ) );
 		
 	   base += this.getModifiers();
         return base
@@ -174,7 +183,7 @@ Game.Entity.prototype.getArcana = function(){
 }
 		
 	Game.Entity.prototype.getEvasion = function(){
-	   let base = Math.ceil( ( (this.getDexterity() *2.2) / 3) -3);
+	   let base = Math.ceil( ( ( (this._dexterity *7.5) /2 ) -10 ) );
 		
 	   base += this.getModifiers();
 	   return base
@@ -188,7 +197,7 @@ Game.Entity.prototype.getBlock = function(){
 }
 
 Game.Entity.prototype.getMagicalResist = function(){
-    let base = Math.ceil( ( ( (this.getWillpower() *2) * .60 ) + (this.getIntelligence() *2) *.020) + (this.getLuck() *2) *.30);
+    let base = Math.ceil( ( (this._willpower *3) + (this._intelligence *2) *.40) + (this._luck *2) *.40);
 
     base += this.getModifiers();
     return base
