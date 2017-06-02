@@ -123,19 +123,9 @@ Game.Mixins.Attacker = {
         }
     },
     checkHit(target){
-        console.log(target)
-        let perc = ROT.RNG.getPercentage()
-             if (this._char == '@' ){
-                    console.log("a hit?");
-            console.log(perc)
-            console.log(this.getAccuracyBonus())
-            console.log(target.getEvasion())
-            }
-        
+  
+        let perc = ROT.RNG.getPercentage()       
         if ((perc + this.getAccuracyBonus()) > target.getEvasion()){
-            
-
-
             return true;
         } else {
             Game.sendMessage(this, 'your attack has missed!', [this.getName()]);

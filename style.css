@@ -10,5 +10,9 @@ p{
 .centered-block{
 	margin: auto;
 	display: block;
-	border: solid silver 2px;
+}
+
+.status{
+	border-top: solid white 1px;
+	border-bottom: solid silver 1px;
 }

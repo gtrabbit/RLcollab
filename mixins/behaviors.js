@@ -44,14 +44,9 @@ Game.Mixins.PlayerActor = {
             Game.sendMessage(this, 'Press [enter] to die all the way')
         }
         this._acting = false;
-        this._tickCount++;
-        if (this._tickCount % this._regenDelay === 0){
-            this.regen();
-        }
-        if (this._tickCount % 5 === 0){
-            this.addTurnHunger();
-        }
-     
+        this.onTick()
+
+       
         Game.refresh();
         this.getMap().getEngine().lock();
     }
@@ -65,7 +60,7 @@ Game.Mixins.TaskActor = {
         this._tasks = template['tasks'] || ['wander']; 
     },
     act: function() {
-    
+        this.onTick()
         // Iterate through all our tasks
         for (var i = 0; i < this._tasks.length; i++) {
             if (this.canDoTask(this._tasks[i])) {
@@ -197,7 +192,7 @@ Game.Mixins.StationaryRangedAttacker = {
         this._tasks = template['tasks'] || ['shoot']; 
     },
     act: function() {
-    
+        this.onTick()
         // Iterate through all our tasks
         for (var i = 0; i < this._tasks.length; i++) {
             if (this.canDoTask(this._tasks[i])) {
@@ -215,7 +210,8 @@ Game.Mixins.StationaryRangedAttacker = {
         }
     },
     shoot: function(){
-        this.attack(this.getMap().getPlayer()); 
+        let target = this.getMap().getPlayer()
+        this.attack(target); 
     }
 }
 

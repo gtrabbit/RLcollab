@@ -7,6 +7,7 @@ Game.DynamicGlyph = function(properties) {
     // Create an object which will keep track what mixins we have
     // attached to this entity based on the name property
     this._attachedMixins = {};
+    this._statuses = [];
     // Create a similar object for groups
     this._attachedMixinGroups = {};
     this._listeners = {};

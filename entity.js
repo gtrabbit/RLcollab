@@ -12,8 +12,6 @@ Game.Entity = function(properties) {
     this._maxStamina = properties['maxStamina'] || 100;
     this._stamina = this._maxStamina;
     this._staminaRegenRate = properties['staminaRegenRate'] || 0;
-    this._healthRegenRate = properties['healthRegenRate'] || 0;
-	this._throwStat = properties['throwStat'] || 5;
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
    if (!properties.stats){
@@ -43,6 +41,7 @@ Game.Entity.extend(Game.DynamicGlyph);
 
 	Game.Entity.prototype.getMeleeDamageModifier = function(){
 		let base = Math.round( ( (this._strength *1.4) / 2) - 6);
+        return base;
 		}
 		
 	Game.Entity.prototype.getRangedDamageModifier = function(){
@@ -97,7 +96,7 @@ Game.Entity.extend(Game.DynamicGlyph);
 	Game.Entity.prototype.getRegenBonus = function(){
 	   let base = Math.ceil( (this._vitality *2) * 0.10 );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('regenBonus');
         return base
 }
 		
@@ -171,27 +170,81 @@ Game.Entity.prototype.modifyStamina = function(amount){
     this._stamina += amount;
 }
 
-Game.Entity.prototype.getRegenBonus = function(){
-let base = Math.ceil( (this._vitality *2) * 0.10 );
 
-base += this.getModifiers();
-    return base
-}
 
 Game.Entity.prototype.getMaxStamina = function(){
     return this._maxStamina;
 }
 
-//=====================other stuff ==========================>>>
+//=====================Helpers ==========================>>>
 
 
 
 
-Game.Entity.prototype.getModifiers = function(){
-    return 0;
+Game.Entity.prototype.getModifiers = function(char){
+    let total = 0;
+    total+= this.getStatusModifiers(char);
+    return total;
+
 };
 
 
+//=====================Status Stuff=========>
+
+Game.Entity.prototype.addStatus = function(status){
+
+//will be able to calculate saving throws here
+    this._statuses.push(status);
+}
+  
+Game.Entity.prototype.getStatusModifiers = function(char){
+    let total = 0;
+    if(this._statuses.length){
+        this._statuses.forEach((a)=>{
+            if (a.value.hasOwnProperty(char)){
+                total += a.value[char]
+                }
+            })
+        
+    }
+  return total;
+}
+
+
+
+
+
+
+
+
+
+//======================Other Basic Stuff=========>>>>>>>>>
+
+Game.Entity.prototype.onTick = function(){
+    this._tickCount++;
+    if (this._tickCount % this._regenDelay === 0){
+        this.regen();
+    }
+    if (this.hasMixin('FoodConsumer') && this._tickCount % 5 === 0){
+        
+        this.addTurnHunger();
+    }
+    
+    if (this._statuses.length){
+    this._statuses.forEach((a, i) => {
+        if (a.hasOwnProperty('duration')){
+            a.duration--;
+            if (a.duration < 1){
+                this._statuses.splice(i, 1);
+        }
+        }
+    })
+    }
+    if (this._tickCount > 100){
+        this._tickCount = 0;
+    }
+
+}
 
 
 Game.Entity.prototype.regen = function(){
@@ -199,11 +252,16 @@ Game.Entity.prototype.regen = function(){
         this.modifyStamina(this._staminaRegenRate);
     }
     if (this._hp < this.getMaxHP()){
+        
+      
         this.modifyHP(this.getRegenBonus());
     }
        
        
 }
+
+//========================Movement==============>>>>>>
+
 
 Game.Entity.prototype.tryMove = function(x, y, z, map){
         map = this.getMap();
@@ -271,6 +329,9 @@ Game.Entity.prototype.tryMove = function(x, y, z, map){
     
 }
 
+
+//==================== Life and Death ==========>>>
+
 Game.Entity.prototype.isAlive = function() {
     return this._alive;
 };
@@ -294,6 +355,12 @@ Game.Entity.prototype.kill = function(message) {
     }
 };
 
+
+
+
+
+
+//--========================Map Based Stuff =============>>>>
 
 Game.Entity.prototype.setX = function(x) {
     this._x = x;

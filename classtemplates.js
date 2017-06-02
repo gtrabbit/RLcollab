@@ -16,7 +16,7 @@ Game.PlayerTemplate = {
         arcana: 5,
         charisma: 5,
         luck: 5,
-    }
+    },
     staminaRegenRate: 1,
     regenDelay: 5,
     mixins: [Game.Mixins.PlayerActor,

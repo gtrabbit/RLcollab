@@ -127,7 +127,7 @@ Game.Screen.playScreen = {
             y: topLeftY
         };
     },
-	render: function(display, msgDisplay){
+	render: function(display, msgDisplay, statusDisplay){
 		if (this._subScreen){
 			this._subScreen.render(display);
 			return;
@@ -160,9 +160,14 @@ Game.Screen.playScreen = {
                                         this._player.getExperience()]);
         display.drawText(0, screenHeight, stats);
         var hungerState = this._player.getHungerState();
-
         display.drawText(screenWidth - hungerState.length, screenHeight, hungerState);
 
+        let statuses = this._player._statuses;
+        let spot = 0;
+        for (let status of statuses){
+            spot += statusDisplay.drawText(spot, 1, status.name);
+            spot+= status.name.length;
+        }
 
 
 
