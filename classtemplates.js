@@ -4,7 +4,6 @@ Game.PlayerTemplate = {
     character: '@',
     foreground: 'white',
     maxHP: 20,
-    attackValue: 8,
     sightRadius: 5,
     name: 'human (you)',
     inventorySlots: 22,
@@ -16,9 +15,8 @@ Game.PlayerTemplate = {
         intelligence: 5,
         arcana: 5,
         charisma: 5,
-        luck: 5
-    },
-    healthRegenRate: 1,
+        luck: 5,
+    }
     staminaRegenRate: 1,
     regenDelay: 5,
     mixins: [Game.Mixins.PlayerActor,
@@ -59,12 +57,18 @@ Game.classTemplates = {};
 Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Fighter",
 	maxHP: 40,
-    strength: 8,
-	vitality: 7,
+    stats: {
+        strength: 7,
+        vitality: 7,
+        willpower: 5,
+        dexterity: 5,
+        intelligence: 4,
+        arcana: 5,
+        charisma: 5,
+        luck: 5,
+    },
     sightRadius: 5,
-    defenseValue: 3,
     speed: 800,
-	throwStat: 10,
     description: "Standard fighter. Strong, but slow"
 
 })
@@ -72,22 +76,35 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
 Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Rogue",
     speed: 1400,
-	dexterity: 9,
-	luck: 7,
+	stats: {
+        strength: 5,
+        vitality: 5,
+        willpower: 5,
+        dexterity: 9,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 5,
+        luck: 5,
+    },
     sightRadius: 7,
-	throwStat: 40,
     description: "A Rogue. Quick, but weak"
 
 })
 
 Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Barbarian",
-	strength: 9
-	dexterity: 6
-    defenseValue: 1,
+	stats: {
+        strength: 9,
+        vitality: 6,
+        willpower: 5,
+        dexterity: 6,
+        intelligence: 4,
+        arcana: 4,
+        charisma: 4,
+        luck: 5,
+    },
     fullnessDepletionRate: 3,
     fullness: 1000,
-	throwStat: 25,
     description: "Hungry for blood, and food"
 })
 
