@@ -155,7 +155,7 @@ Game.Screen.playScreen = {
         stats += vsprintf('HP: %d/%d St: %d/%d  | L: %d XP: %d' , [this._player.getHP(), 
                                         this._player.getMaxHP(),
                                         this._player.getStamina(),
-                                        this._player._maxStamina,
+                                        this._player.getMaxStamina(),
                                         this._player.getLevel(),
                                         this._player.getExperience()]);
         display.drawText(0, screenHeight, stats);

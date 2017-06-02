@@ -123,7 +123,7 @@ Game.Mixins.ExperienceGainer = {
         onKill: function(victim) {
             var exp = (victim.getMaxHP()/10) + (victim.getDefenseValue()*2);
             if (victim.hasMixin('Attacker')) {
-                exp += victim.getAttackValue();
+                exp += victim.getMeleeDamageModifier() + victim.getRangedDamageModifier();
             }
             // Account for level differences
             if (victim.hasMixin('ExperienceGainer')) {

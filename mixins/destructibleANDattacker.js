@@ -2,12 +2,13 @@ Game.Mixins.Destructible = {
     name: 'Destructible',
     init: function(template) {
         this._maxHP = template['maxHP'] || 10;
-        this._hp = template['hp'] || this._maxHP;
+        this._hp = template['maxHP'] + this.getHpBonus() || 10
         this._defenseValue = template['defenseValue'] || 0;
    
     },
     takeDamage: function(attacker, damage){
-        this._hp -= damage;
+        damage = Math.max(damage - this.getDefenseValue(), 0);
+        this.modifyHP(-damage);
         Game.sendMessage(attacker, 'You strike the %s for %d damage!', [this.getName(), damage]);
         if (this._hp <= 0){
             Game.sendMessage(attacker, "You kill the %s!", [this.getName()]);
@@ -36,13 +37,13 @@ Game.Mixins.Destructible = {
         return this._hp;
     },
     getMaxHP: function(){
-        return this._maxHP
+        return this._maxHP + this.getHpBonus();
     },
     setHP: function(hp) {
         this._hp = hp;
     },
     modifyHP: function(amount){
-        this._hp += amount;
+        this._hp = Math.min(this._hp + amount, this.getMaxHP())
     },
     increaseDefenseValue: function(value) {
         // If no value was passed, default to 2.
@@ -91,7 +92,7 @@ Game.Mixins.Attacker = {
     groupName: 'Attacker',
     listeners: {
         details: function() {
-            return [{key: 'attack', value: this.getAttackValue()}];
+            return [{key: 'attack', value: this.getMeleeDamageModifier()}];
         }
     },
     init: function(template){
@@ -100,28 +101,74 @@ Game.Mixins.Attacker = {
     },
     attack: function(target){
         if (target.hasMixin('Destructible')){
-            let attack = this.getAttackValue();
-            let defense = target.getDefenseValue();
-            let max = Math.max(0, attack - defense);
-            let damage = 1+Math.floor(Math.random()*max);
-            Game.sendMessage(target, 'The %s strikes you for %d damage!', [this.getName(), damage]);
-            target.takeDamage(this, damage);
+            if (this.checkHit(target)){
+                let attack = this.getMeleeDamageModifier();
+                attack += this.getWeaponAttackValue();
+                if (this.checkCrit()){
+                    attack += this.getMeleeCriticalDamageBonus();
+                    attack *= 1.5;
+   
+                }
+                let max = Math.max(0, attack);
+                let damage = 1+Math.floor(ROT.RNG.getNormal(max, max/2));
+                Game.sendMessage(target, 'The %s strikes you for %d damage!', [this.getName(), damage]);
+                target.takeDamage(this, damage);
+
+
+            }
+
+
+
+           
         }
+    },
+    checkHit(target){
+        console.log(target)
+        let perc = ROT.RNG.getPercentage()
+             if (this._char == '@' ){
+                    console.log("a hit?");
+            console.log(perc)
+            console.log(this.getAccuracyBonus())
+            console.log(target.getEvasion())
+            }
+        
+        if ((perc + this.getAccuracyBonus()) > target.getEvasion()){
+            
+
+
+            return true;
+        } else {
+            Game.sendMessage(this, 'your attack has missed!', [this.getName()]);
+            Game.sendMessage(target, 'The %s\'s attack has missed!', [this.getName()]);
+            return false;
+        }        
+    },
+    checkCrit(){
+        if (ROT.RNG.getPercentage() < this.getMeleeCritical()){
+            Game.sendMessage(this, "A critical hit!")
+            return true;
+        } else {
+            return false;
+        }
+        
     },
     throw: function(target, projectile){
         this.removeItem(this._items.indexOf(projectile));
         target.setLoot(projectile);
         let targetedEntity = target.getOccupant();
         if (targetedEntity && target.getOccupant().hasMixin('Destructible')){
-            let damage = projectile._attackValue || 2;
-            damage += projectile._weight || 2;
-            damage += Math.floor((this.getThrowStat() || 1) / 4);
-            targetedEntity.takeDamage(this, damage);
+            if (this.checkHit(targetedEntity)){
+                let damage = projectile._attackValue || 2;
+                damage += projectile._weight || 2;
+                damage += Math.floor((this.getThrowStat() || 1) / 2);
+                targetedEntity.takeDamage(this, damage);
+            } 
+            
                         
         }
 
     },
-    getAttackValue: function() {
+    getWeaponAttackValue: function() {
         var modifier = 0;
         // If we can equip items, then have to take into 
         // consideration weapon and armor
@@ -133,10 +180,7 @@ Game.Mixins.Attacker = {
                 modifier += this.getArmor().getAttackValue();
             }
         }
-        return this._attackValue + modifier;
-    },
-    getThrowStat: function(){
-        return this._throwStat;
+        return modifier;
     },
     increaseAttackValue: function(value) {
         // If no value was passed, default to 2.
@@ -147,7 +191,4 @@ Game.Mixins.Attacker = {
     }
 
 }
-
-
-//==========================Thrower=============>>>
 

@@ -16,9 +16,20 @@ Game.Entity = function(properties) {
 	this._throwStat = properties['throwStat'] || 5;
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
-   
+   if (!properties.stats){
+    properties.stats = {
+        strength: 5,
+        vitality: 5,
+        willpower: 5,
+        dexterity: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 5,
+        luck: 5
+    }
+   }
     for (let key in properties.stats){
-            this['_'+key] = properties.stats[key];
+            this['_'+key] = properties.stats[key] || 5;
         }
 
 
@@ -30,106 +41,106 @@ Game.Entity.extend(Game.DynamicGlyph);
 
 //==============get functions for functional stats ============>>>>>>
 
-		Game.Entity.prototype.getMeleeDamageModifier = function(){
+	Game.Entity.prototype.getMeleeDamageModifier = function(){
 		let base = Math.round( ( (this._strength *1.4) / 2) - 6);
 		}
 		
 	Game.Entity.prototype.getRangedDamageModifier = function(){
-	let base = Math.round( ( (this._dexterity *1.3) / 2) - 4);
+	   let base = Math.round( ( (this._dexterity *1.3) / 2) - 4);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getAccuracyBonus = function(){
-	let base = Math.round(this._dexterity *1.5);
+	   let base = Math.round(this._dexterity *1.5);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 			
 	Game.Entity.prototype.getSpellDamage = function(){
-	let base = Math.round( ( ( ( (this._intelligence *1.10) / 2 ) -4 ) + (this._arcana * 1.4) / 2) - 6 )
+	   let base = Math.round( ( ( ( (this._intelligence *1.10) / 2 ) -4 ) + (this._arcana * 1.4) / 2) - 6 )
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getThrowStat = function(){
-	let base = this._dexterity *4;
+	   let base = this._dexterity *4;
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getMeleeCritical = function(){
-	let base = Math.round( ( ( ( (this._dexterity *2) / 2.6) - 4) + (this._luck *1.5) / 2) -2);
+	   let base = Math.round( ( ( ( (this._dexterity *2) / 2.6) - 4) + (this._luck *1.5) / 2) -2);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getMeleeCriticalDamageBonus = function(){
-	let base = Math.ceil( ( (this._strength *2.5) / 2 ) -10 );
+	   let base = Math.ceil( ( (this._strength *2.5) / 2 ) -10 );
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getSpellCritical = function(){
-	let base = Math.round( ( ( ( ( ( (this._intelligence *1.2) / 2 ) -3 ) + (this._arcana *1.2) / 2 ) - 3 )+ (this._luck *1.05) / 2 ) - 2);
+	   let base = Math.round( ( ( ( ( ( (this._intelligence *1.2) / 2 ) -3 ) + (this._arcana *1.2) / 2 ) - 3 )+ (this._luck *1.05) / 2 ) - 2);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getRegenBonus = function(){
-	let base = Math.ceil( (this._vitality *2) * 0.10 );
+	   let base = Math.ceil( (this._vitality *2) * 0.10 );
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getMagicRegenBonus = function(){
-	let base = Math.ceil( ( (this._arcana *2) * 0.20 ) + (this._intelligence *2) * 0.10);
+	   let base = Math.ceil( ( (this._arcana *2) * 0.20 ) + (this._intelligence *2) * 0.10);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getResistPhysical = function(){
-	let base = Math.ceil( ( (this._vitality *2) * 0.50 ) + (this._strength *2) * 0.30);
+	   let base = Math.ceil( ( (this._vitality *2) * 0.50 ) + (this._strength *2) * 0.30);
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getMaxWeight = function(){
-	let base = Math.round(this._strength * 4)
+	   let base = Math.round(this._strength * 4)
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getHpBonus = function(){
-	let base = Math.ceil( ( (this._vitality *2.7) / 3 ) + (this._strength *1.6) / 3 );
+	   let base = Math.ceil( ( (this._vitality *2.7) / 3 ) + (this._strength *1.6) / 3 );
 		
-	base += this.getModifiers();
+	   base += this.getModifiers();
     return base
 }
 		
 	Game.Entity.prototype.getMpBonus = function(){
-	let base = Math.ceil( (this._intelligence *2.8) / 3 );
+	   let base = Math.ceil( (this._intelligence *2.8) / 3 );
 		
-	base += this.getModifiers();
-    return base
+	   base += this.getModifiers();
+        return base
 }
 		
 	Game.Entity.prototype.getEvasion = function(){
-	let base = Math.ceil( ( (this._dexterity *2.2) / 3) -3);
+	   let base = Math.ceil( ( (this._dexterity *2.2) / 3) -3);
 		
-	base += this.getModifiers();
-	return base
+	   base += this.getModifiers();
+	   return base
 }
 		
 Game.Entity.prototype.getBlock = function(){
@@ -146,18 +157,6 @@ Game.Entity.prototype.getMagicalResist = function(){
     return base
 }
 
-
-
-
-//=====================other stuff ==========================>>>
-
-
-
-
-Game.Entity.prototype.getModifiers = function(){
-    return 0;
-};
-
 Game.Entity.prototype.setSpeed = function(speed) {
     this._speed = speed;
 };
@@ -172,15 +171,35 @@ Game.Entity.prototype.modifyStamina = function(amount){
     this._stamina += amount;
 }
 
+Game.Entity.prototype.getRegenBonus = function(){
+let base = Math.ceil( (this._vitality *2) * 0.10 );
+
+base += this.getModifiers();
+    return base
+}
+
+Game.Entity.prototype.getMaxStamina = function(){
+    return this._maxStamina;
+}
+
+//=====================other stuff ==========================>>>
+
+
+
+
+Game.Entity.prototype.getModifiers = function(){
+    return 0;
+};
+
 
 
 
 Game.Entity.prototype.regen = function(){
-    if (this._stamina < this._maxStamina){
+    if (this._stamina < this.getMaxStamina()){
         this.modifyStamina(this._staminaRegenRate);
     }
-    if (this._hp < this._maxHP){
-        this.modifyHP(this._healthRegenRate);
+    if (this._hp < this.getMaxHP()){
+        this.modifyHP(this.getRegenBonus());
     }
        
        

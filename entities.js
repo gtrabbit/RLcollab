@@ -44,6 +44,16 @@ Game.EntityRepository.define('slime', {
     maxHp: 10,
     attackValue: 5,
     sightRadius: 3,
+    stats: {
+        strength: 5,
+        vitality: 5,
+        willpower: 5,
+        dexterity: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 5,
+        luck: 5
+    },
     tasks: ['hunt', 'wander'],
     mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,
