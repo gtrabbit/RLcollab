@@ -37,15 +37,34 @@ Game.Entity = function(properties) {
 Game.Entity.extend(Game.DynamicGlyph);
 
 
-//==============get functions for functional stats ============>>>>>>
+//==========getters for base stats============>>>>
+
+Game.Entity.prototype.getStrength = function(){
+    let base = this._strength;
+    base += this.getModifiers('strength');
+    return base;
+}
+Game.Entity.prototype.getWillpower = function(){
+    let base = this._willpower;
+    base += this.getModifiers('willpower');
+    return base;
+}
+Game.Entity.prototype.getDexterity = function(){
+    let base = this._dexterity;
+    base += this.getModifiers('dexterity');
+    return base;
+}
+
+
+//==============getter functions for functional stats ============>>>>>>
 
 	Game.Entity.prototype.getMeleeDamageModifier = function(){
-		let base = Math.round( ( (this._strength *1.4) / 2) - 6);
+		let base = Math.round( ( (this.getStrength() *1.4) / 2) - 6);
         return base;
 		}
 		
 	Game.Entity.prototype.getRangedDamageModifier = function(){
-	   let base = Math.round( ( (this._dexterity *1.3) / 2) - 4);
+	   let base = Math.round( ( (this.getDexterity() *1.3) / 2) - 4);
 		
 	   base += this.getModifiers();
         return base
