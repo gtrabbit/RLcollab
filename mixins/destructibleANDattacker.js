@@ -109,7 +109,7 @@ Game.Mixins.Attacker = {
                     attack *= 1.5;
    
                 }
-                let max = Math.max(0, attack);
+                let max = 1 + Math.max(0, attack);
                 let damage = 1+Math.floor(ROT.RNG.getNormal(max, max/2));
                 Game.sendMessage(target, 'The %s strikes you for %d damage!', [this.getName(), damage]);
                 target.takeDamage(this, damage);
