@@ -93,7 +93,7 @@ Game.Entity.prototype.getPerception = function(){
         return base
 }
 	Game.Entity.prototype.getSpellPenetration = function(){
-		let base = Math.ceil( ( ( + (this._intelligence *2) *3) + (this._luck *2) *.30) + (this._perception *1.25) );
+		let base = Math.ceil( ( + (this._intelligence *3) + (this._luck *2) *.30) + (this._perception *1.25) );
 		
 	   base += this.getModifiers();
         return base
