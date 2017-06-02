@@ -59,7 +59,8 @@ Game.classTemplates = {};
 Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Fighter",
 	maxHP: 40,
-    attackValue: 12,
+    strength: 8,
+	vitality: 7,
     sightRadius: 5,
     defenseValue: 3,
     speed: 800,
@@ -71,6 +72,8 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
 Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Rogue",
     speed: 1400,
+	dexterity: 9,
+	luck: 7,
     sightRadius: 7,
 	throwStat: 40,
     description: "A Rogue. Quick, but weak"
@@ -79,7 +82,8 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
 
 Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Barbarian",
-    attackValue: 15,
+	strength: 9
+	dexterity: 6
     defenseValue: 1,
     fullnessDepletionRate: 3,
     fullness: 1000,
