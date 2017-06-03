@@ -6,6 +6,7 @@ Game.Screen.startScreen = {
     _availableClasses: null,
     _selectedIndex: null,
 	enter: function(){
+        console.log(Game.ItemRepository);
         this._selectedIndex = 0;
         this._availableClasses = Game.classTemplates.getAvailableClasses()},
 	exit: function(){console.log("exited start screen");},

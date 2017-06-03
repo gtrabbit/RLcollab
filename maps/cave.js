@@ -27,10 +27,9 @@ Game.Map.Cave = function(tiles, player) {
         }
     }
     // Add weapons and armor to the map in random positions and floors
-    var templates = ['dagger', 'sword', 'staff', 
-        'tunic', 'chainmail', 'platemail', 'axe'];
-    for (var i = 0; i < templates.length; i++) {
-        this.addItemAtRandomPosition(Game.ItemRepository.create(templates[i]),
+   var templates = Game.ItemRepository._templates;
+    for (let item in templates) {
+        this.addItemAtRandomPosition(Game.ItemRepository.create(templates[item].name),
             Math.floor(this._depth * Math.random()));
     }
     // Add a hole to the final cavern on the last level.

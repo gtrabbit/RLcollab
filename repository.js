@@ -31,6 +31,21 @@ Game.Repository.prototype.create = function(name, extraProperties){
 	return new this._ctor(template);
 }
 
+Game.Repository.prototype.getRarityChart = function(templates){
+    let chart = {};
+    for (let thing in templates){
+        chart[thing.name] = thing.rarity || 100;
+    }
+    return chart;
+
+}
+
+Game.Repository.prototype.createWeightedRandom = function(chart){
+    return this.create(ROT.RNG.getWeightedValue(chart))
+
+}
+
+
 Game.Repository.prototype.createRandom = function(){
 
 	return this.create(Object.keys(this._randomTemplates).random());

@@ -74,6 +74,8 @@ Game.ItemRepository.define('yew staff', {
 }, {
     disableRandomCreation: true
 });
+
+
 Game.ItemRepository.define('hand axe', {
     name: 'hand axe',
     character: ')',
@@ -175,3 +177,4 @@ Game.ItemRepository.define('pumpkin', {
     wieldable: true,
     mixins: [Game.ItemMixins.Edible, Game.ItemMixins.Equippable]
 });
+

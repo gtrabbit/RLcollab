@@ -6,10 +6,9 @@ Game.Map = function(tiles, player){
 	this._entities = {};
     this._items = {};
     this._fov = [];
-    var templates = ['dagger', 'sword', 'staff', 
-        'tunic', 'chainmail', 'platemail'];
-    for (var i = 0; i < templates.length; i++) {
-        this.addItemAtRandomPosition(Game.ItemRepository.create(templates[i]),
+    var templates = Game.ItemRepository._templates;
+    for (let item in templates) {
+        this.addItemAtRandomPosition(Game.ItemRepository.create(templates[item].name),
             Math.floor(this._depth * Math.random()));
     }
      this.setupFov();
