@@ -50,6 +50,18 @@ Game.ItemRepository.define('dagger', {
     disableRandomCreation: true
 });
 
+Game.ItemRepository.define('Bow', {
+    name: 'dagger',
+    character: '}',
+    foreground: 'gray',
+    weight: 10,
+    attackValue: 5,
+    rangedWeapon: true,
+    mixins: [Game.ItemMixins.Equippable]
+}, {
+    disableRandomCreation: true
+});
+
 Game.ItemRepository.define('sword', {
     name: 'sword',
     character: ')',
