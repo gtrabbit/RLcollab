@@ -93,6 +93,27 @@ Game.Entity.prototype.getPerception = function(){
 	   base += this.getModifiers();
         return base
 }
+	Game.Entity.prototype.getDualWield = function(){
+		let base = Math.round( ( (this.getDexterity() *2) / 2.6) + (this.getLuck() *1.5) / 2);
+		
+	   base += this.getModifiers();
+        return base
+}
+
+	Game.Entity.prototype.getDoubleSwing = function(){
+		let base = Math.round( ( ( (this.getStrength() *2) / 3) + (this.getLuck() * 1.3) / 3) + (this.getDexterity() * 1.5) /2);
+		
+		base += this.getModifiers();
+		 return base
+}
+
+	Game.Entity.prototype.getParry = function(){
+		let base = Math.ceil( ( (this.getPerception() * 2.5) / 2) + (this.getDexterity() * 2) / 2);
+		
+		base += this.getModifiers();
+		 return base
+}
+
 	Game.Entity.prototype.getSpellPenetration = function(){
 		let base = Math.ceil( ( + (this.getIntelligence() *3) + (this.getLuck() *2) *.30) + (this.getPerception() *1.25) );
 		

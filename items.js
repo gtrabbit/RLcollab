@@ -91,7 +91,7 @@ Game.ItemRepository.define('hand axe', {
 // ranged weapons
 
  Game.ItemRepository.define('short bow', {
-    name: 'short bow',
+    name: 'shortbow',
     character: '}',
     foreground: 'gray',
     weight: 7,
@@ -103,7 +103,7 @@ Game.ItemRepository.define('hand axe', {
 });
 
  Game.ItemRepository.define('long bow', {
-    name: 'long bow',
+    name: 'longbow',
     character: '}',
     foreground: 'brown',
     weight: 15,
@@ -125,7 +125,6 @@ Game.ItemRepository.define('hand axe', {
 }, {
     disableRandomCreation: true
 });
-
 
 
 
