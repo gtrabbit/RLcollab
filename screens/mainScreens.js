@@ -140,7 +140,7 @@ Game.Screen.playScreen = {
 
         let messageY = 0;
         for (let i = 0; i < messages.length; i++){
-            if (messages.length > 5){
+            if (messages.length > 8){
                 msgDisplay.clear();
                 messages.shift();
             }
@@ -263,6 +263,27 @@ Game.Screen.playScreen = {
 				case ROT.VK_NUMPAD2:
 					this.move(0,1, 0);
 					break;
+                case ROT.VK_F:
+                    if (this._player.hasMixin('RangedAttacker')){
+                        let point = {
+                            x: this._player.getX(),
+                            y: this._player.getY(),
+                            z: this._player.getZ()
+                        }
+                        let radius = this._player.getSightRadius();
+                        let target = Game.Geometry.getClosestTarget(this._map, point, radius);
+                        if (target){
+                            this._player.shoot(target);
+                        }
+                      
+
+                    } else {
+                        Game.sendMessage(this._player, "You do not have a ranged weapon equipped")
+                    }
+
+                    
+
+                    break;
                 case ROT.VK_T:
                     Game.Screen.selectProjectile.setup(this._player, this._player.getItems())
                     this.setSubScreen(Game.Screen.selectProjectile);

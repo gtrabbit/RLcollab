@@ -13,6 +13,9 @@ Game.DynamicGlyph = function(properties) {
     this._listeners = {};
     // Setup the object's mixins
     var mixins = properties['mixins'] || [];
+    if (properties.hasOwnProperty('extraMixins')){
+        mixins = mixins.concat(properties['extraMixins']);
+    }
     for (var i = 0; i < mixins.length; i++) {
         // Copy over all properties from each mixin as long
         // as it's not the name or the init property. We

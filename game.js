@@ -30,7 +30,7 @@ const Game = {
 		display: null,
 		init: function(){
 			this._display = new ROT.Display({width: this._screenWidth, height: this._screenHeight + 1});
-			this._msgDisplay = new ROT.Display({width: this._screenWidth, height: this._screenHeight / 4 })
+			this._msgDisplay = new ROT.Display({width: this._screenWidth, height: this._screenHeight / 3 })
 			this._statusDisplay = new ROT.Display({width: this._screenWidth, height: 3})
 			let game = this;
 			let bindEventToScreen = function(event){

@@ -29,7 +29,8 @@ Game.PlayerTemplate = {
              Game.Mixins.FoodConsumer,
              Game.Mixins.Equipper,
             Game.Mixins.ExperienceGainer,
-            Game.Mixins.PlayerStatGainer]
+            Game.Mixins.PlayerStatGainer],
+    extraMixins: []
  
 }
 
@@ -125,7 +126,8 @@ Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
         charisma: 4,
         luck: 5,
     },
-    description: "Studying for decades to become a master of magic"
+    description: "Studying for decades to become a master of magic",
+    extraMixins: [Game.Mixins.RangedAttacker]
 })
 
 Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {

@@ -25,24 +25,45 @@ Game.Geometry = {
         }
 
         return points;
+    },
+
+    getDistance: function(point1, point2){
+        return Math.sqrt( Math.pow((point2.x - point1.x), 2) + Math.pow((point2.y - point1.y), 2) )
+
+    },
+
+    getClosestTarget: function(map, point, radius){
+        length = (radius*2) + 1;
+        let leftX = point.x - radius;
+        let topY = point.y - radius;
+        let rightX = point.x + radius;
+        let botY = point.y + radius;
+        let x = Number(point.x);
+        let y = Number(point.y);
+        let z = point.z;
+ 
+        let count = 0;
+        let totalTiles = 0;
+        while (count < radius){
+            count++
+            for (let i= y- count ; i<= y+ count; i++){
+                for(let k = x- count; k<= x+ count; k++){
+                    let target = map.getTile(k, i, z).getOccupant();
+                    if (target && !(k === x && i === y)){
+                        return target;
+                    }
+
+
+                }
+            }
+
+        }
+
+        Game.sendMessage(map._player, "No visible targets");
     }
 
-    // getClosestTarget: function(map, point, radius){
-    //     let leftX = point.x - radius;
-    //     let topY = point.y - radius;
-    //     let rightX = point.x + radius;
-    //     let botY = point.y + radius;
-    //     let x = point.x;
-    //     let y = point.y;
-    //     let z = point.z;
-    //     let total = radius*radius;
-    //     let count = 0;
-    //     let target;
-    //     while (!target || count < total){
-    //         count++;
-    //         target = map.getTile(x, y, z);
-    //     }
 
-//will come back to this some other day....
-    // }
+
 };
+
+

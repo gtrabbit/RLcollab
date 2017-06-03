@@ -87,14 +87,14 @@ Game.Map.prototype._setupExploredArray = function(){
 
 Game.Map.prototype.setExplored = function(x, y, z, state) {
     // Only update if the tile is within bounds
-    if (this.getTile(x, y, z) !== Game.Tile.nullTile) {
+    if (this.getTile(x, y, z) !== Game.Tile.nulltile) {
         this._explored[z][x][y] = state;
     }
 };
 
 Game.Map.prototype.isExplored = function(x, y, z) {
     // Only return the value if within bounds
-    if (this.getTile(x, y, z) !== Game.Tile.nullTile) {
+    if (this.getTile(x, y, z) !== Game.Tile.nulltile) {
         return this._explored[z][x][y];
     } else {
         return false;
@@ -224,8 +224,8 @@ Game.Map.prototype.getTile = function(x, y, z) {
     // null tile.
     if (x < 0 || x >= this._width || y < 0 || y >= this._height ||
         z < 0 || z >= this._depth) {
-        return Game.Tile.nullTile;
+        return Game.Tile.nulltile
     } else {
-        return this._tiles[z][x][y] || Game.Tile.nullTile;
+        return this._tiles[z][x][y] || Game.Tile.nulltile
     }
 };
