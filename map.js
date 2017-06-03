@@ -8,6 +8,7 @@ Game.Map = function(tiles, player){
     this._fov = [];
     var templates = Game.ItemRepository._templates;
     for (let item in templates) {
+         console.log(templates[item].name)
         this.addItemAtRandomPosition(Game.ItemRepository.create(templates[item].name),
             Math.floor(this._depth * Math.random()));
     }
