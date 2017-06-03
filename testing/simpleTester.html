@@ -92,7 +92,7 @@
 		}
 		
 		this.getEvasion = function(){
-			return Math.ceil( ( ( (this._dexterity *7.5) /2 ) -10 ) );
+			return Math.ceil( ( ( ( (this._dexterity *14) /2 ) ) + (this._luck *6) /2 ) );
 		}
 		
 		this.getBlock = function(){

@@ -20,6 +20,7 @@ Game.Entity = function(properties) {
         vitality: 5,
         willpower: 5,
         dexterity: 5,
+		perception: 5,
         intelligence: 5,
         arcana: 5,
         charisma: 5,
@@ -93,13 +94,13 @@ Game.Entity.prototype.getPerception = function(){
         return base
 }
 	Game.Entity.prototype.getSpellPenetration = function(){
-		let base = Math.ceil( ( + (this._intelligence *3) + (this._luck *2) *.30) + (this._perception *1.25) );
+		let base = Math.ceil( ( + (this.getIntelligence() *3) + (this.getLuck() *2) *.30) + (this.getPerception() *1.25) );
 		
 	   base += this.getModifiers();
         return base
 }
 	Game.Entity.prototype.getAccuracyBonus = function(){
-	   let base = Math.round( ( (this._dexterity *3.2) + 10) + (this._perception *2.2) );
+	   let base = Math.ceil( ( (this.getDexterity() *5.2) + 10) + (this.getPerception() *3.2) );
 		
 	   base += this.getModifiers();
         return base
@@ -113,7 +114,7 @@ Game.Entity.prototype.getPerception = function(){
 }
 		
 	Game.Entity.prototype.getThrowStat = function(){
-	   let base = this.getDexterity() *4;
+	   let base = this.getDexterity() *2;
 		
 	   base += this.getModifiers();
         return base
@@ -183,7 +184,7 @@ Game.Entity.prototype.getPerception = function(){
 }
 		
 	Game.Entity.prototype.getEvasion = function(){
-	   let base = Math.ceil( ( ( (this._dexterity *7.5) /2 ) -10 ) );
+	   let base = Math.ceil( ( ( ( (this.getDexterity() *14) /2 ) ) + (this.getLuck() *6) /2 ) );
 		
 	   base += this.getModifiers();
 	   return base
@@ -197,7 +198,7 @@ Game.Entity.prototype.getBlock = function(){
 }
 
 Game.Entity.prototype.getMagicalResist = function(){
-    let base = Math.ceil( ( (this._willpower *3) + (this._intelligence *2) *.40) + (this._luck *2) *.40);
+    let base = Math.ceil( ( (this.getWillpower() *3) + (this.getIntelligence() *2) *.40) + (this.getLuck() *2) *.40);
 
     base += this.getModifiers();
     return base
