@@ -50,8 +50,8 @@ Game.ItemRepository.define('dagger', {
     disableRandomCreation: true
 });
 
-Game.ItemRepository.define('sword', {
-    name: 'sword',
+Game.ItemRepository.define('short sword', {
+    name: 'short sword',
     character: ')',
     foreground: 'white',
 	weight: 20,
@@ -62,8 +62,8 @@ Game.ItemRepository.define('sword', {
     disableRandomCreation: true
 });
 
-Game.ItemRepository.define('staff', {
-    name: 'staff',
+Game.ItemRepository.define('yew staff', {
+    name: 'yew staff',
     character: ')',
     foreground: 'yellow',
 	weight: 8,
@@ -74,8 +74,8 @@ Game.ItemRepository.define('staff', {
 }, {
     disableRandomCreation: true
 });
-Game.ItemRepository.define('axe', {
-    name: 'axe',
+Game.ItemRepository.define('hand axe', {
+    name: 'hand axe',
     character: ')',
     foreground: 'red',
 	weight: 30,
@@ -85,6 +85,48 @@ Game.ItemRepository.define('axe', {
 }, {
     disableRandomCreation: true
 });
+
+// ranged weapons
+
+ Game.ItemRepository.define('short bow', {
+    name: 'short bow',
+    character: '}',
+    foreground: 'gray',
+    weight: 7,
+    attackValue: 5,
+    rangedWeapon: true,
+    mixins: [Game.ItemMixins.Equippable]
+}, {
+    disableRandomCreation: true
+});
+
+ Game.ItemRepository.define('long bow', {
+    name: 'long bow',
+    character: '}',
+    foreground: 'brown',
+    weight: 15,
+    attackValue: 7,
+    rangedWeapon: true,
+    mixins: [Game.ItemMixins.Equippable]
+}, {
+    disableRandomCreation: true
+});
+
+ Game.ItemRepository.define('dart', {
+    name: 'dart',
+    character: '}',
+    foreground: 'blue',
+    weight: 3,
+    attackValue: 2,
+    rangedWeapon: true,
+    mixins: [Game.ItemMixins.Equippable]
+}, {
+    disableRandomCreation: true
+});
+
+
+
+
 // Wearables
 Game.ItemRepository.define('tunic', {
     name: 'tunic',
