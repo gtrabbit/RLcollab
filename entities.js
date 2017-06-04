@@ -22,6 +22,7 @@ Game.EntityRepository.define('fungus', {
         luck: 5,
     },
     speed: 250,
+	rarity: 50,
     mixins: [Game.Mixins.FungusActor,
             Game.Mixins.Destructible,
             Game.Mixins.ExperienceGainer,
@@ -50,6 +51,7 @@ Game.EntityRepository.define('giant zombie', {
     attackValue: 12,
     defenseValue: 5,
     level: 5,
+	rarity: 3,
     sightRadius: 6,
     mixins: [Game.Mixins.GiantZombieActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,
@@ -64,6 +66,7 @@ Game.EntityRepository.define('slime', {
     character: 's',
     foreground: 'lightGreen',
     maxHp: 10,
+	rarity: 80,
     sightRadius: 3,
     stats: {
         strength: 5,
@@ -71,6 +74,7 @@ Game.EntityRepository.define('slime', {
         willpower: 3,
         dexterity: 4,
         intelligence: 1,
+		perception: 3,
         arcana: 1,
         charisma: 1,
         luck: 5
@@ -87,6 +91,7 @@ Game.EntityRepository.define('bat', {
     character: 'B',
     foreground: 'white',
     maxHP: 5,
+	rarity: 70,
 	stats: {
         strength: 3,
         vitality: 2,
@@ -112,6 +117,7 @@ Game.EntityRepository.define('newt', {
     character: ':',
     foreground: 'yellow',
     maxHP: 3,
+	rarity: 75,
 	stats: {
         strength: 3,
         vitality: 3,
@@ -136,6 +142,7 @@ Game.EntityRepository.define('kobold', {
     character: 'k',
     foreground: 'white',
     maxHp: 6,
+	rarity: 70,
 	stats: {
         strength: 3,
         vitality: 3,
@@ -162,6 +169,7 @@ Game.EntityRepository.define('orc', {
 	character: 'O',
 	foreground: 'DarkOliveGreen',
 	maxHP: 12,
+	rarity: 65,
 	stats: {
         strength: 7,
         vitality: 6,
@@ -187,6 +195,7 @@ Game.EntityRepository.define('ogre', {
 	character: 'O',
 	foreground: 'Chocolate',
 	maxHP: 18,
+	rarity: 30,
 	stats: {
         strength: 13,
         vitality: 9,

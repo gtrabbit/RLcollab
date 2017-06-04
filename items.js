@@ -4,6 +4,7 @@ Game.ItemRepository.define('apple', {
     name: 'apple',
     character: '%',
     foreground: 'red',
+	rarity: 60,
     foodValue: 250,
 	weight: 2,
     mixins: [Game.ItemMixins.Edible]
@@ -12,6 +13,7 @@ Game.ItemRepository.define('apple', {
 Game.ItemRepository.define('rock', {
     name: 'rock',
     character: '*',
+	rarity: 70,
     foreground: 'white',
 	weight: 5
 });
@@ -19,6 +21,7 @@ Game.ItemRepository.define('melon', {
     name: 'melon',
     character: '%',
     foreground: 'lightGreen',
+	rarity: 30,
     foodValue: 535,
     consumptions: 1,
 	weight: 8,
@@ -43,6 +46,7 @@ Game.ItemRepository.define('dagger', {
     character: ')',
     foreground: 'gray',
 	weight: 10,
+	rarity: 60,
     attackValue: 5,
     wieldable: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -55,6 +59,7 @@ Game.ItemRepository.define('short sword', {
     character: ')',
     foreground: 'white',
 	weight: 20,
+	rarity: 50,
     attackValue: 10,
     wieldable: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -67,6 +72,7 @@ Game.ItemRepository.define('yew staff', {
     character: ')',
     foreground: 'yellow',
 	weight: 8,
+	rarity: 30,
     attackValue: 5,
     defenseValue: 3,
     wieldable: true,
@@ -81,6 +87,7 @@ Game.ItemRepository.define('hand axe', {
     character: ')',
     foreground: 'red',
 	weight: 30,
+	rarity: 40,
     attackValue: Math.floor(Math.random() * 15),
     wieldable: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -96,6 +103,7 @@ Game.ItemRepository.define('hand axe', {
     foreground: 'gray',
     weight: 7,
     attackValue: 5,
+	rarity: 35,
     rangedWeapon: true,
     mixins: [Game.ItemMixins.Equippable]
 }, {
@@ -107,6 +115,7 @@ Game.ItemRepository.define('hand axe', {
     character: '}',
     foreground: 'brown',
     weight: 15,
+	rarity: 20,
     attackValue: 7,
     rangedWeapon: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -119,6 +128,7 @@ Game.ItemRepository.define('hand axe', {
     character: '}',
     foreground: 'blue',
     weight: 3,
+	rarity: 30,
     attackValue: 2,
     rangedWeapon: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -134,6 +144,7 @@ Game.ItemRepository.define('tunic', {
     character: '[',
     foreground: 'green',
 	weight: 20,
+	rarity: 70,
     defenseValue: 2,
     wearable: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -147,6 +158,7 @@ Game.ItemRepository.define('chainmail', {
     foreground: 'white',
     defenseValue: 4,
 	weight: 45,
+	rarity: 50,
     wearable: true,
     mixins: [Game.ItemMixins.Equippable]
 }, {
@@ -158,6 +170,7 @@ Game.ItemRepository.define('platemail', {
     character: '[',
     foreground: 'aliceblue',
 	weight: 85,
+	rarity: 15,
     defenseValue: 6,
     wearable: true,
     mixins: [Game.ItemMixins.Equippable]
@@ -168,6 +181,7 @@ Game.ItemRepository.define('pumpkin', {
     name: 'pumpkin',
     character: '%',
     foreground: 'orange',
+	rarity: 15,
     foodValue: 350,
     attackValue: 2,
     defenseValue: 2,
