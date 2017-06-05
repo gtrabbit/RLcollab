@@ -1,4 +1,18 @@
+Game.Skills.renderUI = function(inCoolDown){
+		if (!inCoolDown){
+			this.UI.childNodes[1].textContent = "";
+			this.UI.style.backgroundColor = "white";	
+			window.setTimeout(()=> this.UI.style.transition = "", 2000 );
+			window.setTimeout(()=> {
+				this.UI.style.transition = "background-color 1s";
+				this.UI.style.backgroundColor = "rgba(0,0,0,0)";
+			} , 50);
+		} else {
+			this.UI.style.opacity = this.timer / this.coolDownDuration;
+			this.UI.childNodes[1].textContent = " : " + (this.coolDownDuration - this.timer);
+		}
 
+}
 
 Game.Skill = class skill {
 	constructor(skill, actor){
@@ -10,13 +24,13 @@ Game.Skill = class skill {
 		this.costs = skill.costs;
 		this.actor = actor;
 		this.activateMsg = skill.activateMsg;
-		if (actor.hasMixin('PlayerActor')){
+		if (this.actor.hasMixin('PlayerActor')){
 			this.makeIcon();
+			this.renderUI = Game.Skills.renderUI;
 		}	
 
 	}
 	makeIcon(){
-
 		let UI = document.createElement('div');
 		UI.className = "skillIcon";
 		UI.id = this.title;
@@ -36,24 +50,18 @@ Game.Skill = class skill {
 			if (this.actor[getter]() < this.costs[key]){
 				return "Insufficient " + key;
 			}
-
 		}
-		this.activate();
+		this.inCoolDown = true;
+		for (let key in this.costs){
+			let modifier = "modify" + key;
+			this.actor[modifier](-this.costs[key]);
+		}
+		this.activate();		
 		return this.activateMsg;		
 	}
 
 	activate(){
-		this.inCoolDown = true;
-		for (let key in this.costs){
-			switch(key){
-				case 'Stamina':
-					this.actor.modifyStamina(-this.costs[key]);
-					break;
 
-
-
-			}
-		}
 	}
 
 	coolDown(){
@@ -61,25 +69,10 @@ Game.Skill = class skill {
 		if (this.timer > this.coolDownDuration){
 			this.timer = 0;
 			this.inCoolDown = false;
-			this.UI.childNodes[1].textContent = "";
-			this.UI.style.backgroundColor = "white";	
-			window.setTimeout(()=> this.UI.style.transition = "", 2000 );
-			window.setTimeout(()=> {
-				this.UI.style.transition = "background-color 1s";
-				this.UI.style.backgroundColor = "rgba(0,0,0,0)";
-			} , 50);
-			
-		} else {
-			this.UI.style.opacity = this.timer / this.coolDownDuration;
-			this.UI.childNodes[1].textContent = " : " + (this.coolDownDuration - this.timer);
-		}
-		//render CD UI
+		} 
+		if (this.actor.hasMixin('PlayerActor')){
+			this.renderUI(this.inCoolDown);
+		}	
+	}
 	
-	}
-
-	onTick(){
-		
-	}
-
-
 }

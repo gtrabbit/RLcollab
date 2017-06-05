@@ -68,7 +68,7 @@ Game.StatusEffects.haste = function(multi){
 
 Game.StatusEffects.chilled = function(multi){
 	this.name = 'chilled';
-	this.value = {speed: -350 - (multi || 0)
+	this.value = {speed: -350 - (multi || 0),
 		strength: -2 - (multi || 0),
 	};
 	this.duration = 5 + (multi || 0);
