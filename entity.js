@@ -2,7 +2,6 @@ Game.Entity = function(properties) {
     properties = properties || {};
     // Call the glyph's construtor with our set of properties
     Game.DynamicGlyph.call(this, properties);
-
     this._speed = properties['speed'] || 1000;
     this._x = properties['x'] || 0;
     this._y = properties['y'] || 0;
@@ -14,6 +13,16 @@ Game.Entity = function(properties) {
     this._staminaRegenRate = properties['staminaRegenRate'] || 0;
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
+    this._skills = [];
+    if (properties.hasOwnProperty('skills')){
+         properties['skills'].forEach((a)=>{
+       this._skills.push(
+             new Game.Skill(a, this)
+            ) 
+    })
+    }
+
+   
    if (!properties.stats){
     properties.stats = {
         strength: 5,
@@ -235,9 +244,6 @@ Game.Entity.prototype.getSpeed = function() {
 Game.Entity.prototype.getStamina = function(){
     return this._stamina;
 }
-Game.Entity.prototype.modifyStamina = function(amount){
-    this._stamina += amount;
-}
 
 
 
@@ -245,10 +251,21 @@ Game.Entity.prototype.getMaxStamina = function(){
     return this._maxStamina;
 }
 
+
+
+//================Modify/Set Vitals ======================>>>>
+Game.Entity.prototype.modifyStamina = function(amount){
+    this._stamina += amount;
+}
+
+
+
 //=====================Helpers ==========================>>>
 
 
-
+Game.Entity.prototype.getSkills = function(){
+    return this._skills;
+}
 
 Game.Entity.prototype.getModifiers = function(char){
     let total = 0;
@@ -290,6 +307,7 @@ Game.Entity.prototype.getStatusModifiers = function(char){
 //======================Other Basic Stuff=========>>>>>>>>>
 
 Game.Entity.prototype.onTick = function(){
+
     this._tickCount++;
     if (this._tickCount % this._regenDelay === 0){
         this.regen();
@@ -312,6 +330,16 @@ Game.Entity.prototype.onTick = function(){
     if (this._tickCount > 100){
         this._tickCount = 0;
     }
+
+    if (this.hasOwnProperty('_skills') && this._skills.length){
+     
+        this._skills.forEach(function(a){
+        if (a.inCoolDown){
+            a.coolDown();
+        }
+    })
+    }
+    
 
 }
 

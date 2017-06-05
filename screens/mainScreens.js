@@ -6,7 +6,6 @@ Game.Screen.startScreen = {
     _availableClasses: null,
     _selectedIndex: null,
 	enter: function(){
-        console.log(Game.ItemRepository);
         this._selectedIndex = 0;
         this._availableClasses = Game.classTemplates.getAvailableClasses()},
 	exit: function(){console.log("exited start screen");},
@@ -99,13 +98,15 @@ Game.Screen.playScreen = {
 		console.log("exiting the play screen")
 	},
 	enter: function(className){
+ 
       
 		let width = 100;
 		let height = 48;
 		let depth = 6;
 		let tiles = new Game.Builder(width, height, depth).getTiles();
 		this._player = new Game.Entity(className);
-        console.log(this._player)
+        console.log(this._player);
+        this.skills = this._player.getSkills();
 		this._map = new Game.Map.Cave(tiles, this._player);
 		this._map.getEngine().start();
 	},
@@ -169,6 +170,10 @@ Game.Screen.playScreen = {
             spot += statusDisplay.drawText(spot, 1, status.name);
             spot+= status.name.length;
         }
+
+
+
+
 
 
 
@@ -264,6 +269,150 @@ Game.Screen.playScreen = {
 				case ROT.VK_NUMPAD2:
 					this.move(0,1, 0);
 					break;
+
+                case ROT.VK_1:
+                     if (!this.skills.length){
+                        return;
+
+                    } else {
+                        if (!this.skills[0].inCoolDown){
+                           Game.sendMessage(this._player, this.skills[0].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_2:
+                     if (this.skills.length < 2){
+                        return;
+
+                    } else {
+                        if (!this.skills[1].inCoolDown){
+                           Game.sendMessage(this._player, this.skills[1].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_3:
+                     if (this.skills.length < 3){
+                        return;
+
+                    } else {
+                        if (!this.skills[2].inCoolDown){
+                             Game.sendMessage(this._player, this.skills[2].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_4:
+                     if (this.skills.length < 4){
+                        return;
+
+                    } else {
+                        if (!this.skills[3].inCoolDown){
+                             Game.sendMessage(this._player, this.skills[3].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_5:
+                     if (this.skills.length < 5){
+                        return;
+
+                    } else {
+                        if (!this.skills[4].inCoolDown){
+                          Game.sendMessage(this._player, this.skills[4].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_6:
+                    if (this.skills.length < 6){
+                        return;
+
+                    } else {
+                        if (!this.skills[5].inCoolDown){
+                           Game.sendMessage(this._player, this.skills[5].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_7:
+                    if (this.skills.length < 7){
+                        return;
+
+                    } else {
+                        if (!this.skills[6].inCoolDown){
+                            Game.sendMessage(this._player, this.skills[6].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_8:
+                   if (this.skills.length < 8){
+                        return;
+
+                    } else {
+                        if (!this.skills[7].inCoolDown){
+                            Game.sendMessage(this._player, this.skills[7].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_9:
+                   if (this.skills.length < 9){
+                        return;
+
+                    } else {
+                        if (!this.skills[8].inCoolDown){
+                           Game.sendMessage(this._player, this.skills[8].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+                case ROT.VK_0:
+                    if (this.skills.length < 10){
+                        return;
+
+                    } else {
+                        if (!this.skills[9].inCoolDown){
+                            Game.sendMessage(this._player, this.skills[9].canActivate())
+                        } else {
+                            Game.sendMessage(this._player, "Skill is in cooldown!")
+                            return;
+                        }
+                    }
+                   
+                    break;
+
+
+
                 case ROT.VK_F:
                     if (this._player.hasMixin('RangedAttacker')){
                         let point = {
@@ -276,14 +425,9 @@ Game.Screen.playScreen = {
                         if (target){
                             this._player.shoot(target);
                         }
-                      
-
                     } else {
                         Game.sendMessage(this._player, "You do not have a ranged weapon equipped")
                     }
-
-                    
-
                     break;
                 case ROT.VK_T:
                     Game.Screen.selectProjectile.setup(this._player, this._player.getItems())

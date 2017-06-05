@@ -8,15 +8,22 @@ window.onload = function(){
 		const statusDisplay = Game.getStatusDisplay().getContainer();
 		const msgDisp = Game.getMsgDisplay().getContainer();
 
-
 		gameDisplay.id = "gameDisplay";
 		gameDisplay.className = "gameDsp centered-block";
 		msgDisp.className = "centered-block msg";
 		statusDisplay.className = "centered-block status";
+		Game.skillBar = document.createElement('div');
+		Game.skillBar.className = "skillBar";
+		Game.skillBar.innerHTML = "Skills: <hr>"
+		const main = document.getElementById('mainDisplays');
+		const allScreens = document.getElementById('allScreens');
 
-		document.body.appendChild(gameDisplay);
-		document.body.appendChild(statusDisplay);
-		document.body.appendChild(msgDisp);
+		allScreens.insertBefore(Game.skillBar, main);
+
+		main.appendChild(gameDisplay);
+		main.appendChild(statusDisplay);
+		main.appendChild(msgDisp);
+	
 
 
 		Game.switchScreen(Game.Screen.startScreen);
@@ -32,6 +39,7 @@ const Game = {
 			this._display = new ROT.Display({width: this._screenWidth, height: this._screenHeight + 1});
 			this._msgDisplay = new ROT.Display({width: this._screenWidth, height: this._screenHeight / 3 })
 			this._statusDisplay = new ROT.Display({width: this._screenWidth, height: 3})
+			
 			let game = this;
 			let bindEventToScreen = function(event){
 				window.addEventListener(event, function(e){
@@ -44,9 +52,13 @@ const Game = {
 			bindEventToScreen('keyup');
 			bindEventToScreen('keypress');
 		},
+		_display: null,
+		_currentScreen: null,
+		_screenWidth: 80,
+		_screenHeight: 24,
 		refresh: function(){
 			this._display.clear();
-			this._currentScreen.render(this._display, this._msgDisplay, this._statusDisplay);
+			this._currentScreen.render(this._display, this._msgDisplay, this._statusDisplay, this._skillDisplay);
 		},
 		getDisplay: function(){
 			return this._display;
@@ -54,10 +66,6 @@ const Game = {
 		getMsgDisplay: function(){
 			return this._msgDisplay;
 		},
-		_display: null,
-		_currentScreen: null,
-		_screenWidth: 80,
-		_screenHeight: 24,
 		getDisplay: function() {
     		return this._display;
 		},

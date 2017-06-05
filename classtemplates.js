@@ -30,7 +30,8 @@ Game.PlayerTemplate = {
              Game.Mixins.Equipper,
             Game.Mixins.ExperienceGainer,
             Game.Mixins.PlayerStatGainer],
-    extraMixins: []
+    extraMixins: [],
+    skills: [Game.Skills.Run, Game.Skills.Bash]
  
 }
 
