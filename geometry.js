@@ -32,7 +32,7 @@ Game.Geometry = {
 
     },
 
-    getClosestTarget: function(map, point, radius){
+    getClosestTarget: function(map, point, radius, actor){
         length = (radius*2) + 1;
         let leftX = point.x - radius;
         let topY = point.y - radius;
@@ -50,6 +50,11 @@ Game.Geometry = {
                 for(let k = x- count; k<= x+ count; k++){
                     let target = map.getTile(k, i, z).getOccupant();
                     if (target && !(k === x && i === y)){
+                        if (actor && actor.canSee(target)){
+                            return target;
+                        } else {
+                            continue;
+                        }
                         return target;
                     }
 

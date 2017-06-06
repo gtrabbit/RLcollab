@@ -1,6 +1,25 @@
 Game.Entity = function(properties) {
     properties = properties || {};
     // Call the glyph's construtor with our set of properties
+     this._stats = {};
+     if (!properties.stats){
+    properties.stats = {
+        strength: 5,
+        vitality: 5,
+        willpower: 5,
+        dexterity: 5,
+        perception: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 5,
+        luck: 5
+    }
+   }
+    for (let key in properties.stats){
+            this._stats[key] = properties.stats[key] || 5;
+        }
+
+
     Game.DynamicGlyph.call(this, properties);
     this._speed = properties['speed'] || 1000;
     this._x = properties['x'] || 0;
@@ -14,6 +33,10 @@ Game.Entity = function(properties) {
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
     this._skills = [];
+   
+
+//===== this code will have to be replaced later ====>>>>>>
+
     if (properties.hasOwnProperty('skills')){
          properties['skills'].forEach((a)=>{
        this._skills.push(
@@ -21,26 +44,9 @@ Game.Entity = function(properties) {
             ) 
     })
     }
+ //=================================........-=-=-=-=-  
 
-   
-   if (!properties.stats){
-    properties.stats = {
-        strength: 5,
-        vitality: 5,
-        willpower: 5,
-        dexterity: 5,
-		perception: 5,
-        intelligence: 5,
-        arcana: 5,
-        charisma: 5,
-        luck: 5
-    }
-   }
-    for (let key in properties.stats){
-            this['_'+key] = properties.stats[key] || 5;
-        }
-
-
+  
    
 }
 // Make entities inherit all the functionality from glyphs
@@ -50,42 +56,42 @@ Game.Entity.extend(Game.DynamicGlyph);
 //==========getters for base stats============>>>>
 
 Game.Entity.prototype.getStrength = function(){
-    let base = this._strength;
+    let base = this._stats.strength;
     base += this.getModifiers('strength');
     return base;
 }
 Game.Entity.prototype.getWillpower = function(){
-    let base = this._willpower;
+    let base = this._stats.willpower;
     base += this.getModifiers('willpower');
     return base;
 }
 Game.Entity.prototype.getDexterity = function(){
-    let base = this._dexterity;
+    let base = this._stats.dexterity;
     base += this.getModifiers('dexterity');
     return base;
 }
 Game.Entity.prototype.getVitality = function(){
-    let base = this._vitality;
+    let base = this._stats.vitality;
     base += this.getModifiers('vitality');
     return base;
 }
 Game.Entity.prototype.getIntelligence = function(){
-    let base = this._intelligence;
+    let base = this._stats.intelligence;
     base += this.getModifiers('intelligence');
     return base;
 }
 Game.Entity.prototype.getLuck = function(){
-    let base = this._luck;
+    let base = this._stats.luck;
     base += this.getModifiers('luck');
     return base;
 }
 Game.Entity.prototype.getArcana = function(){
-    let base = this._arcana;
+    let base = this._stats.arcana;
     base += this.getModifiers('arcana');
     return base;
 }
 Game.Entity.prototype.getPerception = function(){
-    let base = this._perception;
+    let base = this._stats.perception;
     base += this.getModifiers('perception');
     return base;
 }

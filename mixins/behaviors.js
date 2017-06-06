@@ -3,12 +3,10 @@ Game.Mixins.RandomStatGainer = {
     groupName: 'StatGainer',
     listeners: {
         onGainLevel: function() {
-            var statOptions = this.getStatOptions();
-            // Randomly select a stat option and execute the callback for each
-            // stat point.
+            let options = Object.keys(this._stats);
             while (this.getStatPoints() > 0) {
+                this.increaseStat(options.random(), 1)
                 // Call the stat increasing function with this as the context.
-                statOptions.random()[1].call(this);
                 this.setStatPoints(this.getStatPoints() - 1);
             }
         }

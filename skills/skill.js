@@ -61,7 +61,7 @@ Game.Skill = class skill {
 	}
 
 	activate(){
-
+		console.log(this.actor);
 	}
 
 	coolDown(){

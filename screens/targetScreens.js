@@ -149,7 +149,6 @@ Game.Screen.TargetBasedScreen.prototype.executeOkFunction = function() {
 
 Game.Screen.singleProjectile = new Game.Screen.TargetBasedScreen({
     okFunction: function(x, y){
-        console.log(this._properties);
         let target = this._player.getMap().getTile(x, y, this._player.getZ());
             switch(this._properties.actionType){
                 case "throw":

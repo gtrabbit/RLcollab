@@ -107,31 +107,37 @@ Game.Mixins.ExperienceGainer = {
         this._statPointsPerLevel = template['statPointsPerLevel'] || 1;
         this._statPoints = 0;
         // Determine what stats can be levelled up.
-        this._statOptions = [];
-        if (this.hasMixin('Attacker')) {
-            this._statOptions.push(['Increase attack value', this.increaseAttackValue]);
-        }
-        if (this.hasMixin('Destructible')) {
-            this._statOptions.push(['Increase defense value', this.increaseDefenseValue]);   
-            this._statOptions.push(['Increase max health', this.increaseMaxHp]);
-        }
-        if (this.hasMixin('Sight')) {
-            this._statOptions.push(['Increase sight range', this.increaseSightRadius]);
-        }
+        this._statOptions = [
+            'strength',
+            'vitality',
+            'willpower',
+            'dexterity',
+            'perception',
+            'intelligence',
+            'arcana',
+            'charisma',
+            'luck'
+        ];
+
+
     },
     listeners: {
         onKill: function(victim) {
-            var exp = (victim.getMaxHP()/10) + (victim.getDefenseValue()*2);
-            if (victim.hasMixin('Attacker')) {
-                exp += victim.getMeleeDamageModifier() + victim.getRangedDamageModifier();
+            var exp = (victim.getMaxHP()/10)
+            for (let key in victim._stats){
+                exp += (victim._stats[key]);
             }
+
+        
+         
             // Account for level differences
             if (victim.hasMixin('ExperienceGainer')) {
                 exp -= (this.getLevel() - victim.getLevel()) * 3;
             }
             // Only give experience if more than 0.
             if (exp > 0) {
-                this.giveExperience(Math.round(exp/2));
+                console.log(exp)
+                this.giveExperience(Math.round(exp));
             }
         },
         details: function() {
@@ -140,6 +146,10 @@ Game.Mixins.ExperienceGainer = {
     },
     getLevel: function() {
         return this._level;
+    },
+    increaseStat: function(stat, value){
+        this._stats[stat] += value;
+        Game.sendMessage(this, "Your " + stat + " increases")
     },
     getExperience: function() {
         return this._experience;

@@ -421,7 +421,7 @@ Game.Screen.playScreen = {
                             z: this._player.getZ()
                         }
                         let radius = this._player.getSightRadius();
-                        let target = Game.Geometry.getClosestTarget(this._map, point, radius);
+                        let target = Game.Geometry.getClosestTarget(this._map, point, radius, this._player);
                         if (target){
                             this._player.shoot(target);
                         }
@@ -550,7 +550,7 @@ Game.Screen.gainStatScreen = {
         // Iterate through each of our options
         for (var i = 0; i < this._options.length; i++) {
             display.drawText(0, 2 + i, 
-                letters.substring(i, i + 1) + ' - ' + this._options[i][0]);
+                letters.substring(i, i + 1) + ' - ' + this._options[i]);
         }
 
         // Render remaining stat points
@@ -566,7 +566,7 @@ Game.Screen.gainStatScreen = {
                 var index = inputData.keyCode - ROT.VK_A;
                 if (this._options[index]) {
                     // Call the stat increasing function
-                    this._options[index][1].call(this._entity);
+                    this._entity.increaseStat(this._options[index], 1);
                     // Decrease stat points
                     this._entity.setStatPoints(this._entity.getStatPoints() - 1);
                     // If we have no stat points left, exit the screen, else refresh
