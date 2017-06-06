@@ -15,6 +15,10 @@ Game.StatusEffects = function(status){
 
 Game.StatusEffects.poison = function(multi){
 	this.name = 'poison';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getMagicResist()){
+            return true;
+        } else {
 	this.value = {
 		regenBonus: -2 - (multi || 0),
 		strength: -2 - (multi || 0),
@@ -27,6 +31,10 @@ Game.StatusEffects.poison = function(multi){
 
 Game.StatusEffects.weakness = function(multi){
 	this.name = 'weakness';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getMagicResist()){
+            return true;
+        } else {
 	this.value = {strength: -4 - (multi || 0),
 	};
 	this.duration = 6 + (multi || 0);
@@ -34,6 +42,10 @@ Game.StatusEffects.weakness = function(multi){
 
 Game.StatusEffects.blindness = function(multi){
 	this.name = 'blindness';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getMagicResist()){
+            return true;
+        } else {
 	this.value = {sightRadius: -3 - (multi || 1),
 		perception: -2 - (multi || 0),
 		dexterity: -1 - (multi || 0),
@@ -43,6 +55,10 @@ Game.StatusEffects.blindness = function(multi){
 
 Game.StatusEffects.daze = function(multi){
 	this.name = 'daze';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getResistPhysical()){
+            return true;
+        } else {
 	this.value = {strength: -2 - (multi || 0),
 		perception: -2 - (multi || 0),
 		speed: -400 - (multi || 0),
@@ -68,6 +84,10 @@ Game.StatusEffects.haste = function(multi){
 
 Game.StatusEffects.chilled = function(multi){
 	this.name = 'chilled';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getMagicResist()){
+            return true;
+        } else {
 	this.value = {speed: -350 - (multi || 0),
 		strength: -2 - (multi || 0),
 	};
@@ -76,6 +96,10 @@ Game.StatusEffects.chilled = function(multi){
 
 Game.StatusEffects.slow = function(multi){
 	this.name = 'slow';
+	let perc = ROT.RNG.getPercentage()       
+        if (this.getSpellPenetration()) + perc()) > this.getMagicResist()){
+            return true;
+        } else {
 	this.value = {speed: -500 - (multi || 0),
 	};
 	this.duration = 5 + (multi || 0);
