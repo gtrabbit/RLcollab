@@ -197,7 +197,19 @@ Game.Entity.prototype.getPerception = function(){
 	   base += this.getModifiers();
         return base
 }
-		
+
+	Game.Entity.prototype.getFlatCrit = function(){
+		let base = 0
+		base += this.getModifiers();
+		 return base
+}
+
+Game.Entity.prototype.getFlatEvade = function(){
+		let base = 0
+		base += this.getModifiers();
+		 return base
+}
+
 	Game.Entity.prototype.getMaxWeight = function(){
 	   let base = Math.round(this.getStrength() * 4)
 		

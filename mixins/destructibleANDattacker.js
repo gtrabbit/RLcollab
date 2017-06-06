@@ -126,7 +126,7 @@ Game.Mixins.Attacker = {
     checkHit(target){
   
         let perc = ROT.RNG.getPercentage()       
-        if ((perc + this.getAccuracyBonus()) > target.getEvasion()){
+        if (((perc + this.getAccuracyBonus()) > target.getEvasion())+target.getFlatEvade()){
             return true;
         } else {
             Game.sendMessage(this, 'your attack has missed!', [this.getName()]);
@@ -135,7 +135,7 @@ Game.Mixins.Attacker = {
         }        
     },
     checkCrit(){
-        if (ROT.RNG.getPercentage() < this.getMeleeCritical()){
+        if ((ROT.RNG.getPercentage() < this.getFlatCrit())+this.getMeleeCritical()){
             Game.sendMessage(this, "A critical hit!")
             return true;
         } else {
