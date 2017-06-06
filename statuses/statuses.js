@@ -53,8 +53,8 @@ Game.StatusEffects.daze = function(multi){
 Game.StatusEffects.bless = function(multi){
 	this.name = 'bless';
 	this.value = {strength: +3 + (multi || 0),
-		dexterity: + 3 (multi || 0),
-		vitality: + 4 (multi || 0),
+		dexterity: + 3 + (multi || 0),
+		vitality: + 4 + (multi || 0),
 	};
 	this.duration = 6 + (multi || 0);
 }
@@ -81,6 +81,14 @@ Game.StatusEffects.slow = function(multi){
 	this.duration = 5 + (multi || 0);
 }
 
+Game.StatusEffects.enrage = function(multi){
+	this.name = 'enrage';
+	this.value = {speed: +500 + (multi || 0),
+		strength: +5 + (multi || 0),
+		dexterity: +5 + (multi || 0),
+	};
+	this.duration = 7 + (multi || 0);
+}
 
 //this function is used to generate a status and apply it to a target
 
