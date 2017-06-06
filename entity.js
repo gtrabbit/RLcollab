@@ -157,7 +157,7 @@ Game.Entity.prototype.getPerception = function(){
 }
 		
 	Game.Entity.prototype.getMeleeCritical = function(){
-	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 2.6) - 4) + (this.getLuck() *1.5) / 2) -2);
+	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 2.8) - 3) + (this.getLuck() *1.5) / 2) -1);
 		
 	   base += this.getModifiers();
         return base
