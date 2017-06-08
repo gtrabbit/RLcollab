@@ -24,7 +24,7 @@ Game.StatusEffects.poison = function(multi){
 		strength: -2 - (multi || 0),
 		};
 	this.duration = 5 * (multi || 1);
-
+}
 //etc. etc. might want a 'penetration' value to use to calculate against saving throws
 
 }
@@ -39,6 +39,7 @@ Game.StatusEffects.weakness = function(multi){
 	};
 	this.duration = 6 + (multi || 0);
 }
+}
 
 Game.StatusEffects.blindness = function(multi){
 	this.name = 'blindness';
@@ -52,7 +53,7 @@ Game.StatusEffects.blindness = function(multi){
 	};
 	this.duration = 5 + (multi || 0);
 }
-
+}
 Game.StatusEffects.daze = function(multi){
 	this.name = 'daze';
 	let perc = ROT.RNG.getPercentage()       
@@ -64,6 +65,7 @@ Game.StatusEffects.daze = function(multi){
 		speed: -400 - (multi || 0),
 	};
 	this.duration = 4 + (multi || 0);
+}
 }
 
 Game.StatusEffects.bless = function(multi){
@@ -93,6 +95,7 @@ Game.StatusEffects.chilled = function(multi){
 	};
 	this.duration = 5 + (multi || 0);
 }
+}
 
 Game.StatusEffects.slow = function(multi){
 	this.name = 'slow';
@@ -103,6 +106,7 @@ Game.StatusEffects.slow = function(multi){
 	this.value = {speed: -500 - (multi || 0),
 	};
 	this.duration = 5 + (multi || 0);
+}
 }
 
 Game.StatusEffects.enrage = function(multi){
@@ -120,4 +124,3 @@ Game.StatusEffects.makeStatus = function(status, multi, target){
 	target.addStatus( new Game.StatusEffects (new Game.StatusEffects[status](multi)));
 }
 
-});

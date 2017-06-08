@@ -27,7 +27,6 @@ Game.Repository.prototype.create = function(name, extraProperties){
             template[key] = extraProperties[key];
         }
     }
-
 	return new this._ctor(template);
 }
 

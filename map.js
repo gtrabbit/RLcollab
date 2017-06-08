@@ -4,13 +4,8 @@ Game.Map = function(tiles, player){
 	this._width = tiles[0].length;
 	this._height = tiles[0][0].length;
 	this._entities = {};
-    this._items = {};
     this._fov = [];
-    var templates = Game.ItemRepository._templates;
-    for (let item in templates) {
-        this.addItemAtRandomPosition(Game.ItemRepository.create(templates[item].name),
-            Math.floor(this._depth * Math.random()));
-    }
+   
      this.setupFov();
   
     this._explored = new Array(this._depth);
@@ -196,9 +191,7 @@ Game.Map.prototype.getEntitiesWithinRadius = function(centerX, centerY,
     var rightX = centerX + radius;
     var topY = centerY - radius;
     var bottomY = centerY + radius;
-    // Iterate through our entities, adding any which are within the bounds
-
-//doing work here when I get back
+   
     thingsInRadius = [];
     for (let x = leftX; x < rightX; x++){
         for (let y = topY; y < bottomY; y++){

@@ -66,12 +66,9 @@ Game.Mixins.Destructible = {
         // If we can equip items, then have to take into 
         // consideration weapon and armor
         if (this.hasMixin(Game.Mixins.Equipper)) {
-            if (this.getWeapon()) {
-                modifier += this.getWeapon().getDefenseValue();
-            }
-            if (this.getArmor()) {
-                modifier += this.getArmor().getDefenseValue();
-            }
+        
+        //code here some day...
+
         }
         return this._defenseValue + modifier;
     }
@@ -151,7 +148,8 @@ Game.Mixins.Attacker = {
             if (this.checkHit(targetedEntity)){
                 let damage = projectile._attackValue || 2;
                 damage += projectile._weight || 2;
-                damage += Math.floor((this.getThrowStat() || 1) / 2);
+                damage += Math.floor((this.getThrowStat() || 1) );
+                damage = Math.floor(damage / 3);
                 targetedEntity.takeDamage(this, damage);
             } 
             
@@ -164,12 +162,9 @@ Game.Mixins.Attacker = {
         // If we can equip items, then have to take into 
         // consideration weapon and armor
         if (this.hasMixin(Game.Mixins.Equipper)) {
-            if (this.getWeapon()) {
-                modifier += this.getWeapon().getAttackValue();
-            }
-            if (this.getArmor()) {
-                modifier += this.getArmor().getAttackValue();
-            }
+         
+//need code here eventually
+
         }
         return modifier;
     },

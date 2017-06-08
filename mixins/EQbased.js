@@ -1,34 +1,28 @@
 Game.Mixins.Equipper = {
     name: 'Equipper',
     init: function(template) {
-        this._weapon = null;
-        this._armor = null;
+        this._equipment = {
+            weapon: null,
+            offhand: null,
+            armor: null,
+            helmet: null,
+            boots: null
+        }
+
     },
     wield: function(item) {
-        this._weapon = item;
+        this._equipment[item.slot] = item;
     },
-    unwield: function() {
-        this._weapon = null;
+    unwield: function(slot) {
+        this._equipment[slot] = null;
     },
-    wear: function(item) {
-        this._armor = item;
-    },
-    takeOff: function() {
-        this._armor = null;
-    },
-    getWeapon: function() {
-        return this._weapon;
-    },
-    getArmor: function() {
-        return this._armor;
+    getEquipment: function(slot) {
+        return slot ? this._equipment[slot] : this._equipment;    
     },
     unequip: function(item) {
         // Helper function to be called before getting rid of an item.
-        if (this._weapon === item) {
-            this.unwield();
-        }
-        if (this._armor === item) {
-            this.takeOff();
+        if (this._equipment[item.slot] === item){
+            this.unwield(item.slot);
         }
     }
 };

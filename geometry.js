@@ -42,27 +42,87 @@ Game.Geometry = {
         let y = Number(point.y);
         let z = point.z;
  
-        let count = 0;
-        let totalTiles = 0;
-        while (count < radius){
-            count++
-            for (let i= y- count ; i<= y+ count; i++){
-                for(let k = x- count; k<= x+ count; k++){
-                    let target = map.getTile(k, i, z).getOccupant();
-                    if (target && !(k === x && i === y)){
-                        if (actor && actor.canSee(target)){
-                            return target;
-                        } else {
-                            continue;
-                        }
+        let start = 1;
+
+        while (start <= radius){
+            let target;
+            let dy = y-start;
+            for (let i = x-start; i<= x+start; i++ ){
+                target = map.getTile(i, dy, z).getOccupant();
+                if (actor) {
+                    if (target && actor.canSee(target)){
                         return target;
-                    }
+                    } 
+                } else {
+                    return target;
+                }
+                   
 
+            }
 
+            let dx = x+start;
+            for (let k = y-start+1; k <= y + start; k++){
+                target = map.getTile(dx, k, z).getOccupant();
+                if (actor) {
+                    if (target && actor.canSee(target)){
+                        return target;
+                    } 
+                } else {
+                    return target;
+                }
+            
+            }
+
+            let ey = y+start;
+            for (let i = x+start-1; i >= x-start; i--){
+                target = map.getTile(i, ey, z).getOccupant();
+                if (actor) {
+                    if (target && actor.canSee(target)){
+                        return target;
+                    } 
+                } else {
+                    return target;
                 }
             }
 
-        }
+            let ex = x-start;
+            for (let k = y+start-1; k >= y-start+1; k--){
+                target = map.getTile(ex, k, z).getOccupant();
+                if (actor) {
+                    if (target && actor.canSee(target)){
+                        return target;
+                    } 
+                } else {
+                    return target;
+                }
+            }
+
+            start++
+
+        } //close while loop
+
+
+
+
+        // while (count < radius){
+        //     count++
+        //     for (let i= y- count ; i<= y+ count; i++){
+        //         for(let k = x- count; k<= x+ count; k++){
+        //             let target = map.getTile(k, i, z).getOccupant();
+        //             if (target && !(k === x && i === y)){
+        //                 if (actor && actor.canSee(target)){
+        //                     return target;
+        //                 } else {
+        //                     continue;
+        //                 }
+        //                 return target;
+        //             }
+
+
+        //         }
+        //     }
+
+        // }
 
         Game.sendMessage(map._player, "No visible targets");
     }

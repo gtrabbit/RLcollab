@@ -49,7 +49,6 @@ Game.Mixins.FoodConsumer = {
 
 
 
-
 Game.Mixins.Sight = {
     name: "Sight",
     groupName: 'Sight',
@@ -136,7 +135,6 @@ Game.Mixins.ExperienceGainer = {
             }
             // Only give experience if more than 0.
             if (exp > 0) {
-                console.log(exp)
                 this.giveExperience(Math.round(exp));
             }
         },
@@ -216,8 +214,6 @@ Game.Mixins.CorpseDropper = {
         }
     }
 };
-
-
 
 
 
