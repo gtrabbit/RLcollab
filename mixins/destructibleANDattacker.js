@@ -102,10 +102,18 @@ Game.Mixins.Attacker = {
             if (this.checkHit(target)){
                 let attack = this.getMeleeDamageModifier();
                 attack += this.getWeaponAttackValue();
-                if (this.checkCrit()){
+				
+					if (this.checkCrit())
                     attack += this.getMeleeCriticalDamageBonus();
                     attack *= 1.5;
-   
+					}
+				if (this.checkDoubleSwing(target)){
+				attack = this.getMeleeDamageModifier();
+				attack += this.getWeaponAttackValue();
+					if (this.checkCrit())
+						attack += this.getMeleeCriticalDamageBonus();
+						attack *= 1.5;
+					}
                 }
                 let max = 1 + Math.max(0, attack);
                 let damage = 1+Math.floor(ROT.RNG.getNormal(max, max/2));
@@ -113,26 +121,21 @@ Game.Mixins.Attacker = {
                 target.takeDamage(this, damage);
 
 
-            }
-
-
-
-           
-        }
-    },
+            },
     checkHit(target){
   
         let perc = ROT.RNG.getPercentage()       
         if (((perc + this.getAccuracyBonus()) > target.getEvasion())+target.getFlatEvade()){
             return true;
         } else {
-            Game.sendMessage(this, 'your attack has missed!', [this.getName()]);
+            Game.sendMessage(this, 'Your attack has missed!', [this.getName()]);
             Game.sendMessage(target, 'The %s\'s attack has missed!', [this.getName()]);
             return false;
         }        
     },
     checkCrit(){
-        if ((ROT.RNG.getPercentage() < this.getFlatCrit())+this.getMeleeCritical()){
+		let perc = ROT.RNG.getPercentage()
+        if (perc < (this.getFlatCrit() + this.getMeleeCritical())){
             Game.sendMessage(this, "A critical hit!")
             return true;
         } else {
@@ -140,6 +143,17 @@ Game.Mixins.Attacker = {
         }
         
     },
+	checkDoubleSwing(target){
+	let perc = ROT.RNG.getPercentage()       
+        if (perc < this.getDoubleSwingChance()){
+			Game.sendMessage(this, "You swing again!", [this.getName()]);
+			Game.sendMessage(target, "The %s goes for another attack!", [this.getName()]);
+			return true;
+		} else {
+			return false;
+		}
+	
+	},
     throw: function(target, projectile){
         this.removeItem(this._items.indexOf(projectile));
         target.setLoot(projectile);
