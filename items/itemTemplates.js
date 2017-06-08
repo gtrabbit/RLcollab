@@ -38,3 +38,13 @@ Game.Items.Equipment.Helmets.Cap = {
 	name: "cap",
 	weight: 7
 }
+
+//================ Bracers =========>>
+
+Game.Items.Equipment.Bracers.Bracers = {
+	character: "8",
+	defenseValue: 1,
+	name: "bracer",
+	weight: 3
+}
+

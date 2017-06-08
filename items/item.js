@@ -30,5 +30,6 @@ Game.Items.Prefix.Adjective = {};
 Game.Items.Equipment = {};
 Game.Items.Equipment.Weapons = {};
 Game.Items.Equipment.Helmets = {};
+Game.Items.Equipment.Bracers = {};
 
 //and so on, for shields, armor, boots, etc.

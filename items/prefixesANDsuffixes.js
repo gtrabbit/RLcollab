@@ -43,17 +43,43 @@ Game.Items.Prefix.Quality.Cheap = {
 
 Game.Items.Prefix.Classy.Knight = {
 	prefix: "knight's",  //notice that these do not need to line up with how it's declared above
-	defenseValue: 5,
-	attackValue: 3,
 	modifies: {
 		vitality: 2,
-		strength: 2,
-
+		strength: 3,
+		AccuracyBonus: 20
 	},
 	rarity: 10
 }
 
+Game.Items.Prefix.Classy.Thief = {
+	prefix: "theif's",  //notice that these do not need to line up with how it's declared above
+	modifies: {
+		dexterity: 3,
+		perception: 2,
+		MeleeCritical: 3,
+	},
+	rarity: 10
+}
 
+Game.Items.Prefix.Classy.Mage = {
+	prefix: "mage's",  //notice that these do not need to line up with how it's declared above
+	modifies: {
+		intelligence: 3,
+		arcana: 2,
+		SpellCritical: 3,
+	},
+	rarity: 10
+}
+
+Game.Items.Prefix.Classy.Ninja = {
+	prefix: "ninja's",
+	modifies: {
+		speed: 150
+		perception: 4,
+		dexterity: 2,
+	},
+	rarity: 8
+}
 
 //========================ADJECTIVE ==============>>>
 
