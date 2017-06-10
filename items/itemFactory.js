@@ -120,6 +120,16 @@ class Boots {
 	}
 }
 
+class Bracers {
+	constructor(template){
+		this.baseStat = 'defenseValue';
+		this.EQSlot = 'bracers';
+		for (let key in template){
+			this[key] = template[key] || 0;
+			
+			}
+		}
+}		
 //and so on, for however many EQ slots you want.
 
 
@@ -129,13 +139,13 @@ class Boots {
 let extras = {
 material: Game.Items.Prefix.Material.Silver,
 quality: Game.Items.Prefix.Quality.Good,
-classy: Game.Items.Prefix.Classy.Knight,
+classy: Game.Items.Prefix.Classy.Thief,
 adjective: Game.Items.Prefix.Adjective.Sharp
 
 }
 
 //first make a weapon using the weapon template as an argument
-let weapon1 = new Helmet(Game.Items.Equipment.Helmets.Cap)
+let weapon1 = new Bracers(Game.Items.Equipment.Bracers.Bracers)
 
 
 //then make that item into equipment, attaching prefixes as extras

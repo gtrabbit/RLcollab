@@ -237,6 +237,13 @@ Game.Entity.prototype.getDoubleSwingChance = function(){
 	   base += this.getModifiers();
         return base
 }
+
+	Game.Entity.prototype.getMagicSlayer = function(){
+	   let base = 0
+		
+	   base += this.getModifiers();
+        return base
+}
 		
 	Game.Entity.prototype.getEvasion = function(){
 	   let base = Math.ceil( ( ( ( (this.getDexterity() *14) /2 ) ) + (this.getLuck() *6) /2 ) );

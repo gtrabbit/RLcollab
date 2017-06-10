@@ -29,6 +29,13 @@ Game.Items.Prefix.Adjective = {};
 
 Game.Items.Equipment = {};
 Game.Items.Equipment.Weapons = {};
-Game.Items.Equipment.Helmets = {};
+Game.Items.Equipment.Armor.Helmets = {};
+Game.Items.Equipment.Armor.Bracers = {};
+Game.Items.Equipment.Armor.Body = {};
+Game.Items.Equipment.Armor.Boots = {};
+Game.Items.Equipment.Armor.Rings = {};
+Game.Items.Equipment.Armor.Amulets = {};
+Game.Items.Equipment.Armor.Capes = {};
+
 
 //and so on, for shields, armor, boots, etc.
