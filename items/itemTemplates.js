@@ -7,15 +7,26 @@
 
 Game.Items.Equipment.Weapons.Dagger = {
 
-	character: ")",
-	attackValue: 5,
-	name: 'dagger',
-	weight: 4,
-	variance: 1,
-	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
-		DoubleSwing: 2
+	dagger: {
+		character: ")",
+		attackValue: 5,
+		name: 'dagger',
+		weight: 4,
+		variance: 1,
+		bonuses: {   
+			DoubleSwing: 2
+		}
+	},
+	knife: {
+		character: ")",
+		attackValue: 3,
+		name: 'knife',
+		weight: 3,
+		variance: 4,
+		bonuses: {   
+			DoubleSwing: 2.5
+		}
 	}
-	
 	
 }
 
