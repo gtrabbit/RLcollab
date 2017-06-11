@@ -11,7 +11,7 @@ Game.Items.WeaponPrefix.Material.Silver = {
 	rarity: 18,
 	weight: 2, //multiplies by this amount
 	modifies: {  //everything in here multiplied by multi (from quality) and then added to template base
-	MeleeCriticalDamageBonus: 4
+	MeleeCriticalDamageBonus: 4,
 	MagicSlayer: 3
 	//if you do a secondary stat, format the name exactly as it appears after the "get" on its function, so, in this case, capitalize the first word as well, like in this example
 }
@@ -30,7 +30,7 @@ Game.Items.ArmorPrefix.Material.Silver = {
 
 Game.Items.WeaponPrefix.Material.Iron = {
 	prefix: "iron",
-	basestatBonus: 1,
+	baseStatBonus: 1,
 	rarity: 40,
 	weight: 2.2,
 	modifies: {
@@ -41,7 +41,7 @@ Game.Items.WeaponPrefix.Material.Iron = {
 
 Game.Items.ArmorPrefix.Material.Iron = {
 	prefix: "iron",
-	basestatBonus: 1,
+	baseStatBonus: 1,
 	rarity: 40,
 	weight: 2.2,
 	modifies: {
@@ -52,7 +52,7 @@ Game.Items.ArmorPrefix.Material.Iron = {
 
 Game.Items.WeaponPrefix.Material.Steel = {
 	prefix: "steel",
-	basestatBonus: 3,
+	baseStatBonus: 3,
 	rarity: 18,
 	weight: 1.5,
 	modifies: {
@@ -63,7 +63,7 @@ Game.Items.WeaponPrefix.Material.Steel = {
 
 Game.Items.ArmorPrefix.Material.Steel = {
 	prefix: "steel",
-	basestatBonus: 3,
+	baseStatBonus: 3,
 	rarity: 18,
 	weight: 1.5,
 	modifies: {
@@ -73,7 +73,7 @@ Game.Items.ArmorPrefix.Material.Steel = {
 
 Game.Items.WeaponPrefix.Material.Elven = {
 	prefix: "elven",
-	basestatBonus: 2,
+	baseStatBonus: 2,
 	rarity: 5,
 	weight: 0.6,
 	modifies: {
@@ -82,9 +82,9 @@ Game.Items.WeaponPrefix.Material.Elven = {
 }
 }
 
-Game.Items.ArmorPrefix.Material.ElvenA = {
+Game.Items.ArmorPrefix.Material.Elven = {
 	prefix: "elven",
-	basestatBonus: 2,
+	baseStatBonus: 2,
 	rarity: 5,
 	weight: 0.6,
 	modifies: {
@@ -130,7 +130,7 @@ Game.Items.ArmorPrefix.Quality.Cheap = {
 
 }
 
-Game.Items.WeaponPrefix.Quality.heap = {
+Game.Items.WeaponPrefix.Quality.Cheap = {
 	prefix: "cheap",
 	multi: 0.4,
 	rarity: 70, 
@@ -287,27 +287,27 @@ Game.Items.WeaponPrefix.Classy.Illusionist = {
 	prefix: "illusionist's",  
 	modifies: {
 		arcana: 6,
-		Evasion: 25
+		Evasion: 25,
 		MagicResist: 15
 	},
 	rarity: 12,
 }
 
-Game.Items.ArmorPrefix.Classy.illusionist = {
+Game.Items.ArmorPrefix.Classy.Illusionist = {
 	prefix: "illusionist's",  
 	modifies: {
 		arcana: 6,
-		Evasion: 25
+		Evasion: 25,
 		MagicResist: 15
 	},
 	rarity: 12,
 }
 
 
-Game.Items.WeaponPrefix.Classy.Classy.Ninja = {
+Game.Items.WeaponPrefix.Classy.Ninja = {
 	prefix: "ninja's",
 	modifies: {
-		perception: 4
+		perception: 4,
 		DoubleSwing: 8,
 		ThrowStat: 10,
 	},
@@ -317,7 +317,7 @@ Game.Items.WeaponPrefix.Classy.Classy.Ninja = {
 Game.Items.ArmorPrefix.Classy.Ninja = {
 	prefix: "ninja's",
 	modifies: {
-		speed: 100
+		speed: 100,
 		perception: 4,
 		dexterity: 4,
 		ThrowStat: 10,
@@ -331,7 +331,7 @@ Game.Items.WeaponPrefix.Adjective.Sharp = {
 	prefix: "sharp",
 	rarity: 15,
 	modifies: {
-		MeleeCritical: 3,  //if you do a secondary stat, format the name exactly as it appears after the "get" on its function, so, in this case, capitalize the first word as well, like in this example
+		MeleeCritical: 3, 
 	}
 }
 
@@ -339,7 +339,7 @@ Game.Items.WeaponPrefix.Adjective.Deadly = {
 	prefix: "deadly",
 	rarity: 8,
 	modifies: {
-		MeleeCritical: 5,  //if you do a secondary stat, format the name exactly as it appears after the "get" on its function, so, in this case, capitalize the first word as well, like in this example
+		MeleeCritical: 5, 
 	}
 }
 
@@ -347,7 +347,7 @@ Game.Items.WeaponPrefix.Adjective.Furious = {
 	prefix: "furious",
 	rarity: 15,
 	modifies: {
-		DoubleSwing: 10
+		DoubleSwing: 10,
 		strength: 3
 	}
 }
@@ -357,12 +357,12 @@ Game.Items.ArmorPrefix.Adjective.Vigorous = {
 	rarity: 12,
 	modifies: {
 		MaxHP: 10,
-		vitality: 2
+		vitality: 2,
 		RegenBonus: 1,
 	}
 }
 
-Game.Items.Prefix.Adjective.Spiked = {
+Game.Items.ArmorPrefix.Adjective.Spiked = {
 	prefix: "spiked",
 	attackValue: 4,
 	defenseValue: 3,

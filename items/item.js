@@ -17,18 +17,24 @@ Game.Item.extend(Game.DynamicGlyph);
 Game.Items = {};
 Game.Items.Prefix = {};
 
+Game.Items.WeaponPrefix = {};
+Game.Items.ArmorPrefix = {};
 
-
-Game.Items.Prefix.Material = {};
-Game.Items.Prefix.Quality = {};
-Game.Items.Prefix.Classy = {};
-Game.Items.Prefix.Adjective = {};
+Game.Items.WeaponPrefix.Material = {};
+Game.Items.WeaponPrefix.Quality = {};
+Game.Items.WeaponPrefix.Classy = {};
+Game.Items.WeaponPrefix.Adjective = {};
+Game.Items.ArmorPrefix.Material = {};
+Game.Items.ArmorPrefix.Quality = {};
+Game.Items.ArmorPrefix.Classy = {};
+Game.Items.ArmorPrefix.Adjective = {};
 
 
 //for each equipment slot, you will need to define it like so
 
 Game.Items.Equipment = {};
 Game.Items.Equipment.Weapons = {};
+Game.Items.Equipment.Armor = {};
 Game.Items.Equipment.Armor.Helmets = {};
 Game.Items.Equipment.Armor.Bracers = {};
 Game.Items.Equipment.Armor.Body = {};

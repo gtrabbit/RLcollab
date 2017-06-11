@@ -1,67 +1,66 @@
 Game.Items.Selector = {
 	buildItem: function(rare, spread){
+		let type;
 		let item = this.pickTemplate();
-		console.log(item);
-// 		let type;
-// 		item.constructor === "Weapon" ? type = "WeaponPrefix" : type = "ArmorPrefix";
-// 		let prefixes = this.rarityBasedPick(rare, spread, type);
-
-
-
-// let weapon1 = new Helmet(Game.Items.Equipment.Helmets.Cap)
-
-
-// //then make that item into equipment, attaching prefixes as extras
-// let item = new Equipment(weapon1, extras);
-
-// //then make that equipment into an item
-// let item1 = new Game.Item(item);
-
-// //then log the result so you can check it
-// console.log(item1);
-
+		if (item[1] === "Weapons"){
+			type = "WeaponPrefix";
+			ctor = "Weapons"
+		} else {
+			type = "ArmorPrefix";
+			ctor = item[2];
+		}
+ 		let prefixes = this.rarityBasedPick(rare, spread, type, ctor);
+ 		console.log(prefixes);
+		let drop = new Game.ItemFactory.Classes[ctor](item[0]);
+		drop = new Game.ItemFactory.Classes.Equipment(drop, prefixes);
+		drop = new Game.Item(drop);
+		console.log(drop);
+		return drop
 
 
 	},
 
 	pickTemplate: function(){
-		let selection = this.pickRandomKey(Game.Items.Equipment)
-		for (let i = 0; i < 3; i++){
-			selection = this.pickRandomKey(selection)
-		}
-		return selection
+		let selectionType = Object.keys(Game.Items.Equipment)[Math.floor(Object.keys(Game.Items.Equipment).length * Math.random())]
+		let selection = Game.Items.Equipment[selectionType];
+		selection = this.pickRandomValue(selection)
+		let ctor = selection[1];
+		selection = this.pickRandomValue(selection[0])
+		return [selection[0], selectionType, ctor];
 	},
 
-	pickRandomKey: function(parentObject){
-		return Object.keys(parentObject)[Math.floor(Object.keys(parentObject).length * Math.random())]
+	pickRandomValue: function(parentObject){
+		let index = Math.floor(Object.keys(parentObject).length * Math.random());
+		let value = Object.keys(parentObject)[index]
+		return [parentObject[value], value];
 	},
 
-	pickRandomPrefixOfType: function(option){
-		let selected = thingy[option]
-		for (let i = 0; i < 2; i++){
-			selected = selected[Object.keys(selected)[Math.floor(Math.random() * Object.keys(selected).length)]]
-			}
-		return selected
+	pickRandomPrefixOfType: function(option, type){
+		let selected = Game.Items[type][option];
+		let optArray = Object.keys(selected);
+		let index = Math.floor(Math.random() * optArray.length);
+		selectedPrefix = selected[optArray[index]]
+		return selectedPrefix
 	},
 
 
-	rarityBasedPick: function(rare, spread, type){
+	rarityBasedPick: function(rare, spread, type, ctor){
 		let selections = {};
-		let options = Object.keys(Game.Items[type])
-		totalRarity = [];
+		let options = Object.keys(Game.Items[type]);
+		let bonus = 0;
+		if (ctor === "Rings" || ctor === "Amulets"){
+			bonus = 20;
+		}
 		while (rare < 100 && options.length){
-
 			let number = Math.floor( Math.random() * options.length )
 			let option = options[number]
-			let pick = pickRandomPrefixOfType(option)
-
-			if (pick.rarity > rare - spread && pick.rarity < rare + spread){
+			let pick = this.pickRandomPrefixOfType(option, type)
+			if (pick.hasOwnProperty('prefix') && pick.rarity > rare - spread && pick.rarity < rare + spread){
 				options.splice(number, 1);
 				selections[option] = pick;
-				rare +=  ( ( 100 / options.length )- (pick.rarity ))
-				totalRarity.push( pick.rarity)
+				rare +=  ( ( 100 / options.length ) - ( pick.rarity / options.length ) - bonus) ;
 			} else {
-				rare += 5;
+				rare += 3;
 			}
 		}
 		return selections

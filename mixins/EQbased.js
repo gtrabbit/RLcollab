@@ -2,16 +2,35 @@ Game.Mixins.Equipper = {
     name: 'Equipper',
     init: function(template) {
         this._equipment = {
-            weapon: null,
+            mainHand: null,
             offhand: null,
-            armor: null,
+            body: null,
             helmet: null,
-            boots: null
+            boots: null,
+            bracers: null,
+            leftRing: null,
+            rightRing: null,
+            amulet: null,
+            cape: null
         }
 
     },
     wield: function(item) {
-        this._equipment[item.slot] = item;
+        let changed = false;
+        item.EQSlot.forEach(a => {
+            if (this.getEquipment(a) === null && !changed){
+                this._equipment[a] = item;
+                changed = true;
+
+            }
+        })
+        if (changed){
+            return true;
+        } else {
+            Game.sendMessage(this, "You must unequip something first");
+            return false;
+        }
+
     },
     unwield: function(slot) {
         this._equipment[slot] = null;
@@ -21,8 +40,8 @@ Game.Mixins.Equipper = {
     },
     unequip: function(item) {
         // Helper function to be called before getting rid of an item.
-        if (this._equipment[item.slot] === item){
-            this.unwield(item.slot);
+        if (this._equipment[item.EQSlot] === item){
+            this.unwield(item.EQSlot);
         }
     }
 };

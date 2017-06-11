@@ -1,7 +1,7 @@
 Game.Map.Cave = function(tiles, player) {
     // Call the Map constructor
     Game.Map.call(this, tiles);
- 
+    let spread = 8;
     // Add the player
     this.addEntityAtRandomPosition(player, 0);
     // Add random entities and items to each floor.
@@ -21,7 +21,18 @@ Game.Map.Cave = function(tiles, player) {
             }
         }
         // 15 items per floor
-       
+       for (let z = 0; z < this._depth; z++){
+            
+            for (i = 0; i < 5; i++){
+
+                let item = Game.Items.Selector.buildItem((100-(z*15)), spread*i);
+                console.log(item);
+                this.addItemAtRandomPosition(item, z); 
+            }
+            
+       }
+
+
     }
     // Add weapons and armor to the map in random positions and floors
     // Add a hole to the final cavern on the last level.

@@ -143,10 +143,10 @@ Game.Screen.ItemListScreen.prototype.render = function(display) {
             var selectionState = (this._canSelectItem && this._canSelectMultipleItems &&
                 this._selectedIndices[i]) ? '+' : '-';
             var suffix = '';
-            if (this._items[i] === this._player.getArmor()) {
-                suffix = ' (wearing)';
-            } else if (this._items[i] === this._player.getWeapon()) {
-                suffix = ' (wielding)';
+            for (let key in this._player._equipment){
+                if (this._items[i] === this._player.getEquipment(key)){
+                    suffix = " (equipped [" + key + "])";
+                }
             }
             // Render at the correct row and add 2.
             row += display.drawText(0, 2 + row, letter + ' ' + selectionState + ' ' + this._items[i].describe() + suffix);
@@ -221,7 +221,7 @@ Game.Screen.wieldScreen = new Game.Screen.ItemListScreen({
     canSelectMultipleItems: false,
     hasNoItemOption: true,
     isAcceptable: function(item) {
-        return item && item.hasMixin('Equippable');
+        return item && item.hasOwnProperty('EQSlot');
     },
     ok: function(selectedItems) {
         // Check if we selected 'no item'
@@ -232,11 +232,23 @@ Game.Screen.wieldScreen = new Game.Screen.ItemListScreen({
         } else {
             // Make sure to unequip the item first in case it is the armor.
             var item = selectedItems[keys[0]];
-            this._player.unequip(item);
-            this._player.wield(item);
-            Game.sendMessage(this._player, "You are wielding %s.", [item.describeA()]);
+            let changed = false;
+            item.EQSlot.forEach(a =>{
+                if (this._player.getEquipment(a) === item && !changed){
+                    this._player.unwield(a);
+                    Game.sendMessage(this._player, "You remove the %s.", [item.describeA()]);
+                    changed = true;
+                }
+            })
+            if (!changed){
+                if (this._player.wield(item)){
+                    Game.sendMessage(this._player, "You are wielding %s.", [item.describeA()]);
+                    return true; 
+                } 
+                }
+        return true;  
         }
-        return true;
+        
     }
 });
 

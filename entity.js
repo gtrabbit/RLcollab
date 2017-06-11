@@ -73,6 +73,7 @@ Game.Entity.prototype.getDexterity = function(){
 Game.Entity.prototype.getVitality = function(){
     let base = this._stats.vitality;
     base += this.getModifiers('vitality');
+    
     return base;
 }
 Game.Entity.prototype.getIntelligence = function(){
@@ -99,170 +100,171 @@ Game.Entity.prototype.getPerception = function(){
 
 	Game.Entity.prototype.getMeleeDamageModifier = function(){
 		let base = Math.round( ( (this.getStrength() *1.4) / 2) - 6);
+        base += this.getModifiers('MeleeDamageModifier');
         return base;
 		}
 		
 	Game.Entity.prototype.getRangedDamageModifier = function(){
 	   let base = Math.round( ( (this.getDexterity() *1.3) / 2) - 4);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('RangedDamageModifier');
         return base
 }
 	Game.Entity.prototype.getDualWield = function(){
 		let base = Math.round( ( (this.getDexterity() *2) / 2.6) + (this.getLuck() *1.5) / 2);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('DualWield');
         return base
 }
 
 	Game.Entity.prototype.getDoubleSwing = function(){
 		let base = Math.round( ( ( (this.getStrength() *2) / 3) + (this.getLuck() * 1.3) / 3) + (this.getDexterity() * 1.5) /2);
 		
-		base += this.getModifiers();
+		base += this.getModifiers('DoubleSwing');
 		 return base
 }
 
 	Game.Entity.prototype.getParry = function(){
 		let base = Math.ceil( ( (this.getPerception() * 2.5) / 2) + (this.getDexterity() * 2) / 2);
 		
-		base += this.getModifiers();
+		base += this.getModifiers('Parry');
 		 return base
 }
 
 	Game.Entity.prototype.getSpellPenetration = function(){
 		let base = Math.ceil( ( + (this.getIntelligence() *3) + (this.getLuck() *2) *.30) + (this.getPerception() *1.25) );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('SpellPenetration');
         return base
 }
 	Game.Entity.prototype.getAccuracyBonus = function(){
 	   let base = Math.ceil( ( (this.getDexterity() *5.2) + 10) + (this.getPerception() *3.2) );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('AccuracyBonus');
         return base
 }
 			
 	Game.Entity.prototype.getSpellDamage = function(){
 	   let base = Math.round( ( ( ( (this.getIntelligence() *1.10) / 2 ) -4 ) + (this.getArcana() * 1.4) / 2) - 6 )
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('SpellDamage');
         return base
 }
 		
 	Game.Entity.prototype.getThrowStat = function(){
 	   let base = this.getDexterity() *2;
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('ThrowStat');
         return base
 }
 		
 	Game.Entity.prototype.getMeleeCritical = function(){
 	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 2.8) - 3) + (this.getLuck() *1.5) / 2) -1);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MeleeCritical');
         return base
 }
 		
 	Game.Entity.prototype.getMeleeCriticalDamageBonus = function(){
 	   let base = Math.ceil( ( (this.getStrength() *1.5) / 2 ) );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MeleeCriticalDamageBonus');
         return base
 }
 		
 	Game.Entity.prototype.getSpellCritical = function(){
 	   let base = Math.round( ( ( ( ( ( (this.getIntelligence() *1.2) / 2 ) -3 ) + (this.getArcana() *1.2) / 2 ) - 3 )+ (this.getLuck() *1.05) / 2 ) - 2);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('SpellCritical');
         return base
 }
 		
 	Game.Entity.prototype.getRegenBonus = function(){
 	   let base = Math.ceil( (this.getVitality() *2) * 0.10 );
 		
-	   base += this.getModifiers('regenBonus');
+	   base += this.getModifiers('RegenBonus');
         return base
 }
 		
 	Game.Entity.prototype.getMagicRegenBonus = function(){
 	   let base = Math.ceil( ( (this.getArcana() *2) * 0.20 ) + (this.getIntelligence() *2) * 0.10);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MagicRegenBonus');
         return base
 }
 		
 	Game.Entity.prototype.getResistPhysical = function(){
 	   let base = Math.ceil( ( (this.getVitality() *2) * 0.50 ) + (this.getStrength() *2) * 0.30);
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('ResistPhysical');
         return base
 }
 
 	Game.Entity.prototype.getFlatCrit = function(){
 		let base = 0
-		base += this.getModifiers();
+		base += this.getModifiers('FlatCrit');
 		 return base
 }
 
 Game.Entity.prototype.getFlatEvade = function(){
 		let base = 0
-		base += this.getModifiers();
+		base += this.getModifiers('FlatEvade');
 		 return base
 }
 
 Game.Entity.prototype.getDoubleSwingChance = function(){
 	   let base = 0
 	   
-	   base += this.getModifiers();
+	   base += this.getModifiers('DoubleSwingChance');
 	    return base
 }
 
 	Game.Entity.prototype.getMaxWeight = function(){
 	   let base = Math.round(this.getStrength() * 4)
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MaxWeight');
         return base
 }
 		
 	Game.Entity.prototype.getHpBonus = function(){
 	   let base = Math.ceil( ( (this.getVitality() *2.7) / 3 ) + (this.getStrength() *1.6) / 3 );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('HpBonus');
     return base
 }
 		
 	Game.Entity.prototype.getMpBonus = function(){
 	   let base = Math.ceil( (this.getIntelligence() *2.8) / 3 );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MpBonus');
         return base
 }
 
 	Game.Entity.prototype.getMagicSlayer = function(){
 	   let base = 0
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('MagicSlayer');
         return base
 }
 		
 	Game.Entity.prototype.getEvasion = function(){
 	   let base = Math.ceil( ( ( ( (this.getDexterity() *14) /2 ) ) + (this.getLuck() *6) /2 ) );
 		
-	   base += this.getModifiers();
+	   base += this.getModifiers('Evasion');
 	   return base
 }
 		
 Game.Entity.prototype.getBlock = function(){
 	let base = Math.ceil( ( ( ( (this.getStrength() *2.2) / 2) - 7) + (this.getVitality() *1.4) / 2) -5);
 	
-	base += this.getModifiers();
+	base += this.getModifiers('Block');
     return base
 }
 
 Game.Entity.prototype.getMagicalResist = function(){
     let base = Math.ceil( ( (this.getWillpower() *3) + (this.getIntelligence() *2) *.40) + (this.getLuck() *2) *.40);
 
-    base += this.getModifiers();
+    base += this.getModifiers('MagicalResist');
     return base
 }
 
@@ -301,20 +303,32 @@ Game.Entity.prototype.getSkills = function(){
 
 Game.Entity.prototype.getModifiers = function(char){
     let total = 0;
-    total+= this.getStatusModifiers(char);
+    if (this._statuses.length){
+       total += this.getStatusModifiers(char); 
+    }
+    total += this.getEquipmentBonuses(char);
+
+    if (this.hasMixin('PlayerActor') && total > 0){
+        console.log(char + " is modified by " + total);
+    }
+
     return total;
 
 };
 
+Game.Entity.prototype.getEquipmentBonuses = function(char){
+    let total = 0;
+    for (let slot in this._equipment){
+        if (this._equipment[slot]){
+            if (this._equipment[slot].bonuses.hasOwnProperty(char)){
+                total += Number(this._equipment[slot].bonuses[char]);
+            }
+        }
+    }
 
-//=====================Status Stuff=========>
-
-Game.Entity.prototype.addStatus = function(status){
-
-//will be able to calculate saving throws here
-    this._statuses.push(status);
+    return total;
 }
-  
+
 Game.Entity.prototype.getStatusModifiers = function(char){
     let total = 0;
     if(this._statuses.length){
@@ -329,9 +343,14 @@ Game.Entity.prototype.getStatusModifiers = function(char){
 }
 
 
+//=====================Status Stuff=========>
 
+Game.Entity.prototype.addStatus = function(status){
 
-
+//will be able to calculate saving throws here
+    this._statuses.push(status);
+}
+  
 
 
 

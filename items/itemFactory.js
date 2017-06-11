@@ -1,4 +1,6 @@
-Game.Items.EquippableListeners = {
+Game.ItemFactory = {};
+
+Game.ItemFactory.EquippableListeners = {
         'details': function() {
             var results = [];
             if (this._wieldable) {
@@ -11,12 +13,15 @@ Game.Items.EquippableListeners = {
         }
     }
 
-class Equipment {
+Game.ItemFactory.Classes = {
+
+Equipment: class Equipment {
 	constructor(template, extras){
+		//console.log("inside equipment constructor ", template)
 		this.multi = 1;
 		this.bonuses = {};
 		this.prefix = [];
-		this.listeners = Game.Items.EquippableListeners;
+		this.listeners = Game.ItemFactory.EquippableListeners;
 		if (template.hasOwnProperty('mixins') && template.mixins.length){
 			while(template.mixins.length){
 				this.mixins.push(template.mixins.pop())
@@ -29,10 +34,10 @@ class Equipment {
 			this[key] = template[key] || 0;		
 		}
 
-		extras.adjective ? this.build(extras.adjective) : {};
-		extras.classy ? this.build(extras.classy) : {};
-		extras.quality ? this.make(extras.quality) : {};
-		extras.material ? this.forge(extras.material) : {};
+		extras.Quality ? this.make(extras.Quality) : {};
+		extras.Adjective ? this.build(extras.Adjective) : {};
+		extras.Classy ? this.build(extras.Classy) : {};
+		extras.Material ? this.forge(extras.Material) : {};
 		
 		
 		this.makeName();
@@ -72,7 +77,8 @@ class Equipment {
 	}
 
 	makeName(){
-		this.name = this.prefix.join(" ") + " " + this.name;
+		let initial = this.prefix.join(" ") + " " + this.name
+		this.name = initial.trim();
 	} 
 
 	getAttackValue(){
@@ -84,75 +90,94 @@ class Equipment {
 		return Math.round(this.defenseValue + (Math.random() * this.variance) - (Math.random() * this.variance))
 	}
 
-}
+},
 
-
-
-//basically, you can copy these exactly as they are for each equipment type you create. 
-
-class Weapon {
+Weapons: class Weapon {
 	constructor(template){
 		this.baseStat = 'attackValue';
-		this.EQSlot = 'weapon';
+		this.EQSlot = ['mainHand', "offhand"];
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
 	}
-}
+},
 
-class Helmet {
+Helmets: class Helmet {
 	constructor(template){
 		this.baseStat = 'defenseValue';
-		this.EQSlot = 'helmet';
+		this.EQSlot = ['helmet'];
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
 	}
-}
+},
 
-class Boots {
+Boots: class Boots {
 	constructor(template){
 		this.baseStat = 'defenseValue';
-		this.EQSlot = 'boots';
+		this.EQSlot = ['boots'];
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
 	}
-}
+},
 
-class Bracers {
+Bracers: class Bracers {
 	constructor(template){
 		this.baseStat = 'defenseValue';
-		this.EQSlot = 'bracers';
+		this.EQSlot = ['bracers'];
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
 			}
 		}
-}		
-//and so on, for however many EQ slots you want.
+},
 
+Body: class Body {
+	constructor(template){
+		this.baseStat = 'defenseValue';
+		this.EQSlot = ['body'];
+		for (let key in template){
+			this[key] = template[key] || 0;
+			
+			}
+		}
+},
 
+Rings: class Rings {
+	constructor(template){
+		this.baseStat = 'defenseValue';
+		this.EQSlot = ["leftRing", "rightRing"];
+		for (let key in template){
+			this[key] = template[key] || 0;
+			
+			}
+		}
+},
 
+Amulets: class Amulets {
+	constructor(template){
+		this.baseStat = 'defenseValue';
+		this.EQSlot = ['amulet'];
+		for (let key in template){
+			this[key] = template[key] || 0;
+			
+			}
+		}
+},
 
-//define what prefixes you want
-let extras = {
-material: Game.Items.Prefix.Material.Silver,
-quality: Game.Items.Prefix.Quality.Good,
-classy: Game.Items.Prefix.Classy.Thief,
-adjective: Game.Items.Prefix.Adjective.Sharp
+Capes: class Capes {
+	constructor(template){
+		this.baseStat = 'defenseValue';
+		this.EQSlot = ['cape'];
+		for (let key in template){
+			this[key] = template[key] || 0;
+			
+			}
+		}
+}			
 
 }
 
-//first make a weapon using the weapon template as an argument
-let weapon1 = new Bracers(Game.Items.Equipment.Bracers.Bracers)
 
 
-//then make that item into equipment, attaching prefixes as extras
-let item = new Equipment(weapon1, extras);
-
-//then make that equipment into an item
-let item1 = new Game.Item(item);
-
-//then log the result so you can check it
-console.log(item1);
