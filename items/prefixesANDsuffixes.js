@@ -260,7 +260,7 @@ Game.Items.ArmorPrefix.Classy.Thief = {
 	prefix: "theif's", 
 	modifies: {
 		dexterity: 3,
-		evasion: 15,
+		Evasion: 15,
 	},
 	rarity: 25,
 }
@@ -356,7 +356,7 @@ Game.Items.ArmorPrefix.Adjective.Vigorous = {
 	prefix: "vigorous",
 	rarity: 12,
 	modifies: {
-		MaxHP: 10,
+		HpBonus: 10,
 		vitality: 2,
 		RegenBonus: 1,
 	}

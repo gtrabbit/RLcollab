@@ -63,7 +63,7 @@ Game.Items.Equipment.Weapons.Staves = {
 	weight: 6,
 	variance: 3,
 	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
-		Arcana: 2
+		arcana: 2
 	}
 },
 }
