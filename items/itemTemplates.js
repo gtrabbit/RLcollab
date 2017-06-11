@@ -15,7 +15,7 @@ Game.Items.Equipment.Weapons.Daggers = {
 	weight: 4,
 	variance: 1,
 	bonuses: {
-		DoubleSwing: 15
+		DoubleSwing: 15,
 		MeleeCritical: 3
 }		
 },
@@ -31,7 +31,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	weight: 4,
 	variance: 3,
 	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
-		DoubleSwing: 8
+		DoubleSwing: 8,
 		MeleeCritical: 1
 }
 },
