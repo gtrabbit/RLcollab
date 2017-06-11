@@ -153,28 +153,28 @@ Game.Items.WeaponPrefix.Quality.Formidable = {
 Game.Items.ArmorPrefix.Quality.Cheap = {
 	prefix: "cheap",
 	multi: 0.4,
-	rarity: 70, 
+	rarity: 100, 
 
 }
 
 Game.Items.WeaponPrefix.Quality.Cheap = {
 	prefix: "cheap",
 	multi: 0.4,
-	rarity: 70, 
+	rarity: 100, 
 
 }
 
 Game.Items.ArmorPrefix.Quality.Shoddy = {
 	prefix: "shoddy",
 	multi: 0.7,
-	rarity: 70,
+	rarity: 120,
 
 }
 
 Game.Items.WeaponPrefix.Quality.Shoddy = {
 	prefix: "shoddy",
 	multi: 0.7,
-	rarity: 70,
+	rarity: 120,
 
 }
 
@@ -237,14 +237,14 @@ Game.Items.WeaponPrefix.Quality.Miraculous = {
 Game.Items.ArmorPrefix.Quality.Godlike = {
 	prefix: "godlike",
 	multi: 5,
-	rarity: 1,
+	rarity: -10,
 	
 }
 
 Game.Items.WeaponPrefix.Quality.Godlike = {
 	prefix: "godlike",
 	multi: 5,
-	rarity: 1,
+	rarity: -10,
 	
 }
 
@@ -338,7 +338,7 @@ Game.Items.WeaponPrefix.Classy.Ninja = {
 		DoubleSwing: 8,
 		ThrowStat: 10,
 	},
-	rarity: 15,
+	rarity: 12,
 }
 
 Game.Items.ArmorPrefix.Classy.Ninja = {
@@ -349,7 +349,7 @@ Game.Items.ArmorPrefix.Classy.Ninja = {
 		dexterity: 4,
 		ThrowStat: 10,
 	},
-	rarity: 15,
+	rarity: 12,
 }
 
 //========================ADJECTIVE ==============>>>
@@ -370,12 +370,38 @@ Game.Items.WeaponPrefix.Adjective.Deadly = {
 	}
 }
 
+Game.Items.WeaponPrefix.Adjective.Ruthless = {
+	prefix: "ruthless",
+	rarity: 3,
+	modifies: {
+		MeleeCritical: 8, 
+	}
+}
+
+Game.Items.WeaponPrefix.Adjective.swift = {
+	prefix: "swift",
+	rarity: 5,
+	modifies: {
+		DoubleSwing: 15,
+		dexterity: 2,
+	}
+}
+
+Game.Items.ArmorPrefix.Adjective.Agile = {
+	prefix: "agile",
+	rarity: 7,
+	modifies: {
+		Speed: 100,
+		dexterity: 4,
+	}
+}
+
 Game.Items.WeaponPrefix.Adjective.Furious = {
 	prefix: "furious",
-	rarity: 15,
+	rarity: 7,
 	modifies: {
 		DoubleSwing: 10,
-		strength: 3
+		strength: 3,
 	}
 }
 
@@ -386,6 +412,16 @@ Game.Items.ArmorPrefix.Adjective.Vigorous = {
 		HpBonus: 10,
 		vitality: 2,
 		RegenBonus: 1,
+	}
+}
+
+Game.Items.ArmorPrefix.Adjective.Mystic = {
+	prefix: "mystic",
+	rarity: 12,
+	modifies: {
+		MpBonus: 10,
+		arcana: 2,
+		MagicRegenBonus: 1,
 	}
 }
 
