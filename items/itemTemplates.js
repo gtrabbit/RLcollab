@@ -156,31 +156,31 @@ Game.Items.Equipment.Armor.Helmets = {
 	character: "^",
 	defenseValue: 2,
 	name: "cap",
-	weight: 3
+	weight: 2,
 },
 
 	helmet: {
 	character: "^",
 	defenseValue: 2,
 	name: "helmet",
-	weight: 7
+	weight: 6,
 },
 	
-	full helm: {
+	fullhelm: {
 	character: "^",
 	defenseValue: 5,
-	name: "cap",
-	weight: 13
+	name: "full helm",
+	weight: 9,
 },
 	
-	feather cap: {
+	feathercap: {
 	character: "^",
 	defenseValue: 1,
 	name: "feather cap",
-	weight: 1
+	weight: 1,
 	bonuses: {
-	speed: 50
-	luck: 3
+	speed: 50,
+	luck: 3,
 	Evasion: 10
 }
 },
@@ -189,7 +189,7 @@ Game.Items.Equipment.Armor.Helmets = {
 	character: "^",
 	defenseValue: 1,
 	name: "hood",
-	weight: 1
+	weight: 1,
 },
 }
 
@@ -200,14 +200,14 @@ Game.Items.Equipment.Armor.Bracers = {
 	character: "8",
 	defenseValue: 1,
 	name: "bracer",
-	weight: 3
+	weight: 3,
 },
 	
 	gauntlets: {
 	character: "8",
 	defenseValue: 3,
 	name: "gauntlets",
-	weight: 5
+	weight: 5,
 }
 },
 
@@ -218,27 +218,27 @@ Game.Items.Equipment.Armor.Boots = {
 	foreground: 'brown',
 	defenseValue: 1,
 	name: "boots",
-	weight: 2
+	weight: 2,
 },
 
-	chain boots: {
+	chainboots: {
 	character: ",",
 	foreground: 'brown',
 	defenseValue: 3,
 	name: "chain boots",
-	weight: 4
+	weight: 4,
 },
 
-	ninja tabi: {
+	ninjatabi: {
 	character: ",",
 	foreground: 'brown',
 	defenseValue: 1,
 	name: "ninja tabi",
-	weight: 1
+	weight: 1,
 	bonuses: {
-	Evasion: 10
-	speed: 75
-	dexterity: 2
+	Evasion: 10,
+	speed: 75,
+	dexterity: 2,
 }
 },
 }
@@ -250,7 +250,7 @@ Game.Items.Equipment.Armor.Rings = {
 	foreground: 'gold',
 	defenseValue: 0,
 	name: "ring",
-	weight: 0
+	weight: 0,
 }
 },
 
@@ -261,7 +261,7 @@ Game.Items.Equipment.Armor.Amulets = {
 	foreground: 'pink',
 	defenseValue: 1,
 	name: "amulet",
-	weight: 0
+	weight: 0,
 }
 },
 //=========== Capes ========>>
@@ -273,7 +273,8 @@ Game.Items.Equipment.Armor.Capes = {
 	name: "cape",
 	weight: 1,
 	bonuses: {
-	Evasion: 10
+	Evasion: 10,
+	Evasion: 10,
 }
 }
 }

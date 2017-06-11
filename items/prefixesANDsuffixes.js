@@ -7,24 +7,24 @@
 
 Game.Items.WeaponPrefix.Material.Silver = {
 	prefix: "silver",
-	baseStatBonus: 3, //is applied to attack for weapons, defense for armor
+	baseStatBonus: 4,
 	rarity: 18,
-	weight: 2, //multiplies by this amount
-	modifies: {  //everything in here multiplied by multi (from quality) and then added to template base
+	attackValue: 1.3,
+	weight: 2, 
+	modifies: { 
 	MeleeCriticalDamageBonus: 4,
 	MagicSlayer: 3
-	//if you do a secondary stat, format the name exactly as it appears after the "get" on its function, so, in this case, capitalize the first word as well, like in this example
 }
 }
 
 Game.Items.ArmorPrefix.Material.Silver = {
 	prefix: "silver",
-	baseStatBonus: 3, //is applied to attack for weapons, defense for armor
+	baseStatBonus: 4,
 	rarity: 18,
-	weight: 2, //multiplies by this amount
-	modifies: {  //everything in here multiplied by multi (from quality) and then added to template base
-	MagicalResist: 16
-	//if you do a secondary stat, format the name exactly as it appears after the "get" on its function, so, in this case, capitalize the first word as well, like in this example
+	defenseValue: 1.3,
+	weight: 2, 
+	modifies: { 
+	MagicalResist: 16,
 }
 }
 
@@ -32,9 +32,10 @@ Game.Items.WeaponPrefix.Material.Iron = {
 	prefix: "iron",
 	baseStatBonus: 1,
 	rarity: 40,
+	attackValue: 1.2,
 	weight: 2.2,
 	modifies: {
-	MeleeCriticalDamageBonus: 2,
+	MeleeCriticalDamageBonus: 4,
 	
 }
 }
@@ -43,9 +44,10 @@ Game.Items.ArmorPrefix.Material.Iron = {
 	prefix: "iron",
 	baseStatBonus: 1,
 	rarity: 40,
+	defenseValue: 1.2,
 	weight: 2.2,
 	modifies: {
-	ResistPhysical: 10
+	ResistPhysical: 15,
 	
 }
 }
@@ -54,6 +56,7 @@ Game.Items.WeaponPrefix.Material.Steel = {
 	prefix: "steel",
 	baseStatBonus: 3,
 	rarity: 18,
+	attackValue: 1.3,
 	weight: 1.5,
 	modifies: {
 	MeleeCriticalDamageBonus: 4,
@@ -64,6 +67,7 @@ Game.Items.WeaponPrefix.Material.Steel = {
 Game.Items.ArmorPrefix.Material.Steel = {
 	prefix: "steel",
 	baseStatBonus: 3,
+	defenseValue: 1.3,
 	rarity: 18,
 	weight: 1.5,
 	modifies: {
@@ -73,9 +77,10 @@ Game.Items.ArmorPrefix.Material.Steel = {
 
 Game.Items.WeaponPrefix.Material.Elven = {
 	prefix: "elven",
-	baseStatBonus: 2,
+	baseStatBonus: 5,
 	rarity: 5,
 	weight: 0.6,
+	attackValue: 1.1,
 	modifies: {
 	MeleeCriticalDamageBonus: 2,
 	DoubleSwing: 5,
@@ -84,14 +89,36 @@ Game.Items.WeaponPrefix.Material.Elven = {
 
 Game.Items.ArmorPrefix.Material.Elven = {
 	prefix: "elven",
-	baseStatBonus: 2,
+	baseStatBonus: 5,
 	rarity: 5,
 	weight: 0.6,
+	defenseValue: 1.1,
 	modifies: {
-	speed: 100,
+	speed: 75,
 }
 }
 
+Game.Items.WeaponPrefix.Material.Glass = {
+	prefix: "glass",
+	baseStatBonus: 0,
+	rarity: 12,
+	weight: 0.2,
+	attackValue: 0.5,
+	modifies: {
+	speed: 250,
+	DoubleSwing: 15,
+}
+}
+Game.Items.ArmorPrefix.Material.Glass = {
+	prefix: "glass",
+	baseStatBonus: 0,
+	rarity: 12,
+	defenseValue: 0.5,
+	weight: 0.2,
+	modifies: {
+	speed: 150,
+}
+}
 
 //=========================QUALITY===========>>>>>>
 
