@@ -265,7 +265,7 @@ Game.Items.WeaponPrefix.Classy.Squire = {
 }
 
 Game.Items.ArmorPrefix.Classy.Squire = {
-	prefix: "squire's", //notice that these do not need to line up with how it's declared above
+	prefix: "squire's",
 	modifies: {
 		vitality: 2,
 		strength: 3,
@@ -315,7 +315,7 @@ Game.Items.WeaponPrefix.Classy.Illusionist = {
 	modifies: {
 		arcana: 6,
 		Evasion: 25,
-		MagicResist: 15
+		MagicalResist: 15
 	},
 	rarity: 12,
 }
@@ -325,7 +325,7 @@ Game.Items.ArmorPrefix.Classy.Illusionist = {
 	modifies: {
 		arcana: 6,
 		Evasion: 25,
-		MagicResist: 15
+		MagicalResist: 15
 	},
 	rarity: 12,
 }

@@ -120,7 +120,7 @@ Game.Items.Equipment.Armor.Body = {
 	foreground: 'turquoise',
 	defenseValue: 3,
 	name: "light armor",
-	weight: 5
+	weight: 5,
 },
 
 
@@ -132,7 +132,7 @@ Game.Items.Equipment.Armor.Body = {
 	weight: 16,
 	bonuses: {
 	speed: -200,
-	DoubleSwing: -8
+	DoubleSwing: -8,
 	}
 },
 
@@ -181,7 +181,7 @@ Game.Items.Equipment.Armor.Helmets = {
 	bonuses: {
 	speed: 50,
 	luck: 3,
-	Evasion: 10
+	Evasion: 10,
 }
 },
 	
@@ -273,7 +273,6 @@ Game.Items.Equipment.Armor.Capes = {
 	name: "cape",
 	weight: 1,
 	bonuses: {
-	Evasion: 10,
 	Evasion: 10,
 }
 }
