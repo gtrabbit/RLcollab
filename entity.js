@@ -268,18 +268,13 @@ Game.Entity.prototype.getMagicalResist = function(){
     return base
 }
 
-Game.Entity.prototype.setSpeed = function(speed) {
-    this._speed = speed;
-};
-
 Game.Entity.prototype.getSpeed = function() {
     return this._speed;
 };
+
 Game.Entity.prototype.getStamina = function(){
     return this._stamina;
 }
-
-
 
 Game.Entity.prototype.getMaxStamina = function(){
     return this._maxStamina;
@@ -292,7 +287,9 @@ Game.Entity.prototype.modifyStamina = function(amount){
     this._stamina += amount;
 }
 
-
+Game.Entity.prototype.setSpeed = function(speed) {
+    this._speed = speed;
+};
 
 //=====================Helpers ==========================>>>
 
