@@ -5,7 +5,7 @@ Game.Map.Cave = function(tiles, player) {
     // Add the player
     this.addEntityAtRandomPosition(player, 0);
     // Add random entities and items to each floor.
-    for (var z = 0; z < this._depth; z++) {
+ for (var z = 0; z < this._depth; z++) {
       
         for (var i = 0; i < (5*(z+1))+12; i++) {
             var entity = Game.EntityRepository.createRandom();

@@ -14,17 +14,15 @@ Game.Items.Equipment.Weapons.Daggers = {
 	name: 'dagger',
 	weight: 4,
 	variance: 1,
-	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
-		DoubleSwing: 17,
+	bonuses: {
+		DoubleSwing: 15,
 		MeleeCritical: 3
-	}
-	
-	
-}
+}		
 },
+}
 
 //swords
-Game.Items.Equipment.Weapons.Sword = {
+Game.Items.Equipment.Weapons.Swords = {
 	shortsword: {
 	character: ")",
 	foreground: 'white',
@@ -35,10 +33,8 @@ Game.Items.Equipment.Weapons.Sword = {
 	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
 		DoubleSwing: 8,
 		MeleeCritical: 1
-	}
+}
 },
-
-
 
 	longsword: {
 	character: ")",
@@ -46,10 +42,22 @@ Game.Items.Equipment.Weapons.Sword = {
 	attackValue: 12,
 	name: 'long sword',
 	weight: 9,
-	variance: 5,
-	
-	
-	
+	variance: 4,
+	bonuses: {
+		DoubleSwing: 5
+}
+},
+
+	scimitar: {
+	character: ")",
+	foreground: 'white',
+	attackValue: 12,
+	name: 'scimitar',
+	weight: 12,
+	variance: 2,
+	bonuses: {
+		MeleeCritical: 2
+}
 },
 }
 
@@ -63,8 +71,8 @@ Game.Items.Equipment.Weapons.Staves = {
 	weight: 6,
 	variance: 3,
 	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
-		Arcana: 2
-	}
+		arcana: 2
+}
 },
 }
 
@@ -80,7 +88,7 @@ Game.Items.Equipment.Weapons.Axes = {
 	bonuses: {
 		MeleeCriticalDamageBonus: 2,
 		MeleeCritical: 1
-		}
+}
 },
 
 	broadaxe: {
@@ -93,10 +101,8 @@ Game.Items.Equipment.Weapons.Axes = {
 	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
 		MeleeCriticalDamageBonus: 4,
 		MeleeCritical: 2
-		}
-},
-	
-	
+}
+},	
 }
 
 //================ Armor========>>
@@ -139,7 +145,7 @@ Game.Items.Equipment.Armor.Body = {
 	bonuses: {
 	speed: -400,
 	DoubleSwing: -25
-	}
+}
 }
 },
 
@@ -150,9 +156,42 @@ Game.Items.Equipment.Armor.Helmets = {
 	character: "^",
 	defenseValue: 2,
 	name: "cap",
-	weight: 7
+	weight: 2,
+},
+
+	helmet: {
+	character: "^",
+	defenseValue: 2,
+	name: "helmet",
+	weight: 6,
+},
+	
+	fullhelm: {
+	character: "^",
+	defenseValue: 5,
+	name: "full helm",
+	weight: 9,
+},
+	
+	feathercap: {
+	character: "^",
+	defenseValue: 1,
+	name: "feather cap",
+	weight: 1,
+	bonuses: {
+	speed: 50,
+	luck: 3,
+	Evasion: 10
 }
 },
+	
+	hood: {
+	character: "^",
+	defenseValue: 1,
+	name: "hood",
+	weight: 1,
+},
+}
 
 //================ Bracers =========>>
 
@@ -161,14 +200,14 @@ Game.Items.Equipment.Armor.Bracers = {
 	character: "8",
 	defenseValue: 1,
 	name: "bracer",
-	weight: 3
+	weight: 3,
 },
 	
 	gauntlets: {
 	character: "8",
 	defenseValue: 3,
 	name: "gauntlets",
-	weight: 5
+	weight: 5,
 }
 },
 
@@ -179,29 +218,50 @@ Game.Items.Equipment.Armor.Boots = {
 	foreground: 'brown',
 	defenseValue: 1,
 	name: "boots",
-	weight: 2
+	weight: 2,
+},
+
+	chainboots: {
+	character: ",",
+	foreground: 'brown',
+	defenseValue: 3,
+	name: "chain boots",
+	weight: 4,
+},
+
+	ninjatabi: {
+	character: ",",
+	foreground: 'brown',
+	defenseValue: 1,
+	name: "ninja tabi",
+	weight: 1,
+	bonuses: {
+	Evasion: 10,
+	speed: 75,
+	dexterity: 2,
 }
 },
+}
 
 //================ Rings=====>>
 Game.Items.Equipment.Armor.Rings = {
 	ring: {
-	character: ".",
+	character: "*",
 	foreground: 'gold',
 	defenseValue: 0,
 	name: "ring",
-	weight: 0
+	weight: 0,
 }
 },
 
 //================ Amulets=====>>
 Game.Items.Equipment.Armor.Amulets = {
 	amulet: {
-	character: ".",
+	character: "*",
 	foreground: 'pink',
 	defenseValue: 1,
 	name: "amulet",
-	weight: 0
+	weight: 0,
 }
 },
 //=========== Capes ========>>
@@ -213,7 +273,8 @@ Game.Items.Equipment.Armor.Capes = {
 	name: "cape",
 	weight: 1,
 	bonuses: {
-	Evasion: 10
-	}
+	Evasion: 10,
+	Evasion: 10,
+}
 }
 }
