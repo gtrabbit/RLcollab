@@ -99,6 +99,7 @@ Game.StatusEffects.regen = function(multi){
 	this.value = {
 		RegenBonus: 5 * (multi || 1)
 	}
+	this.duration = 20 + ((multi || 1) * 2 )
 }
 
 //this function is used to generate a status and apply it to a target

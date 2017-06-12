@@ -355,9 +355,6 @@ Game.Entity.prototype.checkPassives = function(char){
             
         }
     }
-    if (this.hasMixin('PlayerActor')){
-        console.log("total passive bonus is " + char + " " + total);
-    }
     return total;
 }
 
@@ -448,6 +445,7 @@ Game.Entity.prototype.tryMove = function(x, y, z, map){
         } else if (z > this.getZ()){
             if (tile._name === 'holeToCavernTile' &&
                 this.hasMixin(Game.Mixins.PlayerActor)) {
+                console.log("swithing maps!")
             // Switch the entity to a boss cavern!
                 this.switchMap(new Game.Map.BossCavern());
             } else if (tile._name != 'stairsDownTile'){

@@ -152,7 +152,6 @@ Game.Mixins.ExperienceGainer = {
         Game.sendMessage(this, "Your " + stat + " increases")
     },
     increaseSkill: function(ability, value){
-        console.log(ability);
         this._passives[ability].level += value;
         this._passives[ability].ability = new Game.Passives[ability](this._passives[ability].level);
     },

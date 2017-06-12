@@ -166,9 +166,10 @@ Game.Screen.playScreen = {
 
         let statuses = this._player._statuses;
         let spot = 0;
+        statusDisplay.clear();
         for (let status of statuses){
-            spot += statusDisplay.drawText(spot, 1, status.name);
-            spot+= status.name.length;
+            spot += statusDisplay.drawText(spot, 1, status.name + " " + status.duration);
+            spot += status.name.length + 5;
         }
 
 
