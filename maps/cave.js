@@ -24,7 +24,7 @@ Game.Map.Cave = function(tiles, player) {
             for (i = 0; i < 5; i++){
 
                 let item = Game.Items.Selector.buildItem((100-(z*15)), spread*i);
-                console.log(item);
+
                 this.addItemAtRandomPosition(item, z); 
             }
   

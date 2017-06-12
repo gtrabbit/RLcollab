@@ -537,49 +537,7 @@ Game.Screen.playScreen = {
     }
 }
 
-Game.Screen.gainStatScreen = {
-    setup: function(entity) {
-        // Must be called before rendering.
-        this._entity = entity;
-        this._options = entity.getStatOptions();
-    },
-    render: function(display) {
-        var letters = 'abcdefghijklmnopqrstuvwxyz';
-        display.drawText(0, 0, 'Choose a stat to increase: ');
 
-        // Iterate through each of our options
-        for (var i = 0; i < this._options.length; i++) {
-            display.drawText(0, 2 + i, 
-                letters.substring(i, i + 1) + ' - ' + this._options[i]);
-        }
-
-        // Render remaining stat points
-        display.drawText(0, 4 + this._options.length,
-            "Remaining points: " + this._entity.getStatPoints());   
-    },
-    handleInput: function(inputType, inputData) {
-        if (inputType === 'keydown') {
-            // If a letter was pressed, check if it matches to a valid option.
-            if (inputData.keyCode >= ROT.VK_A && inputData.keyCode <= ROT.VK_Z) {
-                // Check if it maps to a valid item by subtracting 'a' from the character
-                // to know what letter of the alphabet we used.
-                var index = inputData.keyCode - ROT.VK_A;
-                if (this._options[index]) {
-                    // Call the stat increasing function
-                    this._entity.increaseStat(this._options[index], 1);
-                    // Decrease stat points
-                    this._entity.setStatPoints(this._entity.getStatPoints() - 1);
-                    // If we have no stat points left, exit the screen, else refresh
-                    if (this._entity.getStatPoints() == 0) {
-                        Game.Screen.playScreen.setSubScreen(undefined);
-                    } else {
-                        Game.refresh();
-                    }
-                }
-            }
-        }
-    }
-};
 
 
 
@@ -590,14 +548,14 @@ Game.Screen.helpScreen = {
         var y = 0;
         display.drawText(Game.getScreenWidth() / 2 - text.length / 2, y++, text);
         display.drawText(Game.getScreenWidth() / 2 - text.length / 2, y++, border);
-        display.drawText(0, y++, 'The villagers have been complaining of a terrible stench coming from the cave.');
-        display.drawText(0, y++, 'Find the source of this smell and get rid of it!');
+        display.drawText(0, y++, 'This is a game.');
+        display.drawText(0, y++, 'I suggest you start playing it!');
         y += 3;
         display.drawText(0, y++, '[,] to pick up items');
         display.drawText(0, y++, '[d] to drop items');
         display.drawText(0, y++, '[e] to eat items');
         display.drawText(0, y++, '[w] to wield items');
-        display.drawText(0, y++, '[W] to wield items');
+        display.drawText(0, y++, '[t] to throw items');
         display.drawText(0, y++, '[x] to examine items');
         display.drawText(0, y++, '[;] to look around you');
         display.drawText(0, y++, '[?] to show this help screen');

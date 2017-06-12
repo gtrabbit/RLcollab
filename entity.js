@@ -33,6 +33,7 @@ Game.Entity = function(properties) {
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
     this._skills = [];
+    this._passives = properties['passives'] || {};
    
 
 //===== this code will have to be replaced later ====>>>>>>
@@ -40,7 +41,7 @@ Game.Entity = function(properties) {
     if (properties.hasOwnProperty('skills')){
          properties['skills'].forEach((a)=>{
        this._skills.push(
-             new Game.Skill(a, this)
+             new Game.Skill(a[0], this, a[1])
             ) 
     })
     }
@@ -212,10 +213,10 @@ Game.Entity.prototype.getFlatEvade = function(){
 		 return base
 }
 
-Game.Entity.prototype.getDoubleSwingChance = function(){
+Game.Entity.prototype.getDoubleSwing = function(){
 	   let base = 0
 	   
-	   base += this.getModifiers('DoubleSwingChance');
+	   base += this.getModifiers('DoubleSwing');
 	    return base
 }
 
@@ -269,7 +270,9 @@ Game.Entity.prototype.getMagicalResist = function(){
 }
 
 Game.Entity.prototype.getSpeed = function() {
-    return this._speed;
+    let base = this._speed;
+    base += this.getModifiers('speed');
+    return base;
 };
 
 Game.Entity.prototype.getStamina = function(){
@@ -278,6 +281,13 @@ Game.Entity.prototype.getStamina = function(){
 
 Game.Entity.prototype.getMaxStamina = function(){
     return this._maxStamina;
+}
+
+
+//================ For Leveling ================= >>>>
+
+Game.Entity.prototype.getPassives = function(){
+    return Object.keys(this._passives);
 }
 
 
@@ -304,11 +314,7 @@ Game.Entity.prototype.getModifiers = function(char){
        total += this.getStatusModifiers(char); 
     }
     total += this.getEquipmentBonuses(char);
-
-    if (this.hasMixin('PlayerActor') && total > 0){
-        console.log(char + " is modified by " + total);
-    }
-
+    total += this.checkPassives(char);
     return total;
 
 };
@@ -337,6 +343,22 @@ Game.Entity.prototype.getStatusModifiers = function(char){
         
     }
   return total;
+}
+
+Game.Entity.prototype.checkPassives = function(char){
+    let total = 0;
+    if (this.hasOwnProperty('_passives')){
+        for (let key in this._passives){
+            if (this._passives[key].ability.hasOwnProperty(char)){
+                total += this._passives[key].ability[char];
+            }
+            
+        }
+    }
+    if (this.hasMixin('PlayerActor')){
+        console.log("total passive bonus is " + char + " " + total);
+    }
+    return total;
 }
 
 

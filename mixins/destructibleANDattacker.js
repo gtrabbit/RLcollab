@@ -137,7 +137,7 @@ Game.Mixins.Attacker = {
     },
 	checkDoubleSwing(target){
 	let perc = ROT.RNG.getPercentage()       
-        if (perc < this.getDoubleSwingChance()){
+        if (perc < this.getDoubleSwing()){
 			Game.sendMessage(this, "You swing again!", [this.getName()]);
 			Game.sendMessage(target, "The %s goes for another attack!", [this.getName()]);
 			return true;

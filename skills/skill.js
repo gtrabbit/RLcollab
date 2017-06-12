@@ -15,7 +15,7 @@ Game.Skills.renderUI = function(inCoolDown){
 }
 
 Game.Skill = class skill {
-	constructor(skill, actor){
+	constructor(skill, actor, level){
 		this.title = skill.name;
 		this.coolDownDuration = Number(skill.coolDownDuration)+1;
 		this.timer = 0;
@@ -23,7 +23,10 @@ Game.Skill = class skill {
 		this.isActive = false;
 		this.costs = skill.costs;
 		this.actor = actor;
+		this.activate = skill.activate;
+		this.level = level;
 		this.activateMsg = skill.activateMsg;
+		this.activateArgs = skill.args;
 		if (this.actor.hasMixin('PlayerActor')){
 			this.makeIcon();
 			this.renderUI = Game.Skills.renderUI;
@@ -56,12 +59,8 @@ Game.Skill = class skill {
 			let modifier = "modify" + key;
 			this.actor[modifier](-this.costs[key]);
 		}
-		this.activate();		
+		this.activate(this.activateArgs);		
 		return this.activateMsg;		
-	}
-
-	activate(){
-		console.log(this.actor);
 	}
 
 	coolDown(){

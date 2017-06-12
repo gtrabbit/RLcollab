@@ -104,7 +104,9 @@ Game.Mixins.ExperienceGainer = {
         this._level = template['level'] || 1;
         this._experience = template['experience'] || 0;
         this._statPointsPerLevel = template['statPointsPerLevel'] || 1;
+        this._skillPointsPerLevel = template['skillPointsPerLevel'] || 1;
         this._statPoints = 0;
+        this._skillPoints = 0;
         // Determine what stats can be levelled up.
         this._statOptions = [
             'strength',
@@ -140,7 +142,7 @@ Game.Mixins.ExperienceGainer = {
         },
         details: function() {
             return [{key: 'level', value: this.getLevel()}];
-        }
+        },
     },
     getLevel: function() {
         return this._level;
@@ -148,6 +150,11 @@ Game.Mixins.ExperienceGainer = {
     increaseStat: function(stat, value){
         this._stats[stat] += value;
         Game.sendMessage(this, "Your " + stat + " increases")
+    },
+    increaseSkill: function(ability, value){
+        console.log(ability);
+        this._passives[ability].level += value;
+        this._passives[ability].ability = new Game.Passives[ability](this._passives[ability].level);
     },
     getExperience: function() {
         return this._experience;
@@ -158,6 +165,12 @@ Game.Mixins.ExperienceGainer = {
     getStatPoints: function() {
         return this._statPoints;
     },
+    getSkillPoints: function(){
+        return this._skillPoints;
+    },
+    setSkillPoints: function(skillPoints){
+        this._skillPoints = skillPoints;
+    },
     setStatPoints: function(statPoints) {
         this._statPoints = statPoints;
     },
@@ -166,6 +179,7 @@ Game.Mixins.ExperienceGainer = {
     },
     giveExperience: function(points) {
         var statPointsGained = 0;
+        let skillPointsGained = 0;
         var levelsGained = 0;
         // Loop until we've allocated all points.
         while (points > 0) {
@@ -180,6 +194,8 @@ Game.Mixins.ExperienceGainer = {
                 levelsGained++;
                 this._statPoints += this._statPointsPerLevel;
                 statPointsGained += this._statPointsPerLevel;
+                this._skillPoints += this._skillPointsPerLevel;
+                skillPointsGained += this._skillPointsPerLevel;
             } else {
                 // Simple case - just give the experience.
                 this._experience += points;

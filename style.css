@@ -16,6 +16,7 @@ p{
 	height: 100vh;
 	align-items: center;
 	justify-content: center;
+	counter-reset: skillIcon;
 }
 
 
@@ -33,6 +34,11 @@ p{
 	color: white;
 	border-bottom: solid white 1px;
 	margin-top: 2px;
+}
+
+.skillIcon::before{
+	counter-increment: skillIcon;
+	content: counter(skillIcon) ": ";
 }
 
 
