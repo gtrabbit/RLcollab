@@ -34,6 +34,7 @@ Game.Entity = function(properties) {
     this._tickCount = 0;
     this._skills = [];
     this._abilities = properties['abilities'] || {};
+    this._hpPerLevel = properties['hpPerLevel'] || 5;
    
 
 //===== this code will have to be replaced later ====>>>>>>

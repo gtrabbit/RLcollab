@@ -22,6 +22,7 @@ Game.PlayerTemplate = {
     skillPointsPerLevel: 5,
     abilityPointsPerLevel: 5,
     staminaRegenRate: 1,
+    hpPerLevel: 5,
     regenDelay: 5,
     mixins: [Game.Mixins.PlayerActor,
              Game.Mixins.Attacker,

@@ -204,7 +204,8 @@ Game.Mixins.ExperienceGainer = {
                 this._skillPoints += this._skillPointsPerLevel;
                 skillPointsGained += this._skillPointsPerLevel;
                 this._abilityPoints += this._abilityPointsPerLevel;
-                abilityPointsGained += this._abilityPointsPerLevel
+                abilityPointsGained += this._abilityPointsPerLevel;
+                this._maxHP += this._hpPerLevel;
             } else {
                 // Simple case - just give the experience.
                 this._experience += points;
