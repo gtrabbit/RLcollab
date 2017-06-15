@@ -6,11 +6,16 @@ Game.Mixins.Destructible = {
         this._defenseValue = template['defenseValue'] || 0;
    
     },
-    takeDamage: function(attacker, damage){
+    takeDamage: function(attacker, damage, msg){
         damage = Math.max(damage - this.getDefenseValue(), 0);
         this.modifyHP(-damage);
+        if (msg){
+            Game.sendMessage(attacker, 'Your '+msg+' hits the %s for %d damage!', [this.getName(), damage]);
+        } else {
+             Game.sendMessage(attacker, 'You strike the %s for %d damage!', [this.getName(), damage]);
+        }
         Game.sendMessage(this, "The %s strikes you for %d damage!", [attacker.getName(), damage])
-        Game.sendMessage(attacker, 'You strike the %s for %d damage!', [this.getName(), damage]);
+       
         if (this._hp <= 0){
             Game.sendMessage(attacker, "You kill the %s!", [this.getName()]);
             this.raiseEvent('onDeath', attacker);
@@ -163,7 +168,7 @@ Game.Mixins.Attacker = {
         }
 
     },
-    getWeaponAttackValue: function() {
+    getWeaponAttackValue: function(mainHand, offHand) {
         var modifier = 0;
         // If we can equip items, then have to take into 
         // consideration weapon and armor

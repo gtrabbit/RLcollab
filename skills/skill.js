@@ -24,6 +24,7 @@ Game.Skill = class skill {
 		this.costs = skill.costs;
 		this.actor = actor;
 		this.activate = skill.activate;
+		this.getTargets = skill.getTargets;
 		this.level = level;
 		this.activateMsg = skill.activateMsg;
 		this.activateArgs = skill.args;

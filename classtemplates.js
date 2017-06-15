@@ -20,6 +20,7 @@ Game.PlayerTemplate = {
     },
     statPointsPerLevel: 3,
     skillPointsPerLevel: 5,
+    abilityPointsPerLevel: 5,
     staminaRegenRate: 1,
     regenDelay: 5,
     mixins: [Game.Mixins.PlayerActor,
@@ -33,12 +34,10 @@ Game.PlayerTemplate = {
             Game.Mixins.ExperienceGainer,
             Game.Mixins.PlayerStatGainer],
     extraMixins: [],
-    skills: [[Game.Skills.Run, 1], [Game.Skills.Bash, 1], [Game.Skills.Regenerate, 1]],
-    passives: {
-        "Combat Mastery": {
-            level: 1,
-            ability: new Game.Passives["Combat Mastery"](1)
-        }
+    baseSkills: [[Game.Skills.Run, 1], [Game.Skills.Bash, 1], [Game.Skills.Regenerate, 1], [Game.Skills.WhirlwindAttack, 1], [Game.Skills.FlameBurst, 1]],
+    abilities: {
+        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery")
+        
     }
  
 }

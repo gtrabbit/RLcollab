@@ -21,8 +21,9 @@ Game.Map.BossCavern.prototype._fillCircle = function(tiles, centerX, centerY, ra
     var xChange = 1 - (radius << 1);
     var yChange = 0;
     var radiusError = 0;
-
+    console.log("just before the while loop")
     while (x >= y) {    
+        console.log("it possible it is trapped inside here forever")
         for (var i = centerX - x; i <= centerX + x; i++) {
             tiles[i][centerY + y] = tile;
             tiles[i][centerY - y] = tile;
@@ -54,7 +55,7 @@ Game.Map.BossCavern.prototype._generateTiles = function(width, height) {
     }
     // Now we determine the radius of the cave to carve out.
     var radius = (Math.min(width, height) - 2) / 2;
-    this._fillCircle(tiles, width / 2, height / 2, radius, Game.TileRepository.create('floorTile'););
+    this._fillCircle(tiles, width / 2, height / 2, radius, Game.TileRepository.create('floorTile'));
 
     // Now we randomly position lakes (3 - 6 lakes)
     var lakes = Math.round(Math.random() * 3) + 3;
@@ -69,7 +70,7 @@ Game.Map.BossCavern.prototype._generateTiles = function(width, height) {
         // Random radius
         var radius = Math.floor(Math.random() * maxRadius) + 1;
         // Position the lake!
-        this._fillCircle(tiles, centerX, centerY, radius, Game.TileRepository.create('waterTile'););
+        this._fillCircle(tiles, centerX, centerY, radius, Game.TileRepository.create('waterTile'));
     }
 
     // Return the tiles in an array as we only have 1 depth level.

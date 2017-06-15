@@ -57,15 +57,40 @@ Game.Map.prototype.setupFov = function(){
         (function(){
             let depth = z;
             map._fov.push(
-                new ROT.FOV.DiscreteShadowcasting(function(x, y){
+                new ROT.FOV.PreciseShadowcasting(function(x, y){
                     if (map.getTile(x, y, depth)){
                          return !map.getTile(x, y, depth).isBlockingLight();
                     }
                    
-                }, {topology: 4}))
+                }
+                , {topology: 4}
+                ))
         }) ();
     }
 }
+
+Game.Map.prototype.getEntitiesInVisibleRadius = function(point, radius, excludeCenter){
+    let targets = []
+    let fov = new ROT.FOV.PreciseShadowcasting( (x, y)=>{
+        if (this.getTile(x, y, point[2])){
+                return !this.getTile(x, y, point[2]).isBlockingLight();
+            }
+    });
+
+    fov.compute(point[0], point[1], radius, (x, y, r, visibility)=>{
+        let tile = this.getTile(x,y,point[2]);
+        if ( tile && tile.getOccupant() ){
+            if (excludeCenter && r < 1){
+                return;
+            }
+            targets.push(tile.getOccupant());
+        }
+    })
+    return targets;
+
+}
+
+
 
 Game.Map.prototype._setupExploredArray = function(){
     for (let z = 0; z<this._depth; z++){
@@ -144,10 +169,13 @@ Game.Map.prototype.addEntity = function(entity) {
 
 Game.Map.prototype.addEntityAtRandomPosition = function(entity, z) {
     var position = this.getRandomFloorPosition(z);
-    entity.setX(position.x);
-    entity.setY(position.y);
-    entity.setZ(position.z);
-    this.addEntity(entity);
+     if (this.isEmptyFloor(position.x, position.y, position.z)){
+        entity.setX(position.x);
+        entity.setY(position.y);
+        entity.setZ(position.z);
+        this.addEntity(entity);
+     }
+   
 }
 
 
@@ -186,18 +214,17 @@ Game.Map.prototype.addItemAtRandomPosition = function(item, z) {
 
 Game.Map.prototype.getEntitiesWithinRadius = function(centerX, centerY,
                                                       centerZ, radius) {
-    results = [];
     var leftX = centerX - radius;
     var rightX = centerX + radius;
     var topY = centerY - radius;
     var bottomY = centerY + radius;
    
     thingsInRadius = [];
-    for (let x = leftX; x < rightX; x++){
-        for (let y = topY; y < bottomY; y++){
+    for (let x = leftX; x <= rightX; x++){
+        for (let y = topY; y <= bottomY; y++){
             let tile = this.getTile(x, y, centerZ);
             if (tile){
-                let entity = tile.getOccupant(x,y,centerZ)
+                let entity = tile.getOccupant()
                 if (entity){
                     thingsInRadius.push(entity)
                 }
@@ -209,6 +236,27 @@ Game.Map.prototype.getEntitiesWithinRadius = function(centerX, centerY,
     return thingsInRadius
 };
 
+Game.Map.prototype.getEntitiesAround = function(point, radius){
+    let results = [];
+    let farLeft = point[0] - radius;
+    let farRight = point[0] + radius;
+    let top = point[1] - radius;
+    let bot = point[1] + radius;
+    let tile;
+    for (let x = farLeft; x <= farRight; x++){
+        for (let y = top; y <= bot; y++){
+            if (!(x === point[0] && y === point[1])){
+                tile = this.getTile(x, y, point[2]);
+            }
+            if (tile){
+                if (tile.getOccupant()){
+                }
+            }
+        }
+    }
+    return results;
+
+}
 
 
 Game.Map.prototype.getTile = function(x, y, z) {

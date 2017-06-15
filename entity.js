@@ -33,17 +33,24 @@ Game.Entity = function(properties) {
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
     this._skills = [];
-    this._passives = properties['passives'] || {};
+    this._abilities = properties['abilities'] || {};
    
 
 //===== this code will have to be replaced later ====>>>>>>
 
-    if (properties.hasOwnProperty('skills')){
-         properties['skills'].forEach((a)=>{
+    if (properties.hasOwnProperty('baseSkills')){
+         properties['baseSkills'].forEach((a)=>{
        this._skills.push(
              new Game.Skill(a[0], this, a[1])
             ) 
     })
+    }
+    if (properties.hasOwnProperty('classSkills')){
+        properties['classSkills'].forEach((a)=>{
+            this._skills.push(
+                new Game.Skill(a[0], this, a[1])
+                )
+        })
     }
  //=================================........-=-=-=-=-  
 
@@ -284,13 +291,15 @@ Game.Entity.prototype.getMaxStamina = function(){
 }
 
 
-//================ For Leveling ================= >>>>
+//================ For Skills / Abilities ================= >>>>
 
-Game.Entity.prototype.getPassives = function(){
-    return Object.keys(this._passives);
+Game.Entity.prototype.getAbilities = function(){
+    return this._abilities;
 }
 
-
+Game.Entity.prototype.getSkills = function(){
+    return this._skills;
+}
 
 //================Modify/Set Vitals ======================>>>>
 Game.Entity.prototype.modifyStamina = function(amount){
@@ -304,9 +313,7 @@ Game.Entity.prototype.setSpeed = function(speed) {
 //=====================Helpers ==========================>>>
 
 
-Game.Entity.prototype.getSkills = function(){
-    return this._skills;
-}
+
 
 Game.Entity.prototype.getModifiers = function(char){
     let total = 0;
@@ -562,6 +569,10 @@ Game.Entity.prototype.setPosition = function(x, y, z) {
 
 
 
+}
+
+Game.Entity.prototype.getPosition = function(){
+    return [this._x, this._y, this._z];
 }
 Game.Entity.prototype.setMap = function(map) {
     this._map = map;
