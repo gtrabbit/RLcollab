@@ -100,6 +100,7 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
         luck: 5,
     },
     sightRadius: 7,
+	hpPerLevel: 3,
     description: "A Rogue. Quick, but weak"
 
 })
@@ -118,6 +119,7 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
         luck: 5,
     },
     fullnessDepletionRate: 3,
+	hpPerLevel: 6,
     fullness: 1000,
     description: "Hungry for blood, and food"
 })
@@ -135,6 +137,7 @@ Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
         charisma: 4,
         luck: 5,
     },
+	hpPerLevel: 2,
     description: "Studying for decades to become a master of magic",
     extraMixins: [Game.Mixins.RangedAttacker]
 })
@@ -151,7 +154,9 @@ Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {
         arcana: 6,
         charisma: 5,
         luck: 7,
+
     },
+	hpPerLevel: 4,
     description: "To cleanse the dungeon in the name of their primordial god"
 })
 
