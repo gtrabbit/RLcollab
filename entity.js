@@ -249,6 +249,13 @@ Game.Entity.prototype.getDoubleSwing = function(){
         return base
 }
 
+	Game.Entity.prototype.getMpRegen = function(){
+	   let base = Math.ceil( (this.getArcana() *2.8) / 3 );
+		
+	   base += this.getModifiers('MpRegen');
+        return base
+}
+
 	Game.Entity.prototype.getMagicSlayer = function(){
 	   let base = 0
 		
