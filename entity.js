@@ -395,7 +395,6 @@ Game.Entity.prototype.onTick = function(){
         this.regen();
     }
     if (this.hasMixin('FoodConsumer') && this._tickCount % 5 === 0){
-        
         this.addTurnHunger();
     }
     
@@ -430,10 +429,11 @@ Game.Entity.prototype.regen = function(){
     if (this._stamina < this.getMaxStamina()){
         this.modifyStamina(this._staminaRegenRate);
     }
-    if (this._hp < this.getMaxHP()){
-        
-      
+    if (this.hasMixin('Destructible') && this._hp < this.getMaxHP()){
         this.modifyHP(this.getRegenBonus());
+    }
+    if (this.hasMixin('Caster') && this._mp < this.getMaxMP()){
+        this.modifyMP(this.getMpRegen());
     }
        
        

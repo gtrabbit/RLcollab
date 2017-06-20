@@ -138,8 +138,10 @@ Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
         luck: 5,
     },
 	hpPerLevel: 2,
+    mpPerLevel: 5,
+    maxMP: 25,
     description: "Studying for decades to become a master of magic",
-    extraMixins: [Game.Mixins.RangedAttacker]
+    extraMixins: [Game.Mixins.RangedAttacker, Game.Mixins.Caster]
 })
 
 Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {

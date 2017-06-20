@@ -130,9 +130,6 @@ Game.Mixins.ExperienceGainer = {
             for (let key in victim._stats){
                 exp += (victim._stats[key]);
             }
-
-        
-         
             // Account for level differences
             if (victim.hasMixin('ExperienceGainer')) {
                 exp -= (this.getLevel() - victim.getLevel()) * 3;
