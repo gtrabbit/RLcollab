@@ -21,6 +21,7 @@ Game.Items.Equipment.Weapons.Daggers = {
 },
 }
 
+
 //swords
 Game.Items.Equipment.Weapons.Swords = {
 	shortsword: {
@@ -30,7 +31,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	name: 'short sword',
 	weight: 4,
 	variance: 3,
-	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
+	bonuses: {   
 		DoubleSwing: 8,
 		MeleeCritical: 1
 }
