@@ -33,31 +33,53 @@ Game.Items.Equipment.Weapons.Swords = {
 	variance: 3,
 	bonuses: {   
 		DoubleSwing: 8,
-		MeleeCritical: 1
+		MeleeCritical: 2,
+		StabBonus: 7,
+		ParryBonus: 2,
 }
 },
 
 	longsword: {
 	character: ")",
 	foreground: 'white',
-	attackValue: 12,
+	attackValue: 14,
 	name: 'long sword',
 	weight: 9,
 	variance: 4,
 	bonuses: {
-		DoubleSwing: 5
+		DoubleSwing: 5,
+		ParryBonus: 5,
 }
 },
 
 	scimitar: {
 	character: ")",
 	foreground: 'white',
-	attackValue: 12,
+	attackValue: 15,
 	name: 'scimitar',
-	weight: 12,
+	weight: 15,
 	variance: 2,
 	bonuses: {
-		MeleeCritical: 2
+		MeleeCritical: 3,
+		ParryBonus: 3,
+		CleavingBonus: 5,
+		MaimBonus: 4,
+}
+},
+
+	greatsword: {
+	character: ")",
+	foreground: 'white',
+	attackValue: 24,
+	name: 'great sword',
+	weight: 30,
+	variance: 6,
+	bonuses: {
+		MeleeCritical: 5,
+		MaimBonus: 5,
+		ParryBonus: 2,
+		CleavingBonus: 8,
+		MaimBonus: 8,
 }
 },
 }
