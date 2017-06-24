@@ -26,14 +26,74 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.DoubleSwing = this.level * 0.5;
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
 				this.MeleeCritical = Math.round(this.level * 0.6);
-				this.MeleeDamageModifier = Math.round(this.level * 1.3);
+				this.MeleeDamageModifier = Math.round(this.level * 0.2);
 				this.AccuracyBonus = this.level;
 			} else { //static bonuses for Mastery
 				this.DoubleSwing = 6;
 				this.MeleeCriticalDamageBonus = 12;
-				this.MeleeCritical = 12;
-				this.MeleeDamageModifier = 12;
+				this.MeleeCritical = 7;
+				this.MeleeDamageModifier = 5;
 				this.AccuracyBonus = 12;
+			}
+			
+
+		}
+	}
+	
+	Game.Abilities["Combat Brutality"] = class CombatBrutality extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.CleavingBonus = this.level;
+				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
+				this.MeleeDamageModifier = Math.round(this.level * 0.3);
+				this.MaimBonus = (this.level * 1.2);
+			} else { //static bonuses for Mastery
+				this.CleavingBonus = 15;
+				this.MeleeCriticalDamageBonus = 10;
+				this.MeleeDamageModifier = 8;
+				this.MaimBonus = 14;
+			}
+			
+
+		}
+	}
+	
+	Game.Abilities["Assassination"] = class Assassination extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.MeleeCritical = (this.level * 0.5);
+				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
+				this.SneakAttackBonus = this.level;
+				this.Disembowel = this.level;
+				this.StealthBonus = this.level;
+			} else { //static bonuses for Mastery
+				this.MeleeCritical = 6;
+				this.MeleeCriticalDamageBonus = 10;
+				this.SneakAttackBonus= 14;
+				this.Disembowel = 11;
+				this.StealthBonus = 11;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Mysticism"] = class Mysticism extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.SpellPenetration = (this.level * 7);
+				this.SpellCritical = this.level;
+				this.SpellDamage = this.level; 
+			} else { //static bonuses for Mastery
+				this.SpellPenetration = 80;
+				this.SpellCritical = this.level;
+				this.SpellDamage = this.level;
 			}
 			
 
@@ -137,6 +197,25 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		}
 	}
 	
+		Game.Abilities["Mace"] = class Mace extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.BashBonus = this.level;
+				this.DoubleSwing = this.level;
+				this.AccuracyBonus = 3 * this.level;
+
+			} else { //static bonuses for Mastery
+				this.BashBonus = 15;
+				this.DoubleSwing = 12;
+				this.AccuracyBonus = 50;
+			}
+			
+
+		}
+	}
+	
 	Game.Abilities["Dagger"] = class Dagger extends Game.Abilities['Ability']{
 
 		constructor(points, name){
@@ -181,15 +260,15 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		constructor(points, name){
 			super(points, name);
 			if (this.level !== "Master"){
-				this.MpRegen = this.level;
+				this.MpRegen = Math.round(this.level * 0.3);
 				this.MagicalResist = Math.round(this.level * 2.6);
 				this.MpBonus = 2 * this.level;
 
 
 			} else { //static bonuses for Mastery
-				this.MpRegen = 15;
-				this.MagicalResist = 55
-				this.MpBonus = 24
+				this.MpRegen = 6;
+				this.MagicalResist = 55;
+				this.MpBonus = 24;
 
 			}
 			
