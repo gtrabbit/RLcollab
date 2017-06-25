@@ -1,0 +1,24 @@
+Future
+blacksmiths - upgrade items/weapons 
+world map - randomly generated towns, quests, dungeons
+Add biomes, and ecology for dungeons, and monsters within them
+boss monsters - randomly upgraded normal monsters
+give monsters loot, possibly equipment, and let them drop stuff
+Greatly improve monster spawning, vary spawn rates more
+give monsters passive scaling skills that increase randomly as they level
+traits - allow skils to be tied to traits, certain levels of skills let you gain access to new trains and/or abilities
+Cleave - start out weak and get very strong
+Sword - Add a new ability to swords
+Make parry a default stat
+affinities
+
+
+
+Current
+Weapon proficiences
+Prefixes/suffixes
+passive skills
+active skills
+Classes
+
+Bugs

@@ -67,13 +67,13 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 			if (this.level !== "Master"){
 				this.MeleeCritical = (this.level * 0.5);
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
-				this.SneakAttackBonus = this.level;
+				this.StabBonus = this.level;
 				this.Disembowel = this.level;
 				this.StealthBonus = this.level;
 			} else { //static bonuses for Mastery
 				this.MeleeCritical = 6;
 				this.MeleeCriticalDamageBonus = 10;
-				this.SneakAttackBonus= 14;
+				this.StabBonus= 14;
 				this.Disembowel = 11;
 				this.StealthBonus = 11;
 			}
@@ -221,13 +221,13 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		constructor(points, name){
 			super(points, name);
 			if (this.level !== "Master"){
-				this.SneakAttackBonus = this.level;
+				this.StabBonus = this.level;
 				this.DoubleSwing = this.level;
 				this.AccuracyBonus = 3 * this.level;
 				this.CriticalDamageBonus = this.level;
 
 			} else { //static bonuses for Mastery
-				this.SneakAttackBonus = 15;
+				this.StabBonus = 15;
 				this.DoubleSwing = 12;
 				this.AccuracyBonus = 50;
 				this.CriticalDamageBonus = 11;
