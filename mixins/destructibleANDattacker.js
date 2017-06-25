@@ -88,41 +88,90 @@ Game.Mixins.Attacker = {
             return [{key: 'attack', value: this.getMeleeDamageModifier()}];
         }
     },
+
+    checkMeleeSpecials: function(){
+
+    },
+
     attack: function(target){
         if (target.hasMixin('Destructible')){
-            let attack = 0;
-            if (this.checkHit(target)){
-                attack += this.getMeleeDamageModifier();
-					if (this.checkCrit()){
-                        attack += this.getMeleeCriticalDamageBonus();
-                        attack *= 1.5;
+
+            let attacks = 1;
+            let offhandAttacks = 0;
+       
+       //determine number of attacks
+        let perc =  ROT.RNG.getPercentage()
+        while(perc < this.getDoubleSwing()){
+            console.log("double swing is ", this.getDoubleSwing())
+            console.log("perc is ", perc)
+            attacks++;
+            //check for an offhand weapon
+            if (this.hasMixin("Equipper") && this._equipment.offhand !== null){
+                if (this._equipment.offhand.EQType !== 'shield'){
+                    if (ROT.RNG.getPercentage() < this.getDualWield()){
+                        offhandAttacks++;
                     }
-                    let max = 1 + Math.max(0, attack);
-                    let damage = 1+Math.floor(ROT.RNG.getNormal(max, max/2));
-                    // Game.sendMessage(target, 'The %s strikes you for %d damage!', [this.getName(), damage]);
-                    target.takeDamage(this, damage);
-                   
-					}
-				if (this.checkDoubleSwing(target)){
-				    let attack2 = this.getMeleeDamageModifier();
-					if (this.checkCrit()){
-                        attack2 += this.getMeleeCriticalDamageBonus();
-                        attack2 *= 1.5;
-                    }
-					let max2 = 1 + Math.max(0, attack2);
-                    let damage2 = 1+Math.floor(ROT.RNG.getNormal(max2, max2/2));
-                    // Game.sendMessage(target, 'The %s strikes you for %d damage!', [this.getName(), damage]);
-                    target.takeDamage(this, damage2);	
-					}
-              
-                
+                }  
+            }
+            perc += ROT.RNG.getPercentage();
+        }         
+
+        
+        for (let i = attacks; i > 0; i--){
+            if (this.checkHit(target, false)){
+                let damage = this.calcMeleeDamage(false);
+                target.takeDamage(this, damage)
+
+            }
+
+
+            if (offhandAttacks > 0){
+                if (this.checkHit(target, true)){
+                    let damage2 = this.calcMeleeDamage(true);
+                    target.takeDamage(this, damage2);
+                }
+            }
+        }               
+        }
+    },
+
+    calcMeleeDamage(offhand){
+        let modifier = 1;
+        let weapon;
+        if (offhand){
+            modifier =  this.getDualWield() * 0.01;
+           if (this.hasMixin('Equipper')){
+                weapon = this._equipment.offhand;
+           }
+        } else {
+            if (this.hasMixin('Equipper')){
+                weapon = this._equipment.mainHand;
+            }
+        }
+        let damage = Math.max(0, this.getMeleeDamageModifier());
+        if (weapon){
+            damage += weapon.getAttackValue() || 0;
+        } 
+
+        if ((ROT.RNG.getPercentage() * modifier ) < (this.getFlatCrit() + this.getMeleeCritical())){
+            Game.sendMessage(this, "A critical hit!");
+            damage *= 1.5;
+            damage += this.getMeleeCriticalDamageBonus();
         }
 
-            },
-    checkHit(target){
-  
-        let perc = ROT.RNG.getPercentage()       
-        if (((perc + this.getAccuracyBonus()) > target.getEvasion())+target.getFlatEvade()){
+        damage *= modifier;
+        return damage;
+
+    },
+    checkHit(target, offhand){
+
+        let perc = ROT.RNG.getPercentage()
+        if (offhand){
+            perc *= (this.getDualWield() * 0.01)
+        }
+
+
+        if (((perc + this.getAccuracyBonus()) > target.getEvasion()) +target.getFlatEvade()){
             return true;
         } else {
             Game.sendMessage(this, 'Your attack has missed!', [this.getName()]);

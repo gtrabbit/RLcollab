@@ -93,7 +93,7 @@ Game.Items.Equipment.Weapons.Staves = {
 	name: 'yew staff',
 	weight: 6,
 	variance: 3,
-	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
+	bonuses: {   
 		arcana: 2
 }
 },
@@ -121,26 +121,24 @@ Game.Items.Equipment.Weapons.Axes = {
 	name: 'broad axe',
 	weight: 4,
 	variance: 8,
-	bonuses: {   //possible to modify secondary stats here as well. Could do primary, but that would be weird if the standard sword raised your strength. But I am thinking that daggers might be easier to swing, so could have them give higher doubleswing chance, etc. for any other items and so on
+	bonuses: {  
 		MeleeCriticalDamageBonus: 4,
 		MeleeCritical: 2
 }
 },	
 }
 
+
+
 //================ Armor========>>
 Game.Items.Equipment.Armor.Body = {
 	crude: {
-	character: "#",
-	foreground: 'turquoise',
 	defenseValue: 1,
 	name: "crude armor",
 	weight: 2
 },
 	
 	light: {
-	character: "#",
-	foreground: 'turquoise',
 	defenseValue: 3,
 	name: "light armor",
 	weight: 5,
@@ -148,8 +146,6 @@ Game.Items.Equipment.Armor.Body = {
 
 
 	chainmail: {
-	character: "#",
-	foreground: 'turquoise',
 	defenseValue: 7,
 	name: "chainmail",
 	weight: 16,
@@ -160,8 +156,6 @@ Game.Items.Equipment.Armor.Body = {
 },
 
 	platemail: {
-	character: "#",
-	foreground: 'turquoise',
 	defenseValue: 14,
 	name: "platemail",
 	weight: 38,
@@ -176,28 +170,24 @@ Game.Items.Equipment.Armor.Body = {
 
 Game.Items.Equipment.Armor.Helmets = {
 	cap: {
-	character: "^",
 	defenseValue: 2,
 	name: "cap",
 	weight: 2,
 },
 
 	helmet: {
-	character: "^",
 	defenseValue: 2,
 	name: "helmet",
 	weight: 6,
 },
 	
 	fullhelm: {
-	character: "^",
 	defenseValue: 5,
 	name: "full helm",
 	weight: 9,
 },
 	
 	feathercap: {
-	character: "^",
 	defenseValue: 1,
 	name: "feather cap",
 	weight: 1,
@@ -209,7 +199,6 @@ Game.Items.Equipment.Armor.Helmets = {
 },
 	
 	hood: {
-	character: "^",
 	defenseValue: 1,
 	name: "hood",
 	weight: 1,
@@ -220,14 +209,12 @@ Game.Items.Equipment.Armor.Helmets = {
 
 Game.Items.Equipment.Armor.Bracers = {
 	bracer: {
-	character: "8",
 	defenseValue: 1,
 	name: "bracer",
 	weight: 3,
 },
 	
 	gauntlets: {
-	character: "8",
 	defenseValue: 3,
 	name: "gauntlets",
 	weight: 5,
@@ -237,24 +224,18 @@ Game.Items.Equipment.Armor.Bracers = {
 //================ Boots========>>
 Game.Items.Equipment.Armor.Boots = {
 	boots: {
-	character: ",",
-	foreground: 'brown',
 	defenseValue: 1,
 	name: "boots",
 	weight: 2,
 },
 
 	chainboots: {
-	character: ",",
-	foreground: 'brown',
 	defenseValue: 3,
 	name: "chain boots",
 	weight: 4,
 },
 
 	ninjatabi: {
-	character: ",",
-	foreground: 'brown',
 	defenseValue: 1,
 	name: "ninja tabi",
 	weight: 1,
@@ -269,8 +250,6 @@ Game.Items.Equipment.Armor.Boots = {
 //================ Rings=====>>
 Game.Items.Equipment.Armor.Rings = {
 	ring: {
-	character: "*",
-	foreground: 'gold',
 	defenseValue: 0,
 	name: "ring",
 	weight: 0,
@@ -280,8 +259,6 @@ Game.Items.Equipment.Armor.Rings = {
 //================ Amulets=====>>
 Game.Items.Equipment.Armor.Amulets = {
 	amulet: {
-	character: "*",
-	foreground: 'pink',
 	defenseValue: 1,
 	name: "amulet",
 	weight: 0,
@@ -291,7 +268,6 @@ Game.Items.Equipment.Armor.Amulets = {
 
 Game.Items.Equipment.Armor.Capes = {
 	cape: {
-	character: "[",
 	defenseValue: 0,
 	name: "cape",
 	weight: 1,

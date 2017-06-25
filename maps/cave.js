@@ -21,7 +21,7 @@ Game.Map.Cave = function(tiles, player) {
             }
         }
         // 15 items per floor
-            for (i = 0; i < 5; i++){
+            for (i = 0; i < 25; i++){
 
                 let item = Game.Items.Selector.buildItem((100-(z*15)), spread*i);
 

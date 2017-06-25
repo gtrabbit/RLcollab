@@ -29,17 +29,26 @@ Equipment: class Equipment {
 			delete template.mixins;
 
 		}
-
+//should include: weight, name, character/foreground, variance, attack/defense value
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
 
 		extras.Quality ? this.make(extras.Quality) : {};
+		extras.Material ? this.forge(extras.Material) : {};
 		extras.Adjective ? this.build(extras.Adjective) : {};
 		extras.Classy ? this.build(extras.Classy) : {};
-		extras.Material ? this.forge(extras.Material) : {};
 		
+
 		
+		this.getAttackValue = function(){
+			return this.attackValue === 0 ? 0 :
+				Math.round(this.attackValue + (Math.random() * this.variance) - (Math.random() * this.variance))
+		}
+		this.getDefenseValue = function(){
+			return Math.round(this.defenseValue + (Math.random() * this.variance) - (Math.random() * this.variance))
+		}
+
 		this.makeName();
 		
 		} 
@@ -47,9 +56,9 @@ Equipment: class Equipment {
 	forge(material){
 		this.prefix.push(material.prefix);
 		this.weight *= material.weight;
-		this[this.baseStat] = Math.round( this[this.baseStat] * (material.baseStatBonus * this.multi) )
+		this.boostValue(material.baseStatBonus * this.multi);
 		for (let key in material.modifies){
-			this.bonuses.hasOwnProperty(key) ? this.bonuses[key] += Math.round(material.modifies[key] * this.multi) : this.bonuses[key] = Math.round(material.modifies[key] * this.multi );
+			this.bonuses.hasOwnProperty(key) ? this.bonuses[key] += Math.round(material.modifies[key] * this.multi * material.baseStatBonus) : this.bonuses[key] = Math.round(material.modifies[key] * this.multi * material.baseStatBonus);
 		}
 
 	} 
@@ -57,7 +66,8 @@ Equipment: class Equipment {
 	make(quality){
 		this.prefix.push(quality.prefix);
 		this.multi = quality.multi;
-	} 
+		this.boostValue(this.multi);
+	}
 
 	build(classy){
 		this.prefix.push(classy.prefix);
@@ -76,19 +86,28 @@ Equipment: class Equipment {
 
 	}
 
+	boostValue(multi){
+		if (this.hasOwnProperty("attackValue")){
+			this.attackValue = Math.round(this.attackValue * multi);
+		}
+		if (this.hasOwnProperty("defenseValue")){
+			this.defenseValue = Math.round(this.attackValue * multi);
+		}
+	}
+
 	makeName(){
 		let initial = this.prefix.join(" ") + " " + this.name
 		this.name = initial.trim();
 	} 
 
-	getAttackValue(){
-		return this.attackValue === 0 ? 0 :
-		Math.round(this.attackValue + (Math.random() * this.variance) - (Math.random() * this.variance))
-	}
+	// getAttackValue(){
+	// 	return this.attackValue === 0 ? 0 :
+	// 	Math.round(this.attackValue + (Math.random() * this.variance) - (Math.random() * this.variance))
+	// }
 
-	getDefenseValue(){
-		return Math.round(this.defenseValue + (Math.random() * this.variance) - (Math.random() * this.variance))
-	}
+	// getDefenseValue(){
+	// 	return Math.round(this.defenseValue + (Math.random() * this.variance) - (Math.random() * this.variance))
+	// }
 
 },
 
@@ -96,6 +115,7 @@ Weapons: class Weapon {
 	constructor(template){
 		this.baseStat = 'attackValue';
 		this.EQSlot = ['mainHand', "offhand"];
+		this.EQType = "weapon"
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
@@ -106,6 +126,8 @@ Helmets: class Helmet {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['helmet'];
+		this.character = "^";
+		this.EQType = "helmet";
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
@@ -116,6 +138,9 @@ Boots: class Boots {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['boots'];
+		this.character = ",";
+		this.foreground = "brown";
+		this.EQType = "boots"
 		for (let key in template){
 			this[key] = template[key] || 0;		
 		}
@@ -126,6 +151,9 @@ Bracers: class Bracers {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['bracers'];
+		this.character = "8";
+		this.foreground = "rgb(200, 230, 150)";
+		this.EQType = "bracers";
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
@@ -137,6 +165,9 @@ Body: class Body {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['body'];
+		this.foreground = 'turquoise';
+		this.character = "#";
+		this.EQType = "armor"
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
@@ -148,6 +179,9 @@ Rings: class Rings {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ["leftRing", "rightRing"];
+		this.character = "*";
+		this.foreground = "gold";
+		this.EQType = "ring";
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
@@ -159,6 +193,9 @@ Amulets: class Amulets {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['amulet'];
+		this.character = "*";
+		this.foreground = "pink";
+		this.EQType = "amulet";
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
@@ -170,6 +207,8 @@ Capes: class Capes {
 	constructor(template){
 		this.baseStat = 'defenseValue';
 		this.EQSlot = ['cape'];
+		this.character = "[";
+		this.EQType = "cape";
 		for (let key in template){
 			this[key] = template[key] || 0;
 			
