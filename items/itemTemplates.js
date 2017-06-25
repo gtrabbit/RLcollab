@@ -137,8 +137,10 @@ Game.Items.Equipment.Armor.Shields = {
 		foreground: 'orange',
 		defenseValue: 1,
 		attackValue: 1,
-		blockChance: 15,
-		blockValue: 3,
+		bonuses: {
+			blockChance: 15,
+			blockValue: 3
+		},		
 		name: "buckler",
 		weight: 4,
 	},

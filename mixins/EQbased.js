@@ -35,6 +35,16 @@ Game.Mixins.Equipper = {
     unwield: function(slot) {
         this._equipment[slot] = null;
     },
+    isWearingShields: function (){
+        let number = 0;
+        if (this._equipment.offhand !== null && this._equipment.offhand.EQType === "shield"){
+            number ++;
+        }
+        if (this._equipment.mainHand !== null && this._equipment.mainHand.EQType === "shield"){
+            number ++;
+        }
+        return number;
+    },
     getEquipment: function(slot) {
         return slot ? this._equipment[slot] : this._equipment;    
     },

@@ -340,8 +340,8 @@ Game.Entity.prototype.getEquipmentBonuses = function(char){
     let total = 0;
     for (let slot in this._equipment){
         if (this._equipment[slot]){
-            if (this._equipment[slot].bonuses.hasOwnProperty(char)){
-                total += Number(this._equipment[slot].bonuses[char]);
+            if (this._equipment[slot].wielderBonuses.hasOwnProperty(char)){
+                total += Number(this._equipment[slot].wielderBonuses[char]);
             }
         }
     }

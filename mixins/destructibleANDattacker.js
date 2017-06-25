@@ -7,6 +7,10 @@ Game.Mixins.Destructible = {
    
     },
     takeDamage: function(attacker, damage, msg){
+        if (this.hasMixin('Equipper') && this.isWearingShields() > 0){
+            damage -= this.blockDamage();
+            console.log("damage after blocking is ", damage)
+        }
         damage = Math.max(damage - this.getDefenseValue(), 0);
         this.modifyHP(-damage);
         if (msg){
@@ -39,6 +43,32 @@ Game.Mixins.Destructible = {
             ];
         }
     },
+
+    blockDamage: function(){
+        let reduction = 0;
+        if (this._equipment.offhand !== null && this._equipment.offhand.EQType === "shield"){
+            if (this.checkBlock(this._equipment.offhand)){
+                console.log("block with offhand")
+                reduction += (this._equipment.offhand.bonuses.blockValue + (this.getBlock() * 0.1))
+            }
+            if (this.checkBlock(this._equipment.mainHand)){
+                console.log("block with mainHand")
+                reduction += (this._equipment.mainHand.bonuses.blockValue + (this.getBlock() * 0.1))
+            }
+        }
+        console.log("total reduction", reduction)
+        return reduction;
+
+
+    },
+
+    checkBlock: function(shield){
+        let block = this.getBlock() || 1;
+        block += shield.bonuses.blockChance || 1;
+        return ROT.RNG.getPercentage() < block;
+
+    },
+    
     getHP: function(){
         return this._hp;
     },

@@ -20,6 +20,7 @@ Equipment: class Equipment {
 		//console.log("inside equipment constructor ", template)
 		this.multi = 1;
 		this.bonuses = {};
+		this.wielderBonuses = {};
 		this.prefix = [];
 		this.listeners = Game.ItemFactory.EquippableListeners;
 		if (template.hasOwnProperty('mixins') && template.mixins.length){
@@ -77,7 +78,7 @@ Equipment: class Equipment {
 		this.attackValue += classy.attackValue || 0;
 		delete classy.attackValue;
 		for (let key in classy.modifies){
-			this.bonuses.hasOwnProperty(key) ? this.bonuses[key] += Math.round(classy.modifies[key] * this.multi) : this.bonuses[key] = Math.round(classy.modifies[key] * this.multi );
+			this.bonuses.hasOwnProperty(key) ? this.wielderBonuses[key] += Math.round(classy.modifies[key] * this.multi) : this.wielderBonuses[key] = Math.round(classy.modifies[key] * this.multi );
 		}
 		delete classy.modifies;
 		for (let key in classy){
@@ -91,7 +92,7 @@ Equipment: class Equipment {
 			this.attackValue = Math.round(this.attackValue * multi);
 		}
 		if (this.hasOwnProperty("defenseValue")){
-			this.defenseValue = Math.round(this.attackValue * multi);
+			this.defenseValue = Math.round(this.defenseValue * multi);
 		}
 	}
 
