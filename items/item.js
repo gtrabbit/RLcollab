@@ -42,6 +42,7 @@ Game.Items.Equipment.Armor.Boots = {};
 Game.Items.Equipment.Armor.Rings = {};
 Game.Items.Equipment.Armor.Amulets = {};
 Game.Items.Equipment.Armor.Capes = {};
+Game.Items.Equipment.Armor.Shields = {};
 
 
 //and so on, for shields, armor, boots, etc.

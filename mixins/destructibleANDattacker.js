@@ -89,12 +89,9 @@ Game.Mixins.Attacker = {
         }
     },
 
-    checkMeleeSpecials: function(){
-
-    },
-
     attack: function(target){
         if (target.hasMixin('Destructible')){
+            let sneak = this.checkSneakAttack(target);
 
             let attacks = 1;
             let offhandAttacks = 0;
@@ -135,6 +132,11 @@ Game.Mixins.Attacker = {
         }
     },
 
+    checkSneakAttack(target){
+        return target.canSee(this);
+    },
+
+
     calcMeleeDamage(offhand){
         let modifier = 1;
         let weapon;
@@ -163,13 +165,13 @@ Game.Mixins.Attacker = {
         return damage;
 
     },
+
     checkHit(target, offhand){
 
         let perc = ROT.RNG.getPercentage()
         if (offhand){
             perc *= (this.getDualWield() * 0.01)
         }
-
 
         if (((perc + this.getAccuracyBonus()) > target.getEvasion()) +target.getFlatEvade()){
             return true;
@@ -179,27 +181,8 @@ Game.Mixins.Attacker = {
             return false;
         }        
     },
-    checkCrit(){
-		let perc = ROT.RNG.getPercentage()
-        if (perc < (this.getFlatCrit() + this.getMeleeCritical())){
-            Game.sendMessage(this, "A critical hit!")
-            return true;
-        } else {
-            return false;
-        }
-        
-    },
-	checkDoubleSwing(target){
-	let perc = ROT.RNG.getPercentage()       
-        if (perc < this.getDoubleSwing()){
-			Game.sendMessage(this, "You swing again!", [this.getName()]);
-			Game.sendMessage(target, "The %s goes for another attack!", [this.getName()]);
-			return true;
-		} else {
-			return false;
-		}
+    
 	
-	},
     throw: function(target, projectile){
         this.removeItem(this._items.indexOf(projectile));
         target.setLoot(projectile);

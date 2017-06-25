@@ -122,6 +122,17 @@ Weapons: class Weapon {
 	}
 },
 
+Shields: class Shield {
+	constructor(template){
+		this.baseStat = "defenseValue";
+		this.EQSlot = ['mainHand', "offhand"];
+		this.EQType = "shield"
+		for (let key in template){
+			this[key] = template[key] || 0;		
+		}
+	}
+},
+
 Helmets: class Helmet {
 	constructor(template){
 		this.baseStat = 'defenseValue';

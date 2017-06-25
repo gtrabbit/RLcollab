@@ -10,7 +10,6 @@ Game.Items.Selector = {
 			ctor = item[2];
 		}
  		let prefixes = this.rarityBasedPick(rare, spread, type, ctor);
-
 		let drop = new Game.ItemFactory.Classes[ctor](item[0]);
 		drop = new Game.ItemFactory.Classes.Equipment(drop, prefixes);
 		drop = new Game.Item(drop);

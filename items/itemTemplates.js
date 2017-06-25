@@ -131,18 +131,18 @@ Game.Items.Equipment.Weapons.Axes = {
 },	
 }
 //================ Shields========>>
-Game.Items.Equipment.Armor.Shield = {
+Game.Items.Equipment.Armor.Shields = {
 	buckler: {
-	character: "&",
-	foreground: 'orange',
-	defenseValue: 1,
-	attackValue: 1,
-	blockChance: 15,
-	blockValue: 3,
-	name: "buckler",
-	weight: 4,
-},
-
+		character: "&",
+		foreground: 'orange',
+		defenseValue: 1,
+		attackValue: 1,
+		blockChance: 15,
+		blockValue: 3,
+		name: "buckler",
+		weight: 4,
+	},
+}
 
 
 
