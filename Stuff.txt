@@ -1,5 +1,5 @@
 Future
-blacksmiths - upgrade items/weapons 
+blacksmiths - upgrade items/weapons quality, sell new items etc, based on gold/or fame
 world map - randomly generated towns, quests, dungeons
 Add biomes, and ecology for dungeons, and monsters within them
 boss monsters - randomly upgraded normal monsters
@@ -11,6 +11,19 @@ Cleave - start out weak and get very strong
 Sword - Add a new ability to swords
 Make parry a default stat
 affinities
+treasure chests
+boss monster loot
+master shield mastery and guaridan combat, lets you block spells, to a degree
+
+Items
+SCROLLS:
+affinity - improve affinity by X
+bless - Bless spell
+experience - X amount of XP according to level
+
+POTIONS:
+healing
+antidote
 
 
 

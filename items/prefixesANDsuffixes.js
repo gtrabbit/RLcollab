@@ -3,11 +3,9 @@
 
 //===================MATERIAL===========>>>>
 
-
-
 Game.Items.WeaponPrefix.Material.Silver = {
 	prefix: "silver",
-	baseStatBonus: 4,
+	baseStatBonus: 1.5,
 	rarity: 18,
 	attackValue: 1.3,
 	weight: 2, 
@@ -19,7 +17,7 @@ Game.Items.WeaponPrefix.Material.Silver = {
 
 Game.Items.ArmorPrefix.Material.Silver = {
 	prefix: "silver",
-	baseStatBonus: 4,
+	baseStatBonus: 1.5,
 	rarity: 18,
 	defenseValue: 1.3,
 	weight: 2, 
@@ -54,7 +52,7 @@ Game.Items.ArmorPrefix.Material.Iron = {
 
 Game.Items.WeaponPrefix.Material.Steel = {
 	prefix: "steel",
-	baseStatBonus: 3,
+	baseStatBonus: 1.2,
 	rarity: 18,
 	attackValue: 1.3,
 	weight: 1.5,
@@ -66,7 +64,7 @@ Game.Items.WeaponPrefix.Material.Steel = {
 
 Game.Items.ArmorPrefix.Material.Steel = {
 	prefix: "steel",
-	baseStatBonus: 3,
+	baseStatBonus: 1.2,
 	defenseValue: 1.3,
 	rarity: 18,
 	weight: 1.5,
@@ -77,7 +75,7 @@ Game.Items.ArmorPrefix.Material.Steel = {
 
 Game.Items.WeaponPrefix.Material.Elven = {
 	prefix: "elven",
-	baseStatBonus: 5,
+	baseStatBonus: 2.2,
 	rarity: 5,
 	weight: 0.6,
 	attackValue: 1.1,
@@ -89,7 +87,7 @@ Game.Items.WeaponPrefix.Material.Elven = {
 
 Game.Items.ArmorPrefix.Material.Elven = {
 	prefix: "elven",
-	baseStatBonus: 5,
+	baseStatBonus: 2.2,
 	rarity: 5,
 	weight: 0.6,
 	defenseValue: 1.1,
@@ -100,7 +98,7 @@ Game.Items.ArmorPrefix.Material.Elven = {
 
 Game.Items.WeaponPrefix.Material.Glass = {
 	prefix: "glass",
-	baseStatBonus: 0,
+	baseStatBonus: 1,
 	rarity: 12,
 	weight: 0.2,
 	attackValue: 0.5,
@@ -111,7 +109,7 @@ Game.Items.WeaponPrefix.Material.Glass = {
 }
 Game.Items.ArmorPrefix.Material.Glass = {
 	prefix: "glass",
-	baseStatBonus: 0,
+	baseStatBonus: 1,
 	rarity: 12,
 	defenseValue: 0.5,
 	weight: 0.2,
@@ -427,7 +425,7 @@ Game.Items.ArmorPrefix.Adjective.Mystic = {
 
 Game.Items.ArmorPrefix.Adjective.Spiked = {
 	prefix: "spiked",
-	attackValue: 4,
+	meleeDamageModifier: 4,
 	defenseValue: 3,
 	rarity: 12,
 }

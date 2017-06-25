@@ -16,7 +16,8 @@ Game.Items.Equipment.Weapons.Daggers = {
 	variance: 1,
 	bonuses: {
 		DoubleSwing: 15,
-		MeleeCritical: 3
+		MeleeCritical: 3,
+		StabBonus: 15,
 }		
 },
 }
@@ -110,7 +111,8 @@ Game.Items.Equipment.Weapons.Axes = {
 	variance: 4,
 	bonuses: {
 		MeleeCriticalDamageBonus: 2,
-		MeleeCritical: 1
+		MeleeCritical: 1,
+		CleavingBonus: 3,
 }
 },
 
@@ -123,10 +125,24 @@ Game.Items.Equipment.Weapons.Axes = {
 	variance: 8,
 	bonuses: {  
 		MeleeCriticalDamageBonus: 4,
-		MeleeCritical: 2
+		MeleeCritical: 2,
+		CleavingBonus: 6,
 }
 },	
 }
+//================ Shields========>>
+Game.Items.Equipment.Armor.Shield = {
+	buckler: {
+	character: "&",
+	foreground: 'orange',
+	defenseValue: 1,
+	attackValue: 1,
+	blockChance: 15,
+	blockValue: 3,
+	name: "buckler",
+	weight: 4,
+},
+
 
 
 
@@ -163,8 +179,8 @@ Game.Items.Equipment.Armor.Body = {
 	speed: -400,
 	DoubleSwing: -25
 }
-}
 },
+}
 
 //================ Helmets =========>>
 

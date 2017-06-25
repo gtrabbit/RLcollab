@@ -23,7 +23,7 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		constructor(points, name){
 			super(points, name);
 			if (this.level !== "Master"){
-				this.DoubleSwing = this.level * 0.5;
+				this.DoubleSwing = Math.round(this.level * 0.5);
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
 				this.MeleeCritical = Math.round(this.level * 0.6);
 				this.MeleeDamageModifier = Math.round(this.level * 0.2);
@@ -48,7 +48,7 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.CleavingBonus = this.level;
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
 				this.MeleeDamageModifier = Math.round(this.level * 0.3);
-				this.MaimBonus = (this.level * 1.2);
+				this.MaimBonus = math.round(this.level * 1.2);
 			} else { //static bonuses for Mastery
 				this.CleavingBonus = 15;
 				this.MeleeCriticalDamageBonus = 10;
@@ -65,7 +65,7 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		constructor(points, name){
 			super(points, name);
 			if (this.level !== "Master"){
-				this.MeleeCritical = (this.level * 0.5);
+				this.MeleeCritical = Math.round(this.level * 0.5);
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
 				this.StabBonus = this.level;
 				this.Disembowel = this.level;
@@ -108,19 +108,49 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.ResistPhysical = Math.round(this.level * 1.3);
 				this.HpPerLevel = Math.round(this.level * 1.4);
 				this.DefenseValue = Math.round(this.level * 2);
-				this.BlockValue = this.level;
 				this.RegenBonus = this.level;
 			} else { //static bonuses for Mastery
 				this.ResistPhysical = 25;
 				this.HpPerLevel = 12;
 				this.DefenseValue = 18;
-				this.BlockValue = 11;
 				this.RegenBonus = 12;
 			}
 			
 
 		}
 	}
+	
+	Game.Abilities["Shield Mastery"] = class ShieldMastery extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.BlockValue = Math.round(this.level * 2);
+				this.BlockChance = this.level;
+			} else { //static bonuses for Mastery
+				this.BlockValue = 25;
+				this.BlockChance = 12;
+			
+
+		}
+	}
+}
+	
+		Game.Abilities["Guardian Combat"] = class GuardianCombat extends Game.Abilities['Ability']{
+
+		constructor(points, name){
+			super(points, name);
+			if (this.level !== "Master"){
+				this.ShieldBash = Math.round(this.level *1.5);
+				this.BashBonus = this.level;
+			} else { //static bonuses for Mastery
+				this.ShieldBash = 20;
+				this.BashBonus = 15;
+			
+
+		}
+	}
+}
 	
 	Game.Abilities["Readiness"] = class Readiness extends Game.Abilities['Ability']{
 
