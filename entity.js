@@ -108,13 +108,13 @@ Game.Entity.prototype.getPerception = function(){
 //==============getter functions for functional stats ============>>>>>>
 
 	Game.Entity.prototype.getMeleeDamageModifier = function(){
-		let base = Math.round( ( (this.getStrength() *1.4) / 2) - 6);
+		let base = Math.round( (this.getStrength() / 2) - 6);
         base += this.getModifiers('MeleeDamageModifier');
         return base;
 		}
 		
 	Game.Entity.prototype.getRangedDamageModifier = function(){
-	   let base = Math.round( ( (this.getDexterity() *1.3) / 2) - 4);
+	   let base = Math.round( ( (this.getDexterity() *1) / 2) - 6);
 		
 	   base += this.getModifiers('RangedDamageModifier');
         return base
@@ -127,7 +127,7 @@ Game.Entity.prototype.getPerception = function(){
 }
 
 	Game.Entity.prototype.getDoubleSwing = function(){
-		let base = Math.round( ( ( (this.getStrength() *2) / 3) + (this.getLuck() * 1.3) / 3) + (this.getDexterity() * 1.5) /2);
+		let base = Math.round( (this.getStrength() / 5) + (this.getLuck() / 3) + (this.getDexterity() / 4) );
 		
 		base += this.getModifiers('DoubleSwing');
 		 return base
