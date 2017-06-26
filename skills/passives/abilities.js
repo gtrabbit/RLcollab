@@ -1,11 +1,12 @@
 Game.Abilities = {};
 
 Game.Abilities.Ability = class Ability{
-	constructor(points, name){
+	constructor(points, name, affinity){
 			this.name = name;
 			this.totalPoints = points;
 			this.maxLevel = 10;
-			this.progression = Game.Abilities.levelProgression(this.maxLevel);
+			this.affinity = affinity
+			this.progression = Game.Abilities.levelProgression(this.maxLevel, this.affinity);
 			this.level = this.getLevel(this.totalPoints)
 			this.level === -1 ? this.level = "Master" : {}
 			this.toNext = Math.abs(this.totalPoints - this.progression[this.level])
@@ -20,8 +21,8 @@ Game.Abilities.Ability = class Ability{
 
 Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.DoubleSwing = Math.round(this.level * 0.5);
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
@@ -42,8 +43,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Combat Brutality"] = class CombatBrutality extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.CleavingBonus = this.level;
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
@@ -62,8 +63,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Assassination"] = class Assassination extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.MeleeCritical = Math.round(this.level * 0.5);
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
@@ -84,8 +85,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 		Game.Abilities["Mysticism"] = class Mysticism extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.SpellPenetration = (this.level * 7);
 				this.SpellCritical = this.level;
@@ -102,8 +103,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Tenacity"] = class Tenacity extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.ResistPhysical = Math.round(this.level * 1.3);
 				this.HpPerLevel = Math.round(this.level * 1.4);
@@ -122,8 +123,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Shield Mastery"] = class ShieldMastery extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.BlockValue = Math.round(this.level * 2);
 				this.BlockChance = this.level;
@@ -138,8 +139,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 		Game.Abilities["Guardian Combat"] = class GuardianCombat extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.ShieldBash = Math.round(this.level *1.5);
 				this.BashBonus = this.level;
@@ -154,8 +155,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Readiness"] = class Readiness extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.Evasion = Math.round(this.level * 3.8);
 				this.DefenseValue = Math.round(this.level * 2);
@@ -172,8 +173,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 
 	Game.Abilities["Sword"] = class Sword extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.ParryBonus = this.level;
 				this.DoubleSwing = this.level;
@@ -191,8 +192,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Bow"] = class Bow extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.PiercingBonus = this.level;
 				this.DoubleSwing = this.level;
@@ -210,8 +211,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Axe"] = class Axe extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.CleavingBonus = this.level;
 				this.DoubleSwing = this.level;
@@ -229,8 +230,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 		Game.Abilities["Mace"] = class Mace extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.BashBonus = this.level;
 				this.DoubleSwing = this.level;
@@ -248,8 +249,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Dagger"] = class Dagger extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.StabBonus = this.level;
 				this.DoubleSwing = this.level;
@@ -269,8 +270,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Ambidexterity"] = class Ambidexterity extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.DualWield = this.level;
 				this.DoubleSwing = this.level;
@@ -287,8 +288,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	
 	Game.Abilities["Meditation"] = class Meditation extends Game.Abilities['Ability']{
 
-		constructor(points, name){
-			super(points, name);
+		constructor(points, name, affinity){
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.MpRegen = Math.round(this.level * 0.3);
 				this.MagicalResist = Math.round(this.level * 2.6);
@@ -314,8 +315,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 
 
 
-Game.Abilities.levelProgression = function(maxLevel){
-	let seq = [0, 0];
+Game.Abilities.levelProgression = function(maxLevel, affinity){
+	let seq = [0+affinity, 0+affinity+affinity];
 
 	for (let i=1; i<maxLevel; i++){
 		let cur = seq[i] + i

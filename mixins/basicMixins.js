@@ -151,7 +151,10 @@ Game.Mixins.ExperienceGainer = {
         Game.sendMessage(this, "Your " + stat + " increases")
     },
     increaseAbility: function(ability, value){
-        this._abilities[ability] = new Game.Abilities[ability](this._abilities[ability].totalPoints + value, ability);
+        if (this._abilities[ability].level !== "Master"){
+             this._abilities[ability] = new Game.Abilities[ability](this._abilities[ability].totalPoints + value, ability);     
+        }
+       
     },
     getExperience: function() {
         return this._experience;

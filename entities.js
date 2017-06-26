@@ -114,7 +114,7 @@ Game.EntityRepository.define('bat', {
 
 Game.EntityRepository.define('newt', {
     name: 'newt',
-    character: ':',
+    character: 'n',
     foreground: 'yellow',
     maxHP: 3,
 	rarity: 75,
@@ -182,6 +182,10 @@ Game.EntityRepository.define('orc', {
         luck: 5,
     },
 	sightRadius: 5,
+    abilities: {
+        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery", 1),
+        "Tenacity": new Game.Abilities["Tenacity"](0, "Tenacity", 1)
+    },
 	tasks: ['hunt', 'wander'],
 	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,

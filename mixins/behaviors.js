@@ -5,10 +5,17 @@ Game.Mixins.RandomStatGainer = {
         onGainLevel: function() {
             let options = Object.keys(this._stats);
             while (this.getStatPoints() > 0) {
-                this.increaseStat(options.random(), 1)
-                // Call the stat increasing function with this as the context.
-                this.setStatPoints(this.getStatPoints() - 1);
+                this.increaseStat(options.random(), 1);
+                this.setStatPoints(this.getStatPoints() - 1);    
             }
+
+            if (this._abilities.length){
+                let abilityOptions = Object.keys(this._abilities);
+                for (let i = this.getAbilityPoints(); i > 0; i--){
+                    this.increaseAbility(abilityOptions.random(), 1);
+                    this.setAbilityPoints(this.getAbilityPoints() - 1);
+                }
+            } 
         }
     }
 };

@@ -61,6 +61,12 @@ Game.Mixins.InventoryHolder = {
     init: function(template){
         let inventorySlots = template['inventorySlots'] || 10;
         this._items = new Array(inventorySlots);
+        if (template.hasOwnProperty('items')){
+          for (let item of template.items){
+            this._items.push(item);
+        }  
+        }
+        
     },
     getItems: function(){
         return this._items;
