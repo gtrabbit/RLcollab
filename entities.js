@@ -100,7 +100,7 @@ Game.EntityRepository.define('bat', {
 		perception: 7,
         intelligence: 1,
         arcana: 1,
-        charisma: 5,
+        charisma: 1,
         luck: 5,
     },
     speed: 2000,

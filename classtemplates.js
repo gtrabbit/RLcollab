@@ -86,7 +86,6 @@ let cheapDagger = new Game.Item(basicDagger)
 
 
 //more examples. The final variable can be re-used for other classes, if wanted.
-
 let boots = new Game.ItemFactory.Classes.Boots(Game.Items.Equipment.Armor.Boots.boots);
 let shoddy = {Quality: Game.Items.ArmorPrefix.Quality.Shoddy};
 let basicBoots = new Game.ItemFactory.Classes.Equipment(boots, shoddy);
@@ -136,11 +135,23 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     ],
     abilities: [
         ["Combat Mastery", 0, 0],
-        ["Tenacity", 0, 0]
+        ["Tenacity", 0, 0],
+		["Combat Brutality", 0, 0],
+		["Assassination", 0, 0],
+		["Mysticism", 0, 0],
+		["Shield Mastery", 0, 0],
+		["Guardian Combat", 0, 0],
+		["Readiness", 0, 0],
+		["Sword", 0, 0],
+		["Bow", 0, 0],
+		["Axe", 0, 0],
+		["Mace", 0, 0],
+		["Dagger", 0, 0],
+		["Ambidexterity", 0, 0],
+		["Meditation", 0, 0],
     ],
     sightRadius: 5,
-    speed: 800,
-    description: "Standard fighter. Strong, but slow"
+    description: "A heroic fighter. Testing his mettle in the dungeons."
 
 })
 
@@ -158,9 +169,43 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
         charisma: 5,
         luck: 5,
     },
+	    equipment: {
+        body: null,
+        mainHand: null,
+        offhand: null,
+        boots: null,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
+    },
+    items: [
+        cheapArmor,
+        cheapSword,
+        shoddyBoots
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 0],
+        ["Tenacity", 0, 0],
+		["Combat Brutality", 0, 0],
+		["Assassination", 0, 0],
+		["Mysticism", 0, 0],
+		["Shield Mastery", 0, 0],
+		["Guardian Combat", 0, 0],
+		["Readiness", 0, 0],
+		["Sword", 0, 0],
+		["Bow", 0, 0],
+		["Axe", 0, 0],
+		["Mace", 0, 0],
+		["Dagger", 0, 0],
+		["Ambidexterity", 0, 0],
+		["Meditation", 0, 0],
+    ],
     sightRadius: 7,
 	hpPerLevel: 3,
-    description: "A Rogue. Quick, but weak"
+    description: "A devious rogue in search of great fortune"
 
 })
 
@@ -177,7 +222,7 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
         charisma: 4,
         luck: 5,
     },
-	equipment: { //items added here
+    equipment: { //items added here
         body: null,
         mainHand: cheapAxe,
         offhand: null,
@@ -189,10 +234,30 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
         cape: null,
         helmet: null,
     },
+    items: [
+        cheapAxe,
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 0],
+        ["Tenacity", 0, 0],
+		["Combat Brutality", 0, 0],
+		["Assassination", 0, 0],
+		["Mysticism", 0, 0],
+		["Shield Mastery", 0, 0],
+		["Guardian Combat", 0, 0],
+		["Readiness", 0, 0],
+		["Sword", 0, 0],
+		["Bow", 0, 0],
+		["Axe", 0, 0],
+		["Mace", 0, 0],
+		["Dagger", 0, 0],
+		["Ambidexterity", 0, 0],
+		["Meditation", 0, 0],
+    ],
     fullnessDepletionRate: 3,
 	hpPerLevel: 6,
     fullness: 1000,
-    description: "Hungry for blood, and food"
+    description: "From the great north, the barbarian is on a journey of self discovery"
 })
 
 Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
@@ -208,6 +273,40 @@ Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
         charisma: 4,
         luck: 5,
     },
+		    equipment: {
+        body: null,
+        mainHand: null,
+        offhand: null,
+        boots: null,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
+    },
+    items: [
+        cheapArmor,
+        cheapSword,
+        shoddyBoots
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 0],
+        ["Tenacity", 0, 0],
+		["Combat Brutality", 0, 0],
+		["Assassination", 0, 0],
+		["Mysticism", 0, 0],
+		["Shield Mastery", 0, 0],
+		["Guardian Combat", 0, 0],
+		["Readiness", 0, 0],
+		["Sword", 0, 0],
+		["Bow", 0, 0],
+		["Axe", 0, 0],
+		["Mace", 0, 0],
+		["Dagger", 0, 0],
+		["Ambidexterity", 0, 0],
+		["Meditation", 0, 0],
+    ],
 	hpPerLevel: 2,
     mpPerLevel: 5,
     maxMP: 25,
@@ -229,6 +328,40 @@ Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {
         luck: 7,
 
     },
+		    equipment: {
+        body: null,
+        mainHand: null,
+        offhand: null,
+        boots: null,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
+    },
+    items: [
+        cheapArmor,
+        cheapSword,
+        shoddyBoots
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 0],
+        ["Tenacity", 0, 0],
+		["Combat Brutality", 0, 0],
+		["Assassination", 0, 0],
+		["Mysticism", 0, 0],
+		["Shield Mastery", 0, 0],
+		["Guardian Combat", 0, 0],
+		["Readiness", 0, 0],
+		["Sword", 0, 0],
+		["Bow", 0, 0],
+		["Axe", 0, 0],
+		["Mace", 0, 0],
+		["Dagger", 0, 0],
+		["Ambidexterity", 0, 0],
+		["Meditation", 0, 0],
+    ],
 	hpPerLevel: 4,
     description: "To cleanse the dungeon in the name of their primordial god"
 })

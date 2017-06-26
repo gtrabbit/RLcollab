@@ -168,8 +168,6 @@ Game.Items.Equipment.Armor.Body = {
 	name: "chainmail",
 	weight: 16,
 	bonuses: {
-	speed: -200,
-	DoubleSwing: -8,
 	}
 },
 
@@ -178,8 +176,6 @@ Game.Items.Equipment.Armor.Body = {
 	name: "platemail",
 	weight: 38,
 	bonuses: {
-	speed: -400,
-	DoubleSwing: -25
 }
 },
 }
@@ -192,6 +188,13 @@ Game.Items.Equipment.Armor.Helmets = {
 	name: "cap",
 	weight: 2,
 },
+
+	animalmask: {
+	defenseValue: 1,
+	name: "animal mask",
+	weight: 3,
+},
+
 
 	helmet: {
 	defenseValue: 2,

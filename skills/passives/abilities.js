@@ -49,7 +49,7 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.CleavingBonus = this.level;
 				this.MeleeCriticalDamageBonus = Math.round(this.level * 0.6);
 				this.MeleeDamageModifier = Math.round(this.level * 0.3);
-				this.MaimBonus = math.round(this.level * 1.2);
+				this.MaimBonus = Math.round(this.level * 1.2);
 			} else { //static bonuses for Mastery
 				this.CleavingBonus = 15;
 				this.MeleeCriticalDamageBonus = 10;
