@@ -71,6 +71,8 @@ Game.classTemplates = {};
 
 //          copy this...up until here --|<class>  ------{The item template you want}---------
 let shortsword = new Game.ItemFactory.Classes.Weapons(Game.Items.Equipment.Weapons.Swords.shortsword);
+let handaxe = new Game.ItemFactory.Classes.Weapons(Game.Items.Equipment.Weapons.Axes.handaxe);
+let dagger = new Game.ItemFactory.Classes.Weapons(Game.Items.Equipment.Weapons.Daggers.dagger);
 // -check itemFactory, "equipment class constructors," starting at line 116 currently
 
 
@@ -79,8 +81,12 @@ let cheap = {Quality: Game.Items.WeaponPrefix.Quality.Cheap} //can do one of eac
 
 //  <any name>...copy all this exactly as is, then put variables above
 let basicSword = new Game.ItemFactory.Classes.Equipment(shortsword, cheap);
+let basicAxe = new Game.ItemFactory.Classes.Equipment(handaxe, cheap);
+let basicDagger = new Game.ItemFactory.Classes.Equipment(dagger, cheap);
 // then above variable goes -----V  here
 let cheapSword = new Game.Item(basicSword) //<<--- the resulting item
+let cheapAxe = new Game.Item(basicAxe)
+let cheapDagger = new Game.Item(basicDagger)
 
 
 //more examples. The final variable can be re-used for other classes, if wanted.
@@ -170,6 +176,18 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
         arcana: 1,
         charisma: 4,
         luck: 5,
+    },
+	equipment: { //items added here
+        body: null,
+        mainHand: cheapAxe,
+        offhand: null,
+        boots: null,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
     },
     fullnessDepletionRate: 3,
 	hpPerLevel: 6,
