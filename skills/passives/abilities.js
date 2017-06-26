@@ -1,10 +1,10 @@
 Game.Abilities = {};
 
 Game.Abilities.Ability = class Ability{
-	constructor(points, name, affinity){
+	constructor(points, name, affinity, maxLevel){
 			this.name = name;
 			this.totalPoints = points;
-			this.maxLevel = 10;
+			this.maxLevel = maxLevel || 10;
 			this.affinity = affinity
 			this.progression = Game.Abilities.levelProgression(this.maxLevel, this.affinity);
 			this.level = this.getLevel(this.totalPoints)
@@ -96,15 +96,13 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.SpellCritical = this.level;
 				this.SpellDamage = this.level;
 			}
-			
-
 		}
 	}
 	
 	Game.Abilities["Tenacity"] = class Tenacity extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
-			super(points, name, affinity);
+			super(points, name, affinity, 15);
 			if (this.level !== "Master"){
 				this.ResistPhysical = Math.round(this.level * 1.3);
 				this.HpPerLevel = Math.round(this.level * 1.4);
@@ -112,9 +110,9 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.RegenBonus = this.level;
 			} else { //static bonuses for Mastery
 				this.ResistPhysical = 25;
-				this.HpPerLevel = 12;
-				this.DefenseValue = 18;
-				this.RegenBonus = 12;
+				this.HpPerLevel = 25;
+				this.DefenseValue = 35;
+				this.RegenBonus = 18;
 			}
 			
 
@@ -316,10 +314,10 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 
 
 Game.Abilities.levelProgression = function(maxLevel, affinity){
-	let seq = [0+affinity, 0+affinity+affinity];
+	let seq = [Math.round(0+affinity), Math.round(0+affinity+affinity)];
 
 	for (let i=1; i<maxLevel; i++){
-		let cur = seq[i] + i
+		let cur = Math.round(seq[i] + i + (i * affinity))
 		seq.push(cur);
 	}
 

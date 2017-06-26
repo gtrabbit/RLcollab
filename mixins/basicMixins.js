@@ -152,7 +152,7 @@ Game.Mixins.ExperienceGainer = {
     },
     increaseAbility: function(ability, value){
         if (this._abilities[ability].level !== "Master"){
-             this._abilities[ability] = new Game.Abilities[ability](this._abilities[ability].totalPoints + value, ability);     
+             this._abilities[ability] = new Game.Abilities[ability](this._abilities[ability].totalPoints + value, ability, this._abilities[ability].affinity);     
         }
        
     },

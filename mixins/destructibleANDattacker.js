@@ -116,6 +116,7 @@ Game.Mixins.Attacker = {
     },
 
     attack: function(target){
+        console.log(target);
         if (target.hasMixin('Destructible')){
             let sneak = this.checkSneakAttack(target);
 
@@ -159,7 +160,12 @@ Game.Mixins.Attacker = {
     },
 
     checkSneakAttack(target){
-        return target.canSee(this);
+        if (target.hasMixin('Sight')){
+            return target.canSee(this); 
+        } else {
+            return false;
+        }
+    
     },
 
 

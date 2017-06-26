@@ -36,10 +36,6 @@ Game.PlayerTemplate = {
             Game.Mixins.PlayerStatGainer],
     extraMixins: [],
     baseSkills: [[Game.Skills.Run, 1], [Game.Skills.Bash, 1], [Game.Skills.Regenerate, 1], [Game.Skills.WhirlwindAttack, 1], [Game.Skills.FlameBurst, 1]],
-    abilities: {
-        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery", 1)
-        
-    }
  
 }
 
@@ -138,6 +134,10 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
         cheapSword,
         shoddyBoots
     ],
+    abilities: {
+        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery", 0),
+         "Tenacity": new Game.Abilities["Tenacity"](0, "Tenacity", 1)
+    },
     sightRadius: 5,
     speed: 800,
     description: "Standard fighter. Strong, but slow"
