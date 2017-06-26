@@ -182,10 +182,10 @@ Game.EntityRepository.define('orc', {
         luck: 5,
     },
 	sightRadius: 5,
-    abilities: {
-        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery", 1),
-        "Tenacity": new Game.Abilities["Tenacity"](0, "Tenacity", 1)
-    },
+    abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 1]
+    ],
 	tasks: ['hunt', 'wander'],
 	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,

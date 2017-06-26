@@ -33,7 +33,7 @@ Game.Entity = function(properties) {
     this._regenDelay = properties['regenDelay'] || 5;
     this._tickCount = 0;
     this._skills = [];
-    this._abilities = properties['abilities'] || {};
+    this._abilityList = properties['abilities'] || [];
     this._hpPerLevel = properties['hpPerLevel'] || 5;
    
 
@@ -53,6 +53,14 @@ Game.Entity = function(properties) {
                 )
         })
     }
+    this._abilities = {};
+    this._abilityList.forEach(ability=>{
+         this._abilities[ability[0]] = new Game.Abilities[ability[0]](ability[1], ability[0], ability[2]);        
+    })
+       
+
+   
+
  //=================================........-=-=-=-=-  
 
   

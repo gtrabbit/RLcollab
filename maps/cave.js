@@ -19,6 +19,7 @@ Game.Map.Cave = function(tiles, player) {
                         entity.getExperience());
                 }
             }
+            entity._hp = entity._maxHP;
         }
         // 15 items per floor
             for (i = 0; i < 25; i++){

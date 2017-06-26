@@ -9,11 +9,13 @@ Game.Mixins.RandomStatGainer = {
                 this.setStatPoints(this.getStatPoints() - 1);    
             }
 
-            if (this._abilities.length){
+            if (Object.keys(this._abilities).length){
                 let abilityOptions = Object.keys(this._abilities);
-                for (let i = this.getAbilityPoints(); i > 0; i--){
+                let start = this.getAbilityPoints();
+                for (let i = start; i > 0; i--){
                     this.increaseAbility(abilityOptions.random(), 1);
                     this.setAbilityPoints(this.getAbilityPoints() - 1);
+ 
                 }
             } 
         }

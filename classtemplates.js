@@ -134,10 +134,10 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
         cheapSword,
         shoddyBoots
     ],
-    abilities: {
-        "Combat Mastery": new Game.Abilities["Combat Mastery"](0, "Combat Mastery", 0),
-         "Tenacity": new Game.Abilities["Tenacity"](0, "Tenacity", 1)
-    },
+    abilities: [
+        ["Combat Mastery", 0, 0],
+        ["Tenacity", 0, 0]
+    ],
     sightRadius: 5,
     speed: 800,
     description: "Standard fighter. Strong, but slow"
