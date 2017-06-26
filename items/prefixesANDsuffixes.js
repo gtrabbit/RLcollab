@@ -2,6 +2,84 @@
 
 
 //===================MATERIAL===========>>>>
+Game.Items.WeaponPrefix.Material.Bone = {
+	prefix: "bone",
+	baseStatBonus: 1,
+	rarity: 40,
+	attackValue: 1.2,
+	weight: 0.5,
+	modifies: {
+	speed: 30,
+	DoubleSwing: 20,
+}
+}
+
+Game.Items.ArmorPrefix.Material.Bone = {
+	prefix: "bone",
+	baseStatBonus: 1,
+	rarity: 40,
+	defenseValue: 1,
+	weight: 0.5,
+	modifies: {
+	ResistNether: 15,
+	speed: 20,
+	
+}
+}
+Game.Items.WeaponPrefix.Material.Stone = {
+	prefix: "stone",
+	baseStatBonus: 1,
+	rarity: 40,
+	attackValue: 1.2,
+	weight: 4,
+	modifies: {
+	
+}
+}
+
+Game.Items.ArmorPrefix.Material.Stone = {
+	prefix: "stone",
+	baseStatBonus: 1,
+	rarity: 40,
+	defenseValue: 1.2,
+	weight: 4,
+	modifies: {
+	
+}
+}
+
+Game.Items.ArmorPrefix.Material.Cloth = {
+	prefix: "cloth",
+	baseStatBonus: 1,
+	rarity: 40,
+	defenseValue: 0.5,
+	weight: 0.3, 
+	modifies: { 
+	Evasion: 15,
+	speed: 25,
+}
+}
+
+Game.Items.WeaponPrefix.Material.Wooden = {
+	prefix: "wood",
+	baseStatBonus: 0.6,
+	rarity: 30,
+	attackValue: 0.6,
+	weight: 0.8, 
+	modifies: { 
+	DoubleSwing: 20
+}
+}
+
+Game.Items.ArmorPrefix.Material.Wooden = {
+	prefix: "wood",
+	baseStatBonus: 0.6,
+	rarity: 30,
+	defenseValue: 0.6,
+	weight: 0.8, 
+	modifies: { 
+}
+}
 
 Game.Items.WeaponPrefix.Material.Silver = {
 	prefix: "silver",
