@@ -1,7 +1,7 @@
 Game.Mixins.Equipper = {
     name: 'Equipper',
     init: function(template) {
-        this._equipment = {
+        this._equipment = template.equipment || {
             mainHand: null,
             offhand: null,
             body: null,

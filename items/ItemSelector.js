@@ -17,7 +17,7 @@ Game.Items.Selector = {
 
 
 	},
-
+ 
 	pickTemplate: function(){
 		let selectionType = Object.keys(Game.Items.Equipment)[Math.floor(Object.keys(Game.Items.Equipment).length * Math.random())]
 		let selection = Game.Items.Equipment[selectionType];

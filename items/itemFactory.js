@@ -28,7 +28,6 @@ Equipment: class Equipment {
 				this.mixins.push(template.mixins.pop())
 			}
 			delete template.mixins;
-
 		}
 //should include: weight, name, character/foreground, variance, attack/defense value
 		for (let key in template){
@@ -111,6 +110,10 @@ Equipment: class Equipment {
 	// }
 
 },
+
+
+
+//equipment class constructors
 
 Weapons: class Weapon {
 	constructor(template){

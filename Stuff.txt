@@ -26,6 +26,10 @@ healing
 antidote
 
 
+PREFIXES:
+need low-level prefixes
+
+
 
 Current
 Weapon proficiences

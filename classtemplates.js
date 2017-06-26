@@ -64,6 +64,42 @@ Game.classTemplates = {};
 
 //any values not defined in the classTemplate will default to playertemplate values
 
+//=================  Starter Equipment  ============>====>-->
+
+
+//  pick the weapon/armor template you want
+
+//          copy this...up until here --|<class>  ------{The item template you want}---------
+let shortsword = new Game.ItemFactory.Classes.Weapons(Game.Items.Equipment.Weapons.Swords.shortsword);
+// -check itemFactory, "equipment class constructors," starting at line 116 currently
+
+
+                //just follow declaration from prefixes file
+let cheap = {Quality: Game.Items.WeaponPrefix.Quality.Cheap} //can do one of each type
+
+//  <any name>...copy all this exactly as is, then put variables above
+let basicSword = new Game.ItemFactory.Classes.Equipment(shortsword, cheap);
+// then above variable goes -----V  here
+let cheapSword = new Game.Item(basicSword) //<<--- the resulting item
+
+
+//more examples. The final variable can be re-used for other classes, if wanted.
+
+let boots = new Game.ItemFactory.Classes.Boots(Game.Items.Equipment.Armor.Boots.boots);
+let shoddy = {Quality: Game.Items.ArmorPrefix.Quality.Shoddy};
+let basicBoots = new Game.ItemFactory.Classes.Equipment(boots, shoddy);
+let shoddyBoots = new Game.Item(basicBoots); //<<--- the final item
+
+
+let armor = new Game.ItemFactory.Classes.Body(Game.Items.Equipment.Armor.Body.crude);
+
+let basicArmor = new Game.ItemFactory.Classes.Equipment(armor, cheap);
+let cheapArmor = new Game.Item(basicArmor);//<<--- the final item
+
+
+
+//================= Classes ==============================>>>>>>>
+
 
 Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Fighter",
@@ -78,6 +114,18 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
         arcana: 2,
         charisma: 5,
         luck: 5,
+    },
+    equipment: { //items added here
+        body: cheapArmor,
+        mainHand: cheapSword,
+        offhand: null,
+        boots: shoddyBoots,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
     },
     sightRadius: 5,
     speed: 800,

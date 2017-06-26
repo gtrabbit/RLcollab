@@ -329,9 +329,6 @@ Game.Entity.prototype.getModifiers = function(char){
     }
     total += this.getEquipmentBonuses(char);
     total += this.checkPassives(char);
-    if (char === "DoubleSwing"){
-        console.log(total);
-    }
     return total;
 
 };
