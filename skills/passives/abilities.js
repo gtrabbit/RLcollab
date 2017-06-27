@@ -41,6 +41,65 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		}
 	}
 	
+	Game.Abilities["Light Armor"] = class LightArmor extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.LightDefense = Math.round(this.level * 0.5);
+				this.Evasion = Math.round(this.level * 3);
+				this.Speed = (this.level * 50);
+			} else { //static bonuses for Mastery
+				this.LightDefense = 6;
+				this.Evasion = 35;
+				this.Speed = 550;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Medium Armor"] = class MediumArmor extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.MediumDefense = Math.round(this.level * 0.7);
+				this.Evasion = Math.round(this.level * 2);
+				this.Speed = (this.level * 20);
+				this.ArmorPenalty = (this.level - 3);
+			} else { //static bonuses for Mastery
+				this.MediumDefense = 8;
+				this.Evasion = 24;
+				this.Speed = 220;
+				this.ArmorPenalty = -35;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Heavy Armor"] = class HeavyArmor extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.HeavyDefense = Math.round(this.level * 1);
+				this.Speed = (this.level * 10);
+				this.ArmorPenalty = (this.level - 5);
+				this.ResistPhysical = (this.level * 2);
+			} else { //static bonuses for Mastery
+				this.MediumDefense = 8;
+				this.Speed = 110;
+				this.ArmorPenalty = -70;
+				this.ResistPhysical = 30;
+			}
+			
+
+		}
+	}
+	
+	
 	Game.Abilities["Combat Brutality"] = class CombatBrutality extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
@@ -61,6 +120,8 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		}
 	}
 	
+	
+	
 	Game.Abilities["Assassination"] = class Assassination extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
@@ -77,6 +138,64 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 				this.StabBonus= 14;
 				this.Disembowel = 11;
 				this.StealthBonus = 11;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Marksmanship"] = class Marksmanship extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.RangedCritical = (this.level * 0.5);
+				this.RangedDamageModifier = (this.level * 0.5);
+				this.AccuracyBonus = (this.level * 3);
+			} else { //static bonuses for Mastery
+				this.RangedCritical = 11;
+				this.RangedDamageModifier = 11;
+				this.AccuracyBonus = 35;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Throwing"] = class Throwing extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.RangedCritical = (this.level * 0.5);
+				this.RangedDamageModifier = (this.level * 0.5);
+				this.AccuracyBonus = (this.level * 3);
+				this.ThrowStat = (this.level * 4);
+			} else { //static bonuses for Mastery
+				this.RangedCritical = 11;
+				this.RangedDamageModifier = 11;
+				this.AccuracyBonus = 35;
+				this.ThrowStat = 50;
+			}
+			
+
+		}
+	}
+	
+		Game.Abilities["Awareness"] = class Awareness extends Game.Abilities['Ability']{
+
+		constructor(points, name, affinity){
+			super(points, name, affinity);
+			if (this.level !== "Master"){
+				this.SeeInvis = (this.level * 3);
+				this.Evasion = (this.level * 3);
+				this.SightRadius = (this.level * 0.4);
+
+			} else { //static bonuses for Mastery
+				this.SeeInvis = 35;
+				this.Evasion = 30;
+				this.SightRadius = 5;
+
 			}
 			
 
@@ -102,15 +221,15 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	Game.Abilities["Tenacity"] = class Tenacity extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
-			super(points, name, affinity, 15);
+			super(points, name, affinity);
 			if (this.level !== "Master"){
 				this.ResistPhysical = Math.round(this.level * 1.3);
-				this.HpPerLevel = Math.round(this.level * 1.4);
+				this.MaxHP = Math.round(this.level * 2);
 				this.DefenseValue = Math.round(this.level * 2);
 				this.RegenBonus = this.level;
 			} else { //static bonuses for Mastery
 				this.ResistPhysical = 25;
-				this.HpPerLevel = 25;
+				this.MaxHP = 25;
 				this.DefenseValue = 35;
 				this.RegenBonus = 18;
 			}

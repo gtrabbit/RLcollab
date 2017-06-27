@@ -21,6 +21,13 @@ Game.EntityRepository.define('fungus', {
         charisma: 5,
         luck: 5,
     },
+		abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 1],
+		["Marksmanship", 0, 1],
+    ],
+	attackValue: 3,
+	defenseValue: 3,
     speed: 250,
 	rarity: 50,
     mixins: [Game.Mixins.FungusActor,
@@ -79,6 +86,12 @@ Game.EntityRepository.define('slime', {
         charisma: 1,
         luck: 5
     },
+	 abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 3],
+    ],
+	attackValue: 3,
+	defenseValue: 2,
     tasks: ['hunt', 'wander'],
     mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,
@@ -129,6 +142,8 @@ Game.EntityRepository.define('newt', {
         charisma: 5,
         luck: 5,
     },
+	attackValue: 3,
+	defenseValue: 1,
     mixins: [Game.Mixins.TaskActor, 
              Game.Mixins.Attacker,
              Game.Mixins.Destructible,
@@ -155,7 +170,14 @@ Game.EntityRepository.define('kobold', {
         luck: 5,
     },
 	speed: 300,
+	attackValue: 2,
+	defenseValue: 1,
     sightRadius: 5,
+	
+	abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 1]
+    ],
     tasks: ['hunt', 'wander'],
     mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,
@@ -171,7 +193,7 @@ Game.EntityRepository.define('orc', {
 	maxHP: 12,
 	rarity: 65,
 	stats: {
-        strength: 7,
+        strength: 8,
         vitality: 6,
         willpower: 3,
         dexterity: 4,
@@ -182,9 +204,11 @@ Game.EntityRepository.define('orc', {
         luck: 5,
     },
 	sightRadius: 5,
+	attackValue: 4,
+	defenseValue: 2,
     abilities: [
         ["Combat Mastery", 0, 1],
-        ["Tenacity", 0, 1]
+        ["Tenacity", 0, 1],
     ],
 	tasks: ['hunt', 'wander'],
 	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
@@ -198,7 +222,7 @@ Game.EntityRepository.define('ogre', {
 	name: 'ogre',
 	character: 'O',
 	foreground: 'Chocolate',
-	maxHP: 18,
+	maxHP: 20,
 	rarity: 30,
 	stats: {
         strength: 13,
@@ -211,7 +235,14 @@ Game.EntityRepository.define('ogre', {
         charisma: 2,
         luck: 5,
     },
+	attackValue: 6,
+	defenseValue: 3,
 	sightRadius: 5,
+	    abilities: [
+        ["Combat Mastery", 0, 2],
+        ["Tenacity", 0, 3],
+		["Combat Brutality", 0, 1],
+    ],
 	tasks: ['hunt', 'wander'],
 	mixins: [Game.Mixins.TaskActor, Game.Mixins.Sight,
              Game.Mixins.Attacker, Game.Mixins.Destructible,

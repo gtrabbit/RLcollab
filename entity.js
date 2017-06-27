@@ -169,16 +169,23 @@ Game.Entity.prototype.getPerception = function(){
 }
 		
 	Game.Entity.prototype.getThrowStat = function(){
-	   let base = this.getDexterity() *2;
+	   let base = Math.round( (this.getDexterity() *1.2) + (this.getPerception() *1.7) );
 		
 	   base += this.getModifiers('ThrowStat');
         return base
 }
 		
 	Game.Entity.prototype.getMeleeCritical = function(){
-	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 2.8) - 3) + (this.getLuck() *1.5) / 2) -1);
+	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 5) - 3) + (this.getPerception() *2) / 5) -1);
 		
 	   base += this.getModifiers('MeleeCritical');
+        return base
+}
+
+	Game.Entity.prototype.getRangedCritical = function(){
+	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 5) - 3) + (this.getPerception() *2) / 5) -1);
+		
+	   base += this.getModifiers('RangedCritical');
         return base
 }
 		
@@ -186,6 +193,13 @@ Game.Entity.prototype.getPerception = function(){
 	   let base = Math.ceil( ( (this.getStrength() *1.5) / 2 ) );
 		
 	   base += this.getModifiers('MeleeCriticalDamageBonus');
+        return base
+}
+
+	Game.Entity.prototype.getRangedCriticalDamageBonus = function(){
+	   let base = Math.ceil( ( (this.getPerception() *1.5) / 2 ) );
+		
+	   base += this.getModifiers('RangedCriticalDamageBonus');
         return base
 }
 		

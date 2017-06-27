@@ -10,7 +10,7 @@ Game.Items.WeaponPrefix.Material.Bone = {
 	weight: 0.5,
 	modifies: {
 	speed: 30,
-	DoubleSwing: 20,
+	DoubleSwing: 5,
 }
 }
 
@@ -360,7 +360,7 @@ Game.Items.WeaponPrefix.Classy.Thief = {
 }
 
 Game.Items.ArmorPrefix.Classy.Thief = {
-	prefix: "theif's", 
+	prefix: "thief's", 
 	modifies: {
 		dexterity: 3,
 		Evasion: 15,
@@ -432,7 +432,7 @@ Game.Items.ArmorPrefix.Classy.Ninja = {
 
 Game.Items.WeaponPrefix.Adjective.Sharp = {
 	prefix: "sharp",
-	rarity: 15,
+	rarity: 20,
 	modifies: {
 		MeleeCritical: 3, 
 	}

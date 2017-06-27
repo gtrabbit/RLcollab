@@ -14,6 +14,7 @@ affinities
 treasure chests
 boss monster loot
 master shield mastery and guaridan combat, lets you block spells, to a degree
+***Some kind of stat max for current level, like elona and potential for stats. This might actually be brilliant.
 
 Items
 SCROLLS:
