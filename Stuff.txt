@@ -39,6 +39,7 @@ active skills
 Classes
 
 Bugs
+*** Adding this paladin class below breaks the game where it wont even launch, idk if its because it can't fit that many on screen or what 
 
 
 
