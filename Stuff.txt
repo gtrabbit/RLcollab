@@ -39,3 +39,59 @@ active skills
 Classes
 
 Bugs
+
+
+
+-- code to add that currently breaks game
+
+Game.classTemplates.PaladinTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Paladin",
+	stats: {
+        strength: 6,
+        vitality: 6,
+        willpower: 6,
+        dexterity: 4,
+		perception: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 10,
+        luck: 5,
+
+    },
+		equipment: {
+        body: cheapArmor,
+        mainHand: cheapSword,
+        offhand: null,
+        boots: shoddyBoots,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
+    },
+    items: [
+        cheapArmor,
+        cheapSword,
+        shoddyBoots
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 1],
+		["Combat Brutality", 0, 1.5],
+		["Assassination", 0, 5],
+		["Mysticism", 0, 2],
+		["Shield Mastery", 0, 1],
+		["Guardian Combat", 0, 1],
+		["Readiness", 0, 4],
+		["Sword", 0, 1],
+		["Bow", 0, 2.6],
+		["Axe", 0, 1],
+		["Mace", 0, 1],
+		["Dagger", 0, 5],
+		["Ambidexterity", 0, 2.5],
+		["Meditation", 0, 2],
+    ],
+	hpPerLevel: 5,
+    description: "On a holy quest to save his order, the steadfast paladin is determined"
+})
