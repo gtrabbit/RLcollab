@@ -136,8 +136,9 @@ Game.Entity.prototype.getPerception = function(){
 
 	Game.Entity.prototype.getDoubleSwing = function(){
 		let base = Math.round( (this.getStrength() / 5) + (this.getLuck() / 3) + (this.getDexterity() / 4) );
-		
+		console.log("base is ", base);
 		base += this.getModifiers('DoubleSwing');
+        console.log("with modifiers ", base);
 		 return base
 }
 
@@ -212,7 +213,6 @@ Game.Entity.prototype.getPerception = function(){
 		
 	Game.Entity.prototype.getRegenBonus = function(){
 	   let base = Math.ceil( (this.getVitality() *2) * 0.10 );
-		
 	   base += this.getModifiers('RegenBonus');
         return base
 }
@@ -361,6 +361,9 @@ Game.Entity.prototype.getEquipmentBonuses = function(char){
         if (this._equipment[slot]){
             if (this._equipment[slot].wielderBonuses.hasOwnProperty(char)){
                 total += Number(this._equipment[slot].wielderBonuses[char]);
+            }
+            if (this._equipment[slot].bonuses.hasOwnProperty(char)){
+                total += Number(this._equipment[slot].bonuses[char]);
             }
         }
     }
