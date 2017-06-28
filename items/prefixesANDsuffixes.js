@@ -140,6 +140,60 @@ Game.Items.WeaponPrefix.Material.Steel = {
 }
 }
 
+Game.Items.WeaponPrefix.Material.Mithril = {
+	prefix: "mithril",
+	baseStatBonus: 1.7,
+	rarity: 5,
+	attackValue: 1.5,
+	weight: 1.2,
+	modifies: {
+	MeleeCriticalDamageBonus: 4,
+	MeleeDamageModifier: 4,
+		
+}
+}
+
+Game.Items.ArmorPrefix.Material.Mithril = {
+	prefix: "mithril",
+	baseStatBonus: 1.7,
+	rarity: 5,
+	attackValue: 1.3,
+	weight: 1.2,
+	modifies: {
+	MeleeCriticalDamageBonus: 4,
+	ResistPhysical: 20,
+		
+}
+}
+
+Game.Items.WeaponPrefix.Material.Etherial = {
+	prefix: "etherial",
+	baseStatBonus: 1.2,
+	rarity: -2,
+	attackValue: 1.1,
+	weight: 0.6,
+	modifies: {
+	MeleeCriticalDamageBonus: 4,
+	MagicSlayer: 8,
+	SpellPenetration: 35
+		
+}
+}
+
+Game.Items.WeaponPrefix.Material.Vorpal = {
+	prefix: "vorpal",
+	baseStatBonus: 2.5,
+	rarity: -2,
+	attackValue: 1.6,
+	weight: 1,
+	modifies: {
+	MeleeCriticalDamageBonus: 7,
+	MeleeDamageModifier: 5,
+	IgnoreArmor: 20,
+		
+}
+}
+
 Game.Items.ArmorPrefix.Material.Steel = {
 	prefix: "steel",
 	baseStatBonus: 1.2,
@@ -177,7 +231,7 @@ Game.Items.ArmorPrefix.Material.Elven = {
 Game.Items.WeaponPrefix.Material.Glass = {
 	prefix: "glass",
 	baseStatBonus: 1,
-	rarity: 12,
+	rarity: 18,
 	weight: 0.2,
 	attackValue: 0.5,
 	modifies: {
@@ -188,7 +242,7 @@ Game.Items.WeaponPrefix.Material.Glass = {
 Game.Items.ArmorPrefix.Material.Glass = {
 	prefix: "glass",
 	baseStatBonus: 1,
-	rarity: 12,
+	rarity: 18,
 	defenseValue: 0.5,
 	weight: 0.2,
 	modifies: {
@@ -440,7 +494,7 @@ Game.Items.WeaponPrefix.Adjective.Sharp = {
 
 Game.Items.WeaponPrefix.Adjective.Deadly = {
 	prefix: "deadly",
-	rarity: 8,
+	rarity: 10,
 	modifies: {
 		MeleeCritical: 5, 
 	}
@@ -453,6 +507,31 @@ Game.Items.WeaponPrefix.Adjective.Ruthless = {
 		MeleeCritical: 8, 
 	}
 }
+
+Game.Items.WeaponPrefix.Adjective.Cruel = {
+	prefix: "cruel",
+	rarity: 20,
+	modifies: {
+		MeleeDamageModifier: 2, 
+	}
+}
+
+Game.Items.WeaponPrefix.Adjective.Vicious = {
+	prefix: "vicious",
+	rarity: 10,
+	modifies: {
+		MeleeDamageModifier: 4,
+	}
+}
+
+Game.Items.WeaponPrefix.Adjective.Wicked = {
+	prefix: "wicked",
+	rarity: 3,
+	modifies: {
+		MeleeDamageModifier: 7,
+	}
+}
+
 
 Game.Items.WeaponPrefix.Adjective.swift = {
 	prefix: "swift",
