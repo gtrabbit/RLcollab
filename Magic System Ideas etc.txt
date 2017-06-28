@@ -1,0 +1,46 @@
+Theories
+
+Magic Damage
+Type - Vulnerability (+X% damage from source, defined in creature, or equipment type, resist can work the same way)
+Fire - Ice
+Water/Frost - Lightning
+Lightning - Earth
+Earth - Fire
+Holy - Nether
+Nether - Holy
+Poison/Acid - Nothing
+
+Fire School:
+
+Flare
+Range 6
+MP: 2
+Damage 5-15 + 20% SD (spell damage)
+
+Fireball
+Range 7
+MP: 5
+Damage 12-30 + 80% SD
+AOE: 4x4
+
+Meteor
+Range 9
+MP: 10
+Damage 26-50 + 100% SD
+AoE: 5x5
+
+Fire Wall
+Range 6
+MP: 6
+AoE: 1x5
+Duration: 6 rounds
+Damage: 15-25 + 50% SD
+
+Temper
+Range Self
+MP: 5
+Duration: 60 rounds
+Enchants melee weapons to do 2-5+30% SD on successful hits
+
+
+
