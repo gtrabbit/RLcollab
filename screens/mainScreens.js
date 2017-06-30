@@ -14,19 +14,30 @@ Game.Screen.startScreen = {
         let entermsg = 'Please Select a Class'
         let confirmMsg = "Press [Enter] to confirm selection"
 		display.drawText((Game.getScreenWidth() - entermsg.length)/2 ,1,"%c{yellow}" + entermsg);
-		display.drawText((Game.getScreenWidth() - confirmMsg.length)/2, (Game.getScreenHeight()/2)+5, confirmMsg);
-        for (let i = this._availableClasses.length-1; i>=0; i--){
-            let x = ( (i*12) + Game.getScreenWidth()/(this._availableClasses.length+1) )  ;
-            let y = Game.getScreenHeight()/2;
-            display.drawText(x, y, this._availableClasses[i].name);
+		
+        let yoffset = -2;
+        let y = Game.getScreenHeight()*.6;
+
+        for (let i = 0; i < this._availableClasses.length; i++){
+         
+            let x = 3 + i + (i%6) * 11;
+
+            if ( i % 6 === 0){
+                yoffset +=2;
+            }
+
+            
+        
+            display.drawText(x, y+yoffset, this._availableClasses[i].name);
             if (i === this._selectedIndex){
 
-                display.drawText(x-1, y, "%c{yellow}[");
-                display.drawText(x+this._availableClasses[i].name.length, y, "%c{yellow}]");
+                display.drawText(x-1, y+yoffset, "%c{yellow}[");
+                display.drawText(x+this._availableClasses[i].name.length, y+yoffset, "%c{yellow}]");
                 let description = this._availableClasses[i].description;
                 display.drawText((Game.getScreenWidth() - description.length)/2, (Game.getScreenHeight()/2)-5, description )
             }
         }
+        display.drawText((Game.getScreenWidth() - confirmMsg.length)/2, (Game.getScreenHeight()/2)+7+yoffset, confirmMsg);
 	},
 	handleInput: function(inputType, inputData){
         if (inputType === 'keydown'){
