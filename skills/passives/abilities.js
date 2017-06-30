@@ -270,18 +270,14 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 	}
 }
 	
-	Game.Abilities["Readiness"] = class Readiness extends Game.Abilities['Ability']{
+	Game.Abilities["Dodging"] = class Dodging extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
 			super(points, name, affinity);
 			if (this.level !== "Master"){
-				this.Evasion = Math.round(this.level * 3.8);
-				this.DefenseValue = Math.round(this.level * 2);
-				this.AccuracyBonus = 3.5 * this.level;
+				this.Evasion = Math.round(this.level * 5);
 			} else { //static bonuses for Mastery
 				this.Evasion = 60;
-				this.DefenseValue = 18;
-				this.AccuracyBonus = 60;
 			}
 			
 

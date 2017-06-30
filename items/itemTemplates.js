@@ -297,3 +297,5 @@ Game.Items.Equipment.Armor.Capes = {
 }
 }
 }
+
+//=========== Thrown =======>>

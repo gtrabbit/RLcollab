@@ -141,7 +141,7 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 4],
 		["Shield Mastery", 0, 0.8],
 		["Guardian Combat", 0, 0.8],
-		["Readiness", 0, 2.5],
+		["Dodging", 0, 1.5],
 		["Sword", 0, 1],
 		["Bow", 0, 1.3],
 		["Axe", 0, 1],
@@ -163,7 +163,6 @@ Game.classTemplates.FighterTemplate = Game.extend(Game.PlayerTemplate, {
 
 Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     name: "Rogue",
-    speed: 1400,
 	stats: {
         strength: 5,
         vitality: 4,
@@ -177,8 +176,8 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
     },
 	    equipment: {
         body: null,
-        mainHand: null,
-        offhand: null,
+        mainHand: cheapDagger,
+        offhand: cheapDagger,
         boots: null,
         bracers: null,
         leftRing: null,
@@ -188,7 +187,8 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
         helmet: null,
     },
     items: [
-
+	cheapDagger,
+	cheapDagger,
     ],
     abilities: [
         ["Combat Mastery", 0, 1],
@@ -198,7 +198,7 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 2.2],
 		["Shield Mastery", 0, 3],
 		["Guardian Combat", 0, 4],
-		["Readiness", 0, 1],
+		["Dodging", 0, 1],
 		["Sword", 0, 1],
 		["Bow", 0, 1],
 		["Axe", 0, 1],
@@ -213,7 +213,6 @@ Game.classTemplates.RogueTemplate = Game.extend(Game.PlayerTemplate, {
 		["Medium Armor", 0, 1],
 		["Heavy Armor", 0, 2],
     ],
-    sightRadius: 7,
 	hpPerLevel: 3,
     description: "A devious rogue in search of great fortune"
 
@@ -255,7 +254,7 @@ Game.classTemplates.BarbarianTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 4],
 		["Shield Mastery", 0, 2],
 		["Guardian Combat", 0, 2],
-		["Readiness", 0, 2.4],
+		["Dodging", 0, 1],
 		["Sword", 0, 1],
 		["Bow", 0, 1],
 		["Axe", 0, 1.4],
@@ -312,7 +311,7 @@ Game.classTemplates.WizardTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 1],
 		["Shield Mastery", 0, 5],
 		["Guardian Combat", 0, 5],
-		["Readiness", 0, 3],
+		["Dodging", 0, 1.5],
 		["Sword", 0, 3],
 		["Bow", 0, 2],
 		["Axe", 0, 3],
@@ -371,7 +370,7 @@ Game.classTemplates.ClericTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 1.5],
 		["Shield Mastery", 0, 1.3],
 		["Guardian Combat", 0, 1.3],
-		["Readiness", 0, 3],
+		["Dodging", 0, 1.5],
 		["Sword", 0, 1.5],
 		["Bow", 0, 3],
 		["Axe", 0, 2],
@@ -428,7 +427,7 @@ Game.classTemplates.NinjaTemplate = Game.extend(Game.PlayerTemplate, {
 		["Mysticism", 0, 2],
 		["Shield Mastery", 0, 5],
 		["Guardian Combat", 0, 4],
-		["Readiness", 0, 1],
+		["Dodging", 0, 0.7],
 		["Sword", 0, 1],
 		["Bow", 0, 1],
 		["Axe", 0, 2],
