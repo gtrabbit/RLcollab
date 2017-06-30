@@ -136,9 +136,7 @@ Game.Entity.prototype.getPerception = function(){
 
 	Game.Entity.prototype.getDoubleSwing = function(){
 		let base = Math.round( (this.getStrength() / 5) + (this.getLuck() / 3) + (this.getDexterity() / 4) );
-		console.log("base is ", base);
 		base += this.getModifiers('DoubleSwing');
-        console.log("with modifiers ", base);
 		 return base
 }
 
