@@ -446,22 +446,79 @@ Game.classTemplates.NinjaTemplate = Game.extend(Game.PlayerTemplate, {
     description: "The way of the ninja is quiet, dark, and lonely"
 })
 
-
-Game.classTemplates.NinjaThing = Game.extend(Game.PlayerTemplate, {
-    name: "Ninja2",
-    stats: {
-        strength: 5,
-        vitality: 3,
-        willpower: 5,
-        dexterity: 7,
-        perception: 9,
-        intelligence: 3,
-        arcana: 3,
-        charisma: 2,
-        luck: 3,
+Game.classTemplates.PaladinTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Paladin",
+	stats: {
+        strength: 6,
+        vitality: 6,
+        willpower: 6,
+        dexterity: 4,
+		perception: 5,
+        intelligence: 5,
+        arcana: 5,
+        charisma: 10,
+        luck: 5,
 
     },
-            equipment: {
+		equipment: {
+        body: cheapArmor,
+        mainHand: cheapSword,
+        offhand: null,
+        boots: shoddyBoots,
+        bracers: null,
+        leftRing: null,
+        rightRing: null,
+        amulet: null,
+        cape: null,
+        helmet: null,
+    },
+    items: [
+        cheapArmor,
+        cheapSword,
+        shoddyBoots
+    ],
+    abilities: [
+        ["Combat Mastery", 0, 1],
+        ["Tenacity", 0, 1],
+		["Combat Brutality", 0, 1.5],
+		["Assassination", 0, 5],
+		["Mysticism", 0, 2],
+		["Shield Mastery", 0, 1],
+		["Guardian Combat", 0, 1],
+		["Dodging", 0, 2],
+		["Sword", 0, 1],
+		["Bow", 0, 2.6],
+		["Axe", 0, 1],
+		["Mace", 0, 1],
+		["Dagger", 0, 5],
+		["Ambidexterity", 0, 2.5],
+		["Meditation", 0, 1.8],
+		["Throwing", 0, 3],
+		["Marksmanship", 0, 3],
+		["Awareness", 0, 1.6],
+		["Light Armor", 0, 3],
+		["Medium Armor", 0, 1.5],
+		["Heavy Armor", 0, 1],
+    ],
+	hpPerLevel: 5,
+    description: "On a holy quest to save his order, the steadfast paladin is determined"
+})
+
+
+Game.classTemplates.ArcherTemplate = Game.extend(Game.PlayerTemplate, {
+    name: "Archer",
+	stats: {
+        strength: 4,
+        vitality: 4,
+        willpower: 4,
+        dexterity: 11,
+		perception: 8,
+        intelligence: 4,
+        arcana: 2,
+        charisma: 3,
+        luck: 5,
+    },
+	    equipment: {
         body: null,
         mainHand: null,
         offhand: null,
@@ -472,157 +529,35 @@ Game.classTemplates.NinjaThing = Game.extend(Game.PlayerTemplate, {
         amulet: null,
         cape: null,
         helmet: null,
+		
     },
     items: [
-    
+	
     ],
     abilities: [
-        ["Combat Mastery", 0, 1],
+        ["Combat Mastery", 0, 1.5],
         ["Tenacity", 0, 2.2],
-        ["Combat Brutality", 0, 2.2],
-        ["Assassination", 0, 1],
-        ["Mysticism", 0, 2],
-        ["Shield Mastery", 0, 5],
-        ["Guardian Combat", 0, 4],
-        ["Dodging", 0, 0.7],
-        ["Sword", 0, 1],
-        ["Bow", 0, 1],
-        ["Axe", 0, 2],
-        ["Mace", 0, 2.2],
-        ["Dagger", 0, 1],
-        ["Ambidexterity", 0, 1],
-        ["Meditation", 0, 2.2],
-        ["Throwing", 2, 1],
-        ["Marksmanship", 0, 2],
-        ["Awareness", 0, 1.2],
-        ["Light Armor", 0, 1],
-        ["Medium Armor", 0, 3],
-        ["Heavy Armor", 0, 5],
+		["Combat Brutality", 0, 3],
+		["Assassination", 0, 2.5],
+		["Mysticism", 0, 3],
+		["Shield Mastery", 0, 3],
+		["Guardian Combat", 0, 4],
+		["Dodging", 0, 1],
+		["Sword", 0, 2.4],
+		["Bow", 0, 0.5],
+		["Axe", 0, 2.4],
+		["Mace", 0, 4],
+		["Dagger", 0, 1.5],
+		["Ambidexterity", 0, 3],
+		["Meditation", 0, 3],
+		["Throwing", 0, 1.6],
+		["Marksmanship", 0, 0.8],
+		["Awareness", 0, 0.8],
+		["Light Armor", 0, 1],
+		["Medium Armor", 0, 1.4],
+		["Heavy Armor", 0, 2.5],
     ],
-    hpPerLevel: 2,
-    description: "The way of the ninja is quiet, dark, and lonely"
+	hpPerLevel: 3,
+    description: "A highly skilled bowman making his way in the world"
+
 })
-
-Game.classTemplates.NinjaThing3 = Game.extend(Game.PlayerTemplate, {
-    name: "Ninja3",
-    stats: {
-        strength: 5,
-        vitality: 3,
-        willpower: 5,
-        dexterity: 7,
-        perception: 9,
-        intelligence: 3,
-        arcana: 3,
-        charisma: 2,
-        luck: 3,
-
-    },
-            equipment: {
-        body: null,
-        mainHand: null,
-        offhand: null,
-        boots: null,
-        bracers: null,
-        leftRing: null,
-        rightRing: null,
-        amulet: null,
-        cape: null,
-        helmet: null,
-    },
-    items: [
-    
-    ],
-    abilities: [
-        ["Combat Mastery", 0, 1],
-        ["Tenacity", 0, 2.2],
-        ["Combat Brutality", 0, 2.2],
-        ["Assassination", 0, 1],
-        ["Mysticism", 0, 2],
-        ["Shield Mastery", 0, 5],
-        ["Guardian Combat", 0, 4],
-        ["Dodging", 0, 0.7],
-        ["Sword", 0, 1],
-        ["Bow", 0, 1],
-        ["Axe", 0, 2],
-        ["Mace", 0, 2.2],
-        ["Dagger", 0, 1],
-        ["Ambidexterity", 0, 1],
-        ["Meditation", 0, 2.2],
-        ["Throwing", 2, 1],
-        ["Marksmanship", 0, 2],
-        ["Awareness", 0, 1.2],
-        ["Light Armor", 0, 1],
-        ["Medium Armor", 0, 3],
-        ["Heavy Armor", 0, 5],
-    ],
-    hpPerLevel: 2,
-    description: "The way of the ninja is quiet, dark, and lonely"
-})
-
-
-Game.classTemplates.NinjaThing4 = Game.extend(Game.PlayerTemplate, {
-    name: "Ninja4",
-    stats: {
-        strength: 5,
-        vitality: 3,
-        willpower: 5,
-        dexterity: 7,
-        perception: 9,
-        intelligence: 3,
-        arcana: 3,
-        charisma: 2,
-        luck: 3,
-
-    },
-            equipment: {
-        body: null,
-        mainHand: null,
-        offhand: null,
-        boots: null,
-        bracers: null,
-        leftRing: null,
-        rightRing: null,
-        amulet: null,
-        cape: null,
-        helmet: null,
-    },
-    items: [
-    
-    ],
-    abilities: [
-        ["Combat Mastery", 0, 1],
-        ["Tenacity", 0, 2.2],
-        ["Combat Brutality", 0, 2.2],
-        ["Assassination", 0, 1],
-        ["Mysticism", 0, 2],
-        ["Shield Mastery", 0, 5],
-        ["Guardian Combat", 0, 4],
-        ["Dodging", 0, 0.7],
-        ["Sword", 0, 1],
-        ["Bow", 0, 1],
-        ["Axe", 0, 2],
-        ["Mace", 0, 2.2],
-        ["Dagger", 0, 1],
-        ["Ambidexterity", 0, 1],
-        ["Meditation", 0, 2.2],
-        ["Throwing", 2, 1],
-        ["Marksmanship", 0, 2],
-        ["Awareness", 0, 1.2],
-        ["Light Armor", 0, 1],
-        ["Medium Armor", 0, 3],
-        ["Heavy Armor", 0, 5],
-    ],
-    hpPerLevel: 2,
-    description: "The way of the ninja is quiet, dark, and lonely"
-})
-
-Game.classTemplates.getAvailableClasses = function() {
-    let availableClasses = [];
-    for (let i in Game.classTemplates){
-        if (i !== "getAvailableClasses"){
-            availableClasses.push(Game.classTemplates[i]);
-        }
-    }
-        return availableClasses;
-}
-
