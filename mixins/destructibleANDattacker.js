@@ -125,18 +125,16 @@ Game.Mixins.Attacker = {
        
        //determine number of attacks
         let perc =  ROT.RNG.getPercentage()
-        console.log(this.getDoubleSwing)
-        console.log("doubleSwing is ", this.getDoubleSwing())
+      
         this.getDoubleSwing();
         while(perc < this.getDoubleSwing()){
-            console.log("double swing is ", this.getDoubleSwing())
-            console.log("perc is ", perc)
+          
             attacks++;
             //check for an offhand weapon
-            console.log(this._equipment.offhand)
+         
             if (this.hasMixin("Equipper") && this._equipment.offhand !== null){
                 if (this._equipment.offhand.EQType !== 'shield'){
-                    console.log("dualWield is ", this.getDualWield())
+                
                     if (ROT.RNG.getPercentage() < this.getDualWield()){
                         offhandAttacks++;
                     }
@@ -145,26 +143,19 @@ Game.Mixins.Attacker = {
             perc += ROT.RNG.getPercentage();
         }         
 
-        console.log(offhandAttacks)
         for (let i = attacks; i > 0; i--){
             if (this.checkHit(target, false)){
                 let damage = this.calcMeleeDamage(false);
-                console.log("mainHand hits for ", damage)
                 target.takeDamage(this, damage)
 
-            } else {
-                console.log("mainHand misses")
-            }
-
+            } 
 
             if (offhandAttacks > 0){
                 if (this.checkHit(target, true)){
                     let damage2 = this.calcMeleeDamage(true);
                     target.takeDamage(this, damage2);
-                    console.log("offhand hits for ", damage2)
-                } else {
-                    console.log("offhand misses")
-                }
+                
+                } 
             }
         }               
         }

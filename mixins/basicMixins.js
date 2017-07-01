@@ -160,7 +160,7 @@ Game.Mixins.ExperienceGainer = {
         return this._experience;
     },
     getNextLevelExperience: function() {
-        return (this._level * this._level) + (10 + this._level) ;
+        return (this._level * this._level) * (10 * this._level) ;
     },
     getStatPoints: function() {
         return this._statPoints;
