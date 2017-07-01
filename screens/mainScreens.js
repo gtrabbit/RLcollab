@@ -13,7 +13,7 @@ Game.Screen.startScreen = {
         display.clear();
         let entermsg = 'Please Select a Class'
         let confirmMsg = "Press [Enter] to confirm selection"
-		display.drawText((Game.getScreenWidth() - entermsg.length)/2 ,1,"%c{yellow}" + entermsg);
+		display.drawText((Game.getScreenWidth() - entermsg.length)/2, 1, "%c{yellow}" + entermsg);
 		
         let yoffset = -2;
         let y = Game.getScreenHeight()*.6;
@@ -26,9 +26,8 @@ Game.Screen.startScreen = {
                 yoffset +=2;
             }
 
-            
-        
             display.drawText(x, y+yoffset, this._availableClasses[i].name);
+
             if (i === this._selectedIndex){
 
                 display.drawText(x-1, y+yoffset, "%c{yellow}[");
@@ -37,6 +36,7 @@ Game.Screen.startScreen = {
                 display.drawText((Game.getScreenWidth() - description.length)/2, (Game.getScreenHeight()/2)-5, description )
             }
         }
+
         display.drawText((Game.getScreenWidth() - confirmMsg.length)/2, (Game.getScreenHeight()/2)+7+yoffset, confirmMsg);
 	},
 	handleInput: function(inputType, inputData){

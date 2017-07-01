@@ -41,6 +41,18 @@ Game.PlayerTemplate = {
 
 Game.classTemplates = {};
 
+Game.classTemplates.getAvailableClasses = function(){
+    let classes = [];
+    for (let key in Game.classTemplates){
+        if (key !== 'getAvailableClasses'){
+            classes.push(Game.classTemplates[key]);
+        }
+    }
+    console.log(classes)
+    return classes;
+}
+
+
 
 //from here, you can build classes simply by entering values.
 //I think this is all the values you can alter

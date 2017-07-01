@@ -367,7 +367,7 @@ Game.Entity.prototype.getStatusModifiers = function(char){
     if(this._statuses.length){
         this._statuses.forEach((a)=>{
             if (a.value.hasOwnProperty(char)){
-                total += a.value[char]
+                total *= (a.value[char] / 100)
                 }
             })
         
