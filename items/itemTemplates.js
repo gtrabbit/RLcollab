@@ -12,6 +12,7 @@ Game.Items.Equipment.Weapons.Daggers = {
 	foreground: 'grey',
 	attackValue: 5,
 	name: 'dagger',
+	EQsubtype: "Dagger",
 	weight: 4,
 	variance: 1,
 	bonuses: {
@@ -30,6 +31,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	foreground: 'white',
 	attackValue: 8,
 	name: 'short sword',
+	EQsubtype: "Sword",
 	weight: 4,
 	variance: 3,
 	bonuses: {   
@@ -45,6 +47,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	foreground: 'white',
 	attackValue: 14,
 	name: 'long sword',
+	EQsubtype: "Sword",
 	weight: 9,
 	variance: 4,
 	bonuses: {
@@ -58,6 +61,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	foreground: 'white',
 	attackValue: 15,
 	name: 'scimitar',
+	EQsubtype: "Sword",
 	weight: 15,
 	variance: 2,
 	bonuses: {
@@ -73,6 +77,7 @@ Game.Items.Equipment.Weapons.Swords = {
 	foreground: 'white',
 	attackValue: 24,
 	name: 'great sword',
+	EQsubtype: "Sword",
 	weight: 30,
 	variance: 6,
 	bonuses: {
@@ -91,7 +96,8 @@ Game.Items.Equipment.Weapons.Staves = {
 	character: ")",
 	foreground: 'blue',
 	attackValue: 6,
-	name: 'yew staff',
+	name: 'staff',
+	EQsubtype: "Staff",
 	weight: 6,
 	variance: 3,
 	bonuses: {   
@@ -107,6 +113,7 @@ Game.Items.Equipment.Weapons.Axes = {
 	foreground: 'brown',
 	attackValue: 4,
 	name: 'hand axe',
+	EQsubtype: "Axe",
 	weight: 5,
 	variance: 4,
 	bonuses: {
@@ -121,6 +128,7 @@ Game.Items.Equipment.Weapons.Axes = {
 	foreground: 'brown',
 	attackValue: 9,
 	name: 'broad axe',
+	EQsubtype: "Axe",
 	weight: 4,
 	variance: 8,
 	bonuses: {  

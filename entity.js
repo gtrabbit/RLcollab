@@ -54,8 +54,9 @@ Game.Entity = function(properties) {
         })
     }
     this._abilities = {};
+    this._proficiencies = {};
     this._abilityList.forEach(ability=>{
-         this._abilities[ability[0]] = new Game.Abilities[ability[0]](ability[1], ability[0], ability[2]);        
+         this._abilities[ability[0]] = new Game.Abilities[ability[0]](ability[1], ability[0], ability[2], this);        
     })
        
 
@@ -115,35 +116,35 @@ Game.Entity.prototype.getPerception = function(){
 }
 //==============getter functions for functional stats ============>>>>>>
 
-	Game.Entity.prototype.getMeleeDamageModifier = function(){
+	Game.Entity.prototype.getMeleeDamageModifier = function(weapon){
 		let base = Math.round( (this.getStrength() / 2) - 6);
-        base += this.getModifiers('MeleeDamageModifier', base);
+        base += this.getModifiers('MeleeDamageModifier', base, weapon);
         return base;
 		}
 		
-	Game.Entity.prototype.getRangedDamageModifier = function(){
+	Game.Entity.prototype.getRangedDamageModifier = function(weapon){
 	   let base = Math.round( ( (this.getDexterity() *1) / 2) - 6);
 		
-	   base += this.getModifiers('RangedDamageModifier', base);
+	   base += this.getModifiers('RangedDamageModifier', base, weapon);
         return base
 }
-	Game.Entity.prototype.getDualWield = function(){
+	Game.Entity.prototype.getDualWield = function(weapon){
 		let base = Math.round( ( (this.getDexterity() *2) / 2.6) + (this.getLuck() *1.5) / 2);
 		
-	   base += this.getModifiers('DualWield', base);
+	   base += this.getModifiers('DualWield', base, weapon);
         return base
 }
 
-	Game.Entity.prototype.getDoubleSwing = function(){
+	Game.Entity.prototype.getDoubleSwing = function(weapon){
 		let base = Math.round( (this.getStrength() / 5) + (this.getLuck() / 3) + (this.getDexterity() / 4) );
-		base += this.getModifiers('DoubleSwing', base);
+		base += this.getModifiers('DoubleSwing', base, weapon);
 		 return base
 }
 
-	Game.Entity.prototype.getParry = function(){
+	Game.Entity.prototype.getParry = function(weapon){
 		let base = Math.ceil( ( (this.getPerception() * 2.5) / 2) + (this.getDexterity() * 2) / 2);
 		
-		base += this.getModifiers('Parry', base);
+		base += this.getModifiers('Parry', base, weapon);
 		 return base
 }
 
@@ -153,17 +154,17 @@ Game.Entity.prototype.getPerception = function(){
 	   base += this.getModifiers('SpellPenetration', base);
         return base
 }
-	Game.Entity.prototype.getAccuracyBonus = function(){
+	Game.Entity.prototype.getAccuracyBonus = function(weapon){
 	   let base = Math.ceil( ( (this.getDexterity() *5.2) + 10) + (this.getPerception() *3.2) );
 		
-	   base += this.getModifiers('AccuracyBonus', base);
+	   base += this.getModifiers('AccuracyBonus', base, weapon);
         return base
 }
 			
 	Game.Entity.prototype.getSpellDamage = function(){
 	   let base = Math.round( ( ( ( (this.getIntelligence() *1.10) / 2 ) -4 ) + (this.getArcana() * 1.4) / 2) - 6 )
 		
-	   base += this.getModifiers('SpellDamage', base);
+	   base += this.getModifiers('SpellDamage', base, weapon);
         return base
 }
 		
@@ -174,31 +175,31 @@ Game.Entity.prototype.getPerception = function(){
         return base
 }
 		
-	Game.Entity.prototype.getMeleeCritical = function(){
+	Game.Entity.prototype.getMeleeCritical = function(weapon){
 	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 5) - 3) + (this.getPerception() *2) / 5) -1);
 		
-	   base += this.getModifiers('MeleeCritical', base);
+	   base += this.getModifiers('MeleeCritical', base, weapon);
         return base
 }
 
-	Game.Entity.prototype.getRangedCritical = function(){
+	Game.Entity.prototype.getRangedCritical = function(weapon){
 	   let base = Math.round( ( ( ( (this.getDexterity() *2) / 5) - 3) + (this.getPerception() *2) / 5) -1);
 		
-	   base += this.getModifiers('RangedCritical', base);
+	   base += this.getModifiers('RangedCritical', base, weapon);
         return base
 }
 		
-	Game.Entity.prototype.getMeleeCriticalDamageBonus = function(){
+	Game.Entity.prototype.getMeleeCriticalDamageBonus = function(weapon){
 	   let base = Math.ceil( ( (this.getStrength() *1.5) / 2 ) );
 		
-	   base += this.getModifiers('MeleeCriticalDamageBonus', base);
+	   base += this.getModifiers('MeleeCriticalDamageBonus', base, weapon);
         return base
 }
 
-	Game.Entity.prototype.getRangedCriticalDamageBonus = function(){
+	Game.Entity.prototype.getRangedCriticalDamageBonus = function(weapon){
 	   let base = Math.ceil( ( (this.getPerception() *1.5) / 2 ) );
 		
-	   base += this.getModifiers('RangedCriticalDamageBonus', base);
+	   base += this.getModifiers('RangedCriticalDamageBonus', base, weapon);
         return base
 }
 		
@@ -341,18 +342,18 @@ Game.Entity.prototype.setSpeed = function(speed) {
 
 
 
-Game.Entity.prototype.getModifiers = function(char, base){
+Game.Entity.prototype.getModifiers = function(char, base, equipment){
+
     let total = base;
+    total += this.checkPassives(char);
+    total += this.checkProficiencies(char, equipment);
 
     if (this._statuses.length){
-       total += ((this.getStatusModifiers(char) / 100) * total) ; 
+       total += ((this.getStatusModifiers(char) / 100) * total);
+ 
     }
-
-
     total += this.getEquipmentBonuses(char);
-    total += this.checkPassives(char);
 
-    
     return total;
 
 };
@@ -389,10 +390,11 @@ Game.Entity.prototype.getStatusModifiers = function(char, base){
 
 Game.Entity.prototype.checkPassives = function(char){
     let total = 0;
-    if (this.hasOwnProperty('_passives')){
-        for (let key in this._passives){
-            if (this._passives[key].ability.hasOwnProperty(char)){
-                total += this._passives[key].ability[char];
+    if (this.hasOwnProperty('_abilities')){
+        for (let key in this._abilities){
+            if (this._abilities[key].hasOwnProperty(char)){
+                total += this._abilities[key][char];
+                //console.log("added " + total + " to " + char + " from passives")
             }
             
         }
@@ -400,6 +402,22 @@ Game.Entity.prototype.checkPassives = function(char){
     return total;
 }
 
+Game.Entity.prototype.checkProficiencies = function(char, equipment){
+    if (equipment){
+        let EQtype = equipment.EQsubtype || EQtype;
+        for (let type in this._proficiencies){
+            if (type === EQtype && this._proficiencies[type].hasOwnProperty(char)){
+                //console.log("added " + this._proficiencies[type][char] + " to " + char + " from proficiencies")
+                return this._proficiencies[type][char];
+            }
+        }
+        return 0;
+    } else {
+        return 0;
+    }
+
+   
+}
 
 //=====================Status Stuff=========>
 

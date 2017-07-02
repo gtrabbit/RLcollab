@@ -118,23 +118,34 @@ Game.Mixins.Attacker = {
     attack: function(target){
         console.log(target);
         if (target.hasMixin('Destructible')){
+
+            let mainWeapon;
+            let offhandWeapon;
+            if (this.hasMixin("Equipper")){
+                mainWeapon = this._equipment.mainHand;
+                offhandWeapon = this._equipment.offhand;
+            } else {
+                 mainWeapon = null;
+                 offhandWeapon = null;
+            }
+
+            let profBonuses
             let sneak = this.checkSneakAttack(target);
+
 
             let attacks = 1;
             let offhandAttacks = 0;
        
        //determine number of attacks
         let perc =  ROT.RNG.getPercentage()
-      
-        this.getDoubleSwing();
-        while(perc < this.getDoubleSwing()){
+     
+        while(perc < this.getDoubleSwing(mainWeapon)){
           
             attacks++;
+
             //check for an offhand weapon
-         
             if (this.hasMixin("Equipper") && this._equipment.offhand !== null){
                 if (this._equipment.offhand.EQType !== 'shield'){
-                
                     if (ROT.RNG.getPercentage() < this.getDualWield()){
                         offhandAttacks++;
                     }
@@ -144,15 +155,15 @@ Game.Mixins.Attacker = {
         }         
 
         for (let i = attacks; i > 0; i--){
-            if (this.checkHit(target, false)){
-                let damage = this.calcMeleeDamage(false);
+            if (this.checkHit(target, mainWeapon, false)){
+                let damage = this.calcMeleeDamage(mainWeapon, false);
                 target.takeDamage(this, damage)
 
             } 
 
             if (offhandAttacks > 0){
-                if (this.checkHit(target, true)){
-                    let damage2 = this.calcMeleeDamage(true);
+                if (this.checkHit(target, offhandWeapon, true)){
+                    let damage2 = this.calcMeleeDamage(offhandWeapon, true);
                     target.takeDamage(this, damage2);
                 
                 } 
@@ -171,28 +182,22 @@ Game.Mixins.Attacker = {
     },
 
 
-    calcMeleeDamage(offhand){
+    calcMeleeDamage(weapon, offhand){
         let modifier = 1;
-        let weapon;
-        if (offhand){
-            modifier =  this.getDualWield() * 0.01;
-           if (this.hasMixin('Equipper')){
-                weapon = this._equipment.offhand;
-           }
-        } else {
-            if (this.hasMixin('Equipper')){
-                weapon = this._equipment.mainHand;
-            }
-        }
-        let damage = Math.max(0, this.getMeleeDamageModifier());
+        if (offhand && weapon){
+            modifier =  this.getDualWield(weapon) * 0.01;  
+        } 
+
+        let damage = Math.max(0, this.getMeleeDamageModifier(weapon));
+        damage += Math.max(0, this.checkProficiencies('AttackValue', weapon))
         if (weapon){
             damage += weapon.getAttackValue() || 0;
         } 
 
-        if ((ROT.RNG.getPercentage() * modifier ) < (this.getFlatCrit() + this.getMeleeCritical())){
+        if ((ROT.RNG.getPercentage() * modifier ) < (this.getFlatCrit() + this.getMeleeCritical(weapon))){
             Game.sendMessage(this, "A critical hit!");
             damage *= 1.5;
-            damage += this.getMeleeCriticalDamageBonus();
+            damage += this.getMeleeCriticalDamageBonus(weapon);
         }
 
         damage *= modifier;
@@ -200,14 +205,14 @@ Game.Mixins.Attacker = {
 
     },
 
-    checkHit(target, offhand){
+    checkHit(target, weapon, offhand){
 
         let perc = ROT.RNG.getPercentage()
         if (offhand){
-            perc *= (this.getDualWield() * 0.01)
+            perc *= (this.getDualWield(weapon) * 0.01)
         }
 
-        if (((perc + this.getAccuracyBonus()) > target.getEvasion()) +target.getFlatEvade()){
+        if (((perc + this.getAccuracyBonus(weapon)) > target.getEvasion()) +target.getFlatEvade()){
             return true;
         } else {
             Game.sendMessage(this, 'Your attack has missed!', [this.getName()]);

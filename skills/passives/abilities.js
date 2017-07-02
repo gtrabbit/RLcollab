@@ -1,12 +1,13 @@
 Game.Abilities = {};
 
 Game.Abilities.Ability = class Ability{
-	constructor(points, name, affinity, maxLevel){
+	constructor(points, name, affinity, entity, maxLevel){
+			this.entity = entity;
 			this.name = name;
 			this.totalPoints = points;
 			this.maxLevel = maxLevel || 10;
-			this.affinity = affinity
-			this.progression = Game.Abilities.levelProgression(this.maxLevel, this.affinity);
+			this.affinity = affinity;
+			this.progression = Game.Abilities.levelProgressionExponential(this.maxLevel, this.affinity);
 			this.level = this.getLevel(this.totalPoints)
 			this.level === -1 ? this.level = "Master" : {}
 			this.toNext = Math.abs(this.totalPoints - this.progression[this.level])
@@ -17,6 +18,29 @@ Game.Abilities.Ability = class Ability{
 		}
 }
 
+
+
+Game.Abilities.levelProgressionExponential = function(maxLevel, affinity){
+	let seq = [Math.round(0+affinity), Math.round(0+affinity+affinity)];
+
+	for (let i=1; i<maxLevel; i++){
+		let cur = Math.round(seq[i] + i + (i * affinity))
+		seq.push(cur);
+	}
+
+	let result = seq.slice(1);
+	return result
+}
+
+Game.Abilities.levelProgressionLinear = function(maxLevel, affinity){
+	let prog = [];
+	for (let i=1; i<=maxLevel; i++){
+		prog.push(i * (2+affinity));
+	}
+	return prog;
+}
+
+//====================Abilities=====================>>>>
 
 
 Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['Ability']{
@@ -284,103 +308,7 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 		}
 	}
 
-	Game.Abilities["Sword"] = class Sword extends Game.Abilities['Ability']{
 
-		constructor(points, name, affinity){
-			super(points, name, affinity);
-			if (this.level !== "Master"){
-				this.ParryBonus = this.level;
-				this.DoubleSwing = this.level;
-				this.AccuracyBonus = 3 * this.level;
-
-			} else { //static bonuses for Mastery
-				this.ParryBonus = 15;
-				this.DoubleSwing = 12;
-				this.AccuracyBonus = 50;
-			}
-			
-
-		}
-	}
-	
-	Game.Abilities["Bow"] = class Bow extends Game.Abilities['Ability']{
-
-		constructor(points, name, affinity){
-			super(points, name, affinity);
-			if (this.level !== "Master"){
-				this.PiercingBonus = this.level;
-				this.DoubleSwing = this.level;
-				this.AccuracyBonus = 3 * this.level;
-
-			} else { //static bonuses for Mastery
-				this.PiercingBonus = 15;
-				this.DoubleSwing = 12;
-				this.AccuracyBonus = 50;
-			}
-			
-
-		}
-	}
-	
-	Game.Abilities["Axe"] = class Axe extends Game.Abilities['Ability']{
-
-		constructor(points, name, affinity){
-			super(points, name, affinity);
-			if (this.level !== "Master"){
-				this.CleavingBonus = this.level;
-				this.DoubleSwing = this.level;
-				this.AccuracyBonus = 3 * this.level;
-
-			} else { //static bonuses for Mastery
-				this.CleavingBonus = 15;
-				this.DoubleSwing = 12;
-				this.AccuracyBonus = 50;
-			}
-			
-
-		}
-	}
-	
-		Game.Abilities["Mace"] = class Mace extends Game.Abilities['Ability']{
-
-		constructor(points, name, affinity){
-			super(points, name, affinity);
-			if (this.level !== "Master"){
-				this.BashBonus = this.level;
-				this.DoubleSwing = this.level;
-				this.AccuracyBonus = 3 * this.level;
-
-			} else { //static bonuses for Mastery
-				this.BashBonus = 15;
-				this.DoubleSwing = 12;
-				this.AccuracyBonus = 50;
-			}
-			
-
-		}
-	}
-	
-	Game.Abilities["Dagger"] = class Dagger extends Game.Abilities['Ability']{
-
-		constructor(points, name, affinity){
-			super(points, name, affinity);
-			if (this.level !== "Master"){
-				this.StabBonus = this.level;
-				this.DoubleSwing = this.level;
-				this.AccuracyBonus = 3 * this.level;
-				this.CriticalDamageBonus = this.level;
-
-			} else { //static bonuses for Mastery
-				this.StabBonus = 15;
-				this.DoubleSwing = 12;
-				this.AccuracyBonus = 50;
-				this.CriticalDamageBonus = 11;
-			}
-			
-
-		}
-	}
-	
 	Game.Abilities["Ambidexterity"] = class Ambidexterity extends Game.Abilities['Ability']{
 
 		constructor(points, name, affinity){
@@ -426,19 +354,6 @@ Game.Abilities["Combat Mastery"] = class CombatMastery extends Game.Abilities['A
 
 
 
-
-
-Game.Abilities.levelProgression = function(maxLevel, affinity){
-	let seq = [Math.round(0+affinity), Math.round(0+affinity+affinity)];
-
-	for (let i=1; i<maxLevel; i++){
-		let cur = Math.round(seq[i] + i + (i * affinity))
-		seq.push(cur);
-	}
-
-	let result = seq.slice(1);
-	return result
-}
 
 
 
