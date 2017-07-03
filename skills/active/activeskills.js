@@ -49,7 +49,7 @@ Game.Skills.Bash = {
 	name: 'Bash',
 	coolDownDuration: 15,
 	costs: {
-		Stamina: 20
+		Stamina: 25
 	},
 	activateMsg: "You attempt to bash your target"
 } //incomplete
@@ -66,6 +66,21 @@ Game.Skills.Regenerate = {
 		let level = this[args[0]];
 		let actor = this[args[1]];
 		Game.StatusEffects.makeStatus('regen', level, actor);
+	}
+}
+
+Game.Skills.Bless = {
+	name: 'Bless',
+	coolDownDuration: 25,
+	costs: {
+		Stamina: 20,
+	},
+	activateMsg: "You are blessed",
+	args: ["level", "actor"],
+	activate: function(args){
+		let level = this[args[0]];
+		let actor = this[args[1]];
+		Game.StatusEffects.makeStatus('bless', level, actor);
 	}
 }
 
@@ -93,3 +108,32 @@ Game.Skills.FlameBurst = {
 		return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), 7, true);
 	}
 }
+
+Game.Skills.CorruptionWave = {
+name: "Wave of Corruption",
+coolDownDuration: 20,
+costs: {
+
+},
+activateMsg: "you conjure a wave of corruption",
+args: ['level', 'actor'],
+activate: function(args){
+let actor = this[args[1]];
+let level = this[args[0]];
+level += Math.round(actor.getArcana() / 5)
+let targets = this.getTargets(actor, level);
+targets.forEach((a)=>{
+if (a.hasMixin('Destructible')){
+let damage = level * 2;
+let msg = "wave of corruption"
+a.takeDamage(actor, damage, msg)
+Game.StatusEffects.makeStatus('blindness', level, a)
+Game.StatusEffects.makeStatus('weakness', level, a)
+}
+})
+},
+getTargets: function(actor, level){
+return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), level + 2, true);
+}
+}
+
