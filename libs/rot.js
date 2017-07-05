@@ -1059,7 +1059,7 @@ ROT.Display.Rect.prototype._drawWithCache = function(data, clearBefore) {
 		canvas.height = this._spacingY;
 		ctx.fillStyle = bg;
 		ctx.fillRect(b, b, canvas.width-b, canvas.height-b);
-		
+		 
 		if (ch) {
 			ctx.fillStyle = fg;
 			ctx.font = this._context.font;

@@ -7,15 +7,17 @@ p{
 
 }
 
-
+body{
+	margin: 0;
+	background-color: black;
+}
 
 .allScreens{
 	display: flex;
 	margin: auto ;
-	width: 90%;
 	height: 100vh;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	counter-reset: skillIcon;
 }
 
@@ -45,7 +47,7 @@ p{
 
 .skillBar{
 	color: white;
-	height: 540px;
+	height: 100vh;
 	min-width: 60px;
 	max-width: 180px;
 	background-color: rgba(50,50,50,1);

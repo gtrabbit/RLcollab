@@ -107,7 +107,7 @@ Game.Skills.Templates.FlameBurst = {
 
 Game.Skills.Templates.CorruptionWave = {
 	name: "Wave of Corruption",
-	coolDownDuration: 20,
+	coolDownDuration: -1,
 	costs: {
 		MP: 10
 	},
