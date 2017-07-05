@@ -16,7 +16,7 @@ Game.StatusEffects = function(status){
 Game.StatusEffects.poison = function(multi){
 	this.name = 'poison';
 	this.value = {
-		RegenBonus: -25 - (multi || 0),
+		RegenBonus: -10 - (multi || 0),
 		};
 	this.duration = 5 * (multi || 1);
 }
@@ -35,7 +35,7 @@ Game.StatusEffects.weakness = function(multi){
 	this.name = 'blindness';
 	this.value = {
 		sightRadius: -70,
-		AccuracyBonus: -75
+		AccuracyBonus: -75,
 		};
 	this.duration = 5
 }
@@ -61,7 +61,7 @@ Game.StatusEffects.weakness = function(multi){
 Game.StatusEffects.daze = function(multi){
 	this.name = 'daze';
 	this.value = {AccuracyBonus: -50,
-		speed: -50,
+		speed: -30,
 	};
 	this.duration = 4 + (multi || 0);
 }
@@ -70,15 +70,15 @@ Game.StatusEffects.daze = function(multi){
 Game.StatusEffects.bless = function(multi){
 	this.name = 'bless';
 	this.value = {strength: +30,
-		dexterity: +30, 
-		vitality: +30, 
+		dexterity: 30, 
+		vitality: 30, 
 	};
 	this.duration = 6
 }
 
 Game.StatusEffects.haste = function(multi){
 	this.name = 'haste';
-	this.value = {speed: +30 + (multi || 0),
+	this.value = {speed: 30 + (multi || 0),
 	};
 	this.duration = 6 + (multi || 0);
 }
@@ -101,10 +101,10 @@ Game.StatusEffects.slow = function(multi){
 
 Game.StatusEffects.enrage = function(multi){
 	this.name = 'enrage';
-	this.value = {speed: +25 (multi || 0),
-		strength: +35 + (multi || 0),
-		dexterity: +35 + (multi || 0),
-		DefenseValue: -35 (multi || 0),
+	this.value = {speed: 25 (multi || 0),
+		strength: 35 + (multi || 0),
+		dexterity: 35 + (multi || 0),
+		DefenseValue: -35 - (multi || 0),
 	};
 	this.duration = 7 + (multi || 0);
 }
@@ -112,7 +112,7 @@ Game.StatusEffects.enrage = function(multi){
 Game.StatusEffects.regen = function(multi){
 	this.name = "regen";
 	this.value = {
-		RegenBonus: +30 + (multi || 0),
+		RegenBonus: 30 + (multi || 0),
 	};
 	this.duration = 10 + (multi || 1);
 }

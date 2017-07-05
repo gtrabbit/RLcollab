@@ -56,4 +56,7 @@ Unholy Strength (power, unholy)
 Summon imp (summon, unholy, demonic)
 Pentagram (unholy, fire) - fire damage for all targets that stand in it
 
+to recap, gods give spell school bonuses that vary per skill level, and spell school bonuses unlock spells that you can change in town, and the spells you CAN unlock are effected by equipment bonuses (+ fire etc), and REQUIRE you to have them the requirements in place to actually cast
+
+
 

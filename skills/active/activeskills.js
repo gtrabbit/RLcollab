@@ -7,9 +7,9 @@ Game.Skills.Templates = {};
 
 Game.Skills.Templates.Run = {
 	name: 'Run',
-	coolDownDuration: 10,
+	coolDownDuration: 30,
 	costs: {
-		Stamina: 20
+		Stamina: 40
 	},
 	activateMsg: "You begin running",
 	activate: function(){
@@ -18,11 +18,24 @@ Game.Skills.Templates.Run = {
 	}
 }
 
+Game.Skills.Templates.Berserk = {
+	name: 'Berserk',
+	coolDownDuration: -1,
+	costs: {
+		Stamina: 50
+	},
+	activateMsg: "You go berserk!",
+	activate: function(){
+		this.extractCosts();
+		Game.StatusEffects.makeStatus('enrage', this.level, this.actor);	
+	}
+}
+
 Game.Skills.Templates.Regenerate = {
 	name: 'Regenerate',
-	coolDownDuration: 25,
+	coolDownDuration: -1,
 	costs: {
-		Stamina: 20,
+		MP: 8,
 	},
 	activateMsg: "You begin healing faster",
 	activate: function(){
@@ -33,9 +46,9 @@ Game.Skills.Templates.Regenerate = {
 
 Game.Skills.Templates.Bless = {
 	name: 'Bless',
-	coolDownDuration: 25,
+	coolDownDuration: -1,
 	costs: {
-		Stamina: 20,
+		MP: 8,
 	},
 	activateMsg: "You are blessed",
 	activate: function(){
@@ -50,9 +63,9 @@ Game.Skills.Templates.Bless = {
 
 Game.Skills.Templates.WhirlwindAttack = {
 	name: 'Whirlwind Attack',
-	coolDownDuration: 20,
+	coolDownDuration: -1,
 	costs: {
-		Stamina: 40
+		Stamina: 30
 	},
 	activateMsg: "You perform a whirlwind attack",
 	targetingType: 'AoEAroundCaster',
@@ -79,9 +92,9 @@ Game.Skills.Templates.WhirlwindAttack = {
 
 Game.Skills.Templates.FlameBurst = {
 	name: "Flame Burst",
-	coolDownDuration: 20,
+	coolDownDuration: -1,
 	costs: {
-		Stamina: 5
+		MP: 13
 	},
 	activateMsg: "You send out a wave of flames",
 	targetingType: 'AoEAroundCaster',
@@ -147,9 +160,9 @@ Game.Skills.Templates.CorruptionWave = {
 
 Game.Skills.Templates.Bash = {
 	name: 'Bash',
-	coolDownDuration: 15,
+	coolDownDuration: -1,
 	costs: {
-		Stamina: 25
+		Stamina: 15
 	},
 	activateMsg: "You attempt to bash your target",
 	targetingType: 'singleTarget',
@@ -164,6 +177,34 @@ Game.Skills.Templates.Bash = {
         let callback = (target)=>{
 			Game.sendMessage(this.actor, this.activateMsg)
 			let msg = "bash"
+			// add daze somehow to this: target.getOccupant().takeDamage(this.actor, damage, msg)
+			this.extractCosts();		
+		}
+		let damage = (this.level + 1) * 5;
+		this.getTargets(this.actor, this.targetingProps, callback);
+		Game.StatusEffects.makeStatus('daze', this.level, this.actor);	
+	}
+}
+
+Game.Skills.Templates.MagicDart = {
+	name: 'Magic Dart',
+	coolDownDuration: -1,
+	costs: {
+		MP: 5
+	},
+	activateMsg: "You cast Magic Dart",
+	targetingType: 'singleTarget',
+	determineTargetingProps: function(actor, level){
+		return {
+			maxRange: 6,
+			allowSelfTarget: false,
+			canTargetGround: false
+		}
+	},
+	activate: function(){
+        let callback = (target)=>{
+			Game.sendMessage(this.actor, this.activateMsg)
+			let msg = "magic dart"
 			target.getOccupant().takeDamage(this.actor, damage, msg)
 			this.extractCosts();		
 		}
@@ -172,5 +213,32 @@ Game.Skills.Templates.Bash = {
 	}
 }
 
+Game.Skills.Templates.Iceshard = {
+	name: 'Ice Shard',
+	coolDownDuration: -1,
+	costs: {
+		MP: 7
+	},
+	activateMsg: "You cast Ice Shard",
+	targetingType: 'singleTarget',
+	determineTargetingProps: function(actor, level){
+		return {
+			maxRange: 6,
+			allowSelfTarget: false,
+			canTargetGround: false
+		}
+	},
+	activate: function(){
+        let callback = (target)=>{
+			Game.sendMessage(this.actor, this.activateMsg)
+			let msg = "ice shard"
+			target.getOccupant().takeDamage(this.actor, damage, msg)
+			this.extractCosts();
+		}
+		let damage = (this.level + 1) * 5;
+		this.getTargets(this.actor, this.targetingProps, callback);
+		//somehow add chilled to the target: Game.StatusEffects.makeStatus('chilled', this.level, this.actor);
+	}
+}
 
 
