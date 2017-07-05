@@ -331,7 +331,7 @@ Game.Entity.prototype.getSkills = function(){
 
 //================Modify/Set Vitals ======================>>>>
 Game.Entity.prototype.modifyStamina = function(amount){
-    this._stamina += amount;
+    this._stamina = Math.min(this._stamina + amount, this.getMaxStamina());
 }
 
 
@@ -384,7 +384,6 @@ Game.Entity.prototype.getEquipmentBonuses = function(char){
             }
         }
     }
-
     return total;
 }
 

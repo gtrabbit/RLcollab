@@ -127,7 +127,7 @@ Game.Skills.Templates.CorruptionWave = {
 		let damage = (this.level + Math.round(this.actor.getArcana() / 5)) * 2;
 		targets.forEach((a)=>{
 			if (a.hasMixin('Destructible')){
-				a.takeDamage(actor, damage, msg)
+				a.takeDamage(this.actor, damage, msg)
 				Game.StatusEffects.makeStatus('blindness', this.level, a)
 				Game.StatusEffects.makeStatus('weakness', this.level, a)
 			}
