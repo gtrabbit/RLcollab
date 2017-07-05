@@ -14,6 +14,42 @@ Game.Skills.renderUI = function(inCoolDown){
 
 }
 
+Game.Skills.extractCosts = function(){
+	this.inCoolDown = true;
+	for (let key in this.costs){
+		let modifier = "modify" + key;
+		this.actor[modifier](-this.costs[key]);
+	}
+
+}
+
+Game.Skills.targeting = {
+	singleTarget: function(actor, properties, callback){
+		let offsets = Game.Screen.playScreen.getScreenOffsets();
+        Game.Screen.singleProjectile.setup(actor,
+                    actor.getX(), actor.getY(),
+                    offsets.x, offsets.y, properties, callback);
+        Game.Screen.playScreen.setSubScreen(Game.Screen.singleProjectile);
+	},
+	AoEAroundCaster: function(actor, props){
+		return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), props.radius, props.excludeCenter)
+	}
+}
+
+Game.Skills.getAvailableSkills = function(){
+	let skillsArr = [];
+	for (key in Game.Skills.Templates){
+		skillsArr.push(Game.Skills.Templates[key])
+	}
+	return skillsArr;
+}
+
+Game.Skills.GiveAllSkillsAtLevelOne = function(){
+	return Game.Skills.getAvailableSkills().map(function(a){
+		return [a, 1]
+	})
+}
+
 Game.Skill = class skill {
 	constructor(skill, actor, level){
 		this.title = skill.name;
@@ -27,12 +63,17 @@ Game.Skill = class skill {
 		this.getTargets = skill.getTargets;
 		this.level = level;
 		this.activateMsg = skill.activateMsg;
-		this.activateArgs = skill.args;
+		this.extractCosts = Game.Skills.extractCosts
+		if (skill.hasOwnProperty('determineTargetingProps')){
+			this.targetingProps = skill.determineTargetingProps(this.actor, this.level);
+		}
 		if (this.actor.hasMixin('PlayerActor')){
 			this.makeIcon();
 			this.renderUI = Game.Skills.renderUI;
-		}	
-
+		}
+		if (skill.hasOwnProperty('targetingType')){
+			this.getTargets = Game.Skills.targeting[skill.targetingType];
+		}
 	}
 	makeIcon(){
 		let UI = document.createElement('div');
@@ -55,15 +96,12 @@ Game.Skill = class skill {
 				return "Insufficient " + key;
 			}
 		}
-		this.inCoolDown = true;
-		for (let key in this.costs){
-			let modifier = "modify" + key;
-			this.actor[modifier](-this.costs[key]);
-		}
-		this.activate(this.activateArgs);		
-		return this.activateMsg;		
+
+		this.activate();
+		return ""			
 	}
 
+	
 	coolDown(){
 		this.timer++
 		if (this.timer > this.coolDownDuration){

@@ -307,7 +307,7 @@ Game.Entity.prototype.getSpeed = function() {
 Game.Entity.prototype.getStamina = function(){
     let base = this._stamina;
 
-     base += this.getModifiers('stamina', base);
+    base += this.getModifiers('stamina', base);
     return base
 }
 
@@ -344,16 +344,29 @@ Game.Entity.prototype.setSpeed = function(speed) {
 
 Game.Entity.prototype.getModifiers = function(char, base, equipment){
 
-    let total = base;
+    let total = 0;
     total += this.checkPassives(char);
+    //  if (this.hasMixin('PlayerActor')){
+    //     console.log("after passives", char, total);
+    // }
     total += this.checkProficiencies(char, equipment);
 
-    if (this._statuses.length){
-       total += ((this.getStatusModifiers(char) / 100) * total);
- 
-    }
-    total += this.getEquipmentBonuses(char);
+    //  if (this.hasMixin('PlayerActor')){
+    //     console.log("after profs", char, total);
+    // }
 
+    if (this._statuses.length){
+       total += ((this.getStatusModifiers(char) / 100) * base);
+    }
+
+    //  if (this.hasMixin('PlayerActor')){
+    //     console.log("after statuses", char, total);
+    // }
+    
+    total += this.getEquipmentBonuses(char);
+    //  if (this.hasMixin('PlayerActor')){
+    //     console.log("after EQ", char, total);
+    // }
     return total;
 
 };

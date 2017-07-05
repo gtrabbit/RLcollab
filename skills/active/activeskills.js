@@ -1,139 +1,176 @@
 Game.Skills = {};
+Game.Skills.Templates = {};
+
+//==========Self-Targeting=========>>>>>>>
 
 
-Game.Skills.Run = {
+
+Game.Skills.Templates.Run = {
 	name: 'Run',
 	coolDownDuration: 10,
 	costs: {
 		Stamina: 20
 	},
 	activateMsg: "You begin running",
-	args: ["level", "actor"],
-	activate: function(args){
-		let level = this[args[0]];
-		let actor = this[args[1]];
-		Game.StatusEffects.makeStatus('haste', level, actor);
-		
+	activate: function(){
+		this.extractCosts();
+		Game.StatusEffects.makeStatus('haste', this.level, this.actor);	
 	}
 }
 
-
-Game.Skills.WhirlwindAttack = {
-	name: 'Whirlwind Attack',
-	coolDownDuration: 20,
-	costs: {
-		Stamina: 40
-	},
-	activateMsg: "You perform a whirlwind attack",
-	args: ["level", "actor"],
-	relStats: {},
-	activate: function(args){
-		let level = this[args[0]];
-		let actor = this[args[1]];
-		let targets = this.getTargets(actor);
-		targets.forEach(a=>{
-			if (a.hasMixin('Destructible')){
-				let damage = Math.ceil((actor.getMeleeDamageModifier() + actor.getWeaponAttackValue(true, true) * level) / 2)
-				let msg = "whirlwind attack";
-				a.takeDamage(actor, damage, msg);
-			}
-		})
-	},
-	getTargets: function(actor){
-		return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), 1, true)
-	}
-}
-
-
-Game.Skills.Bash = {
-	name: 'Bash',
-	coolDownDuration: 15,
-	costs: {
-		Stamina: 25
-	},
-	activateMsg: "You attempt to bash your target"
-} //incomplete
-
-Game.Skills.Regenerate = {
+Game.Skills.Templates.Regenerate = {
 	name: 'Regenerate',
 	coolDownDuration: 25,
 	costs: {
 		Stamina: 20,
 	},
 	activateMsg: "You begin healing faster",
-	args: ["level", "actor"],
-	activate: function(args){
-		let level = this[args[0]];
-		let actor = this[args[1]];
-		Game.StatusEffects.makeStatus('regen', level, actor);
+	activate: function(){
+		this.extractCosts();
+		Game.StatusEffects.makeStatus('regen', this.level, this.actor);
 	}
 }
 
-Game.Skills.Bless = {
+Game.Skills.Templates.Bless = {
 	name: 'Bless',
 	coolDownDuration: 25,
 	costs: {
 		Stamina: 20,
 	},
 	activateMsg: "You are blessed",
-	args: ["level", "actor"],
-	activate: function(args){
-		let level = this[args[0]];
-		let actor = this[args[1]];
-		Game.StatusEffects.makeStatus('bless', level, actor);
+	activate: function(){
+		this.extractCosts();
+		Game.StatusEffects.makeStatus('bless', this.level, this.actor);
 	}
 }
 
-Game.Skills.FlameBurst = {
+
+
+//===========AoEAroundCaster==========>>>>>>>
+
+Game.Skills.Templates.WhirlwindAttack = {
+	name: 'Whirlwind Attack',
+	coolDownDuration: 20,
+	costs: {
+		Stamina: 40
+	},
+	activateMsg: "You perform a whirlwind attack",
+	targetingType: 'AoEAroundCaster',
+	determineTargetingProps: function(actor, level){
+		return {
+			radius: 1,
+			excludeCenter: true
+		}
+	},
+	activate: function(){
+		this.extractCosts();
+		let targets = this.getTargets(this.actor, this.targetingProps);
+		targets.forEach(a=>{
+			if (a.hasMixin('Destructible')){
+				let damage = Math.ceil(((this.actor.getMeleeDamageModifier() + this.actor.getWeaponAttackValue(true, true)) * this.level) / 2)
+				let msg = "whirlwind attack";
+				a.takeDamage(this.actor, damage, msg);
+			}
+		})
+	}
+	
+}
+
+
+Game.Skills.Templates.FlameBurst = {
 	name: "Flame Burst",
 	coolDownDuration: 20,
 	costs: {
 		Stamina: 5
 	},
 	activateMsg: "You send out a wave of flames",
-	args: ["level", "actor"],
-	activate: function(args){
-		let actor = this[args[1]];
-		let targets = this.getTargets(actor);
-		let level = this[args[0]];
+	targetingType: 'AoEAroundCaster',
+	determineTargetingProps: function(actor, level){
+		let radius = 3 + level
+		return {
+			radius: radius,
+			excludeCenter: true
+		}
+	},
+	activate: function(){
+		this.extractCosts();
+		let targets = this.getTargets(this.actor, this.targetingProps);
 		targets.forEach((a)=>{
 			if (a.hasMixin('Destructible')){
 				let damage = 20;
 				let msg = "wall of flame"
-				a.takeDamage(actor, 20, msg)
+				a.takeDamage(this.actor, damage, msg)
 			}
 		})
-	},
-	getTargets: function(actor){
-		return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), 7, true);
 	}
 }
 
-Game.Skills.CorruptionWave = {
-name: "Wave of Corruption",
-coolDownDuration: 20,
-costs: {
+Game.Skills.Templates.CorruptionWave = {
+	name: "Wave of Corruption",
+	coolDownDuration: 20,
+	costs: {
 
-},
-activateMsg: "you conjure a wave of corruption",
-args: ['level', 'actor'],
-activate: function(args){
-let actor = this[args[1]];
-let level = this[args[0]];
-level += Math.round(actor.getArcana() / 5)
-let targets = this.getTargets(actor, level);
-targets.forEach((a)=>{
-if (a.hasMixin('Destructible')){
-let damage = level * 2;
-let msg = "wave of corruption"
-a.takeDamage(actor, damage, msg)
-Game.StatusEffects.makeStatus('blindness', level, a)
-Game.StatusEffects.makeStatus('weakness', level, a)
+	},
+	activateMsg: "you conjure a wave of corruption",
+	targetingType: 'AoEAroundCaster',
+	determineTargetingProps: function(actor, level){
+		let radius = 1 + level + Math.round(actor.getArcana() / 5)
+		return {
+			radius: radius,
+			excludeCenter: true
+		}
+	},
+	activate: function(){
+		this.extractCosts();
+		let targets = this.getTargets(this.actor, this.targetingProps);
+		let msg = "wave of corruption";
+		let damage = (this.level + Math.round(this.actor.getArcana() / 5)) * 2;
+		targets.forEach((a)=>{
+			if (a.hasMixin('Destructible')){
+				a.takeDamage(actor, damage, msg)
+				Game.StatusEffects.makeStatus('blindness', this.level, a)
+				Game.StatusEffects.makeStatus('weakness', this.level, a)
+			}
+		})
+	}
 }
-})
-},
-getTargets: function(actor, level){
-return actor.getMap().getEntitiesInVisibleRadius(actor.getPosition(), level + 2, true);
+
+
+
+
+
+
+
+//===========Single-Target=========>>>>>>>
+
+
+
+Game.Skills.Templates.Bash = {
+	name: 'Bash',
+	coolDownDuration: 15,
+	costs: {
+		Stamina: 25
+	},
+	activateMsg: "You attempt to bash your target",
+	targetingType: 'singleTarget',
+	determineTargetingProps: function(actor, level){
+		return {
+			maxRange: 1,
+			allowSelfTarget: false,
+			canTargetGround: false
+		}
+	},
+	activate: function(){
+        let callback = (target)=>{
+			Game.sendMessage(this.actor, this.activateMsg)
+			let msg = "bash"
+			target.getOccupant().takeDamage(this.actor, damage, msg)
+			this.extractCosts();		
+		}
+		let damage = (this.level + 1) * 5;
+		this.getTargets(this.actor, this.targetingProps, callback);
+	}
 }
-}
+
+
 

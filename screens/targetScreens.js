@@ -45,9 +45,10 @@ Game.Screen.TargetBasedScreen = function(template) {
     }
 };
 
-Game.Screen.TargetBasedScreen.prototype.setup = function(player, startX, startY, offsetX, offsetY, properties) {
+Game.Screen.TargetBasedScreen.prototype.setup = function(player, startX, startY, offsetX, offsetY, properties, callback) {
     this._player = player;
     this._properties = properties;
+    this._callback = callback
     // Store original position. Subtract the offset to make life easy so we don't
     // always have to remove it.
     this._startX = startX - offsetX;
@@ -58,6 +59,7 @@ Game.Screen.TargetBasedScreen.prototype.setup = function(player, startX, startY,
     // Store map offsets
     this._offsetX = offsetX;
     this._offsetY = offsetY;
+    this._specifiedTarget = false;
     // Cache the FOV
     var visibleCells = {};
     this._player.getMap().getFov(this._player.getZ()).compute(
@@ -71,14 +73,51 @@ Game.Screen.TargetBasedScreen.prototype.setup = function(player, startX, startY,
 
 Game.Screen.TargetBasedScreen.prototype.render = function(display) {
     Game.Screen.playScreen.renderTiles.call(Game.Screen.playScreen, display);
-
+    this.isPossible = true;
     // Draw a line from the start to the cursor.
     var points = Game.Geometry.getLine(this._startX, this._startY, this._cursorX,
         this._cursorY);
+    let indication = '%c{magenta}*'
+    let coords1 = this._player.getPosition();
+    let point1 = {
+        x: coords1[0],
+        y: coords1[1]
+    }
+    let point2 = {
+        x: this._cursorX + this._offsetX,
+        y: this._cursorY + this._offsetY
+    }
+  
+    let distance = Game.Geometry.getDistance(point1, point2);
+    if (this._properties.hasOwnProperty('maxRange')){
+        if (distance > this._properties.maxRange){
+            this.isPossible = false;
+            indication = '%c{grey}*'
+            display.drawText(3, Game.getScreenHeight()-3, "Target is out of range!")
+        }
+    }
+
+    if (!this._properties.allowSelfTarget && distance === 0){
+        this.isPossible = false;
+        indication = '%c{grey}*';
+        display.drawText(3, Game.getScreenHeight()-3, "You cannot target yourself")
+    }
+
+    if (!this._properties.canTargetGround){
+
+        this.specifiedTarget = this._player.getMap().getTile(point2.x, point2.y, this._player.getZ()).getOccupant();
+        if (!this.specifiedTarget){
+            this.isPossible = false;
+            indication = '%c{grey}*';
+            display.drawText(3, Game.getScreenHeight()-3, "You must select a valid target")
+        }
+    }
+
+   
 
     // Render stars along the line.
     for (var i = 0, l = points.length; i < l; i++) {
-        display.drawText(points[i].x, points[i].y, '%c{magenta}*');
+        display.drawText(points[i].x, points[i].y, indication);
     }
 
     // Render the caption at the bottom.
@@ -138,8 +177,9 @@ Game.Screen.TargetBasedScreen.prototype.executeOkFunction = function() {
     // Switch back to the play screen.
     Game.Screen.playScreen.setSubScreen(undefined);
     // Call the OK function and end the player's turn if it return true.
-    if (this._isAcceptableFunction(this._cursorX + this._offsetX, this._cursorY + this._offsetY, this._properties)) {
+    if (this.isPossible && this._isAcceptableFunction(this._cursorX + this._offsetX, this._cursorY + this._offsetY, this._properties) ) {
         this._player.getMap().getEngine().unlock();
+        return this.specifiedTarget;
     }
 };
 
@@ -149,17 +189,17 @@ Game.Screen.TargetBasedScreen.prototype.executeOkFunction = function() {
 
 Game.Screen.singleProjectile = new Game.Screen.TargetBasedScreen({
     okFunction: function(x, y){
-        let target = this._player.getMap().getTile(x, y, this._player.getZ());
+        this.specifiedTarget = this._player.getMap().getTile(x, y, this._player.getZ());
             switch(this._properties.actionType){
                 case "throw":
-                    this._player.throw(target, this._properties.projectile);
+                    this._player.throw(this.specifiedTarget, this._properties.projectile);
                     break;
+                default:
+                    this._callback(this.specifiedTarget);
             }
 
             return true;
     
-
-
 
     }
 

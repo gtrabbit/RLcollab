@@ -25,7 +25,7 @@ Game.StatusEffects.poison = function(multi){
 
 Game.StatusEffects.weakness = function(multi){
 	this.name = 'weakness';
-	this.value = {strength -50,
+	this.value = {strength: -50,
 	};
 	this.duration = 6 + (multi || 0);
 }
@@ -33,10 +33,11 @@ Game.StatusEffects.weakness = function(multi){
 
  Game.StatusEffects.blindness = function(multi){
 	this.name = 'blindness';
-	this.value = {sightRadius: -70,
-	AccuracyBonus: -75,
-	};
-	this.duration = 5,
+	this.value = {
+		sightRadius: -70,
+		AccuracyBonus: -75
+		};
+	this.duration = 5
 }
 
  Game.StatusEffects.eagleeye = function(multi){
@@ -45,23 +46,22 @@ Game.StatusEffects.weakness = function(multi){
 	AccuracyBonus: 20,
 	perception: 20,
 	};
-	this.duration = 8,
+	this.duration = 8
 }
 
  Game.StatusEffects.truesight = function(multi){
 	this.name = 'true sight';
 	this.value = {SeeInvis: 75,
 	};
-	this.duration = 10,
+	this.duration = 10
 }
 
 
 
 Game.StatusEffects.daze = function(multi){
 	this.name = 'daze';
-	this.value = {AccuracyBonus -50,
-		speed -50,
-		
+	this.value = {AccuracyBonus: -50,
+		speed: -50,
 	};
 	this.duration = 4 + (multi || 0);
 }
@@ -73,7 +73,7 @@ Game.StatusEffects.bless = function(multi){
 		dexterity: +30, 
 		vitality: +30, 
 	};
-	this.duration = 6,
+	this.duration = 6
 }
 
 Game.StatusEffects.haste = function(multi){
@@ -115,7 +115,7 @@ Game.StatusEffects.regen = function(multi){
 		RegenBonus: +30 + (multi || 0),
 	};
 	this.duration = 10 + (multi || 1);
-
+}
 //this function is used to generate a status and apply it to a target
 
 Game.StatusEffects.makeStatus = function(status, multi, target){

@@ -35,7 +35,7 @@ Game.PlayerTemplate = {
             Game.Mixins.ExperienceGainer,
             Game.Mixins.PlayerStatGainer],
     extraMixins: [],
-    baseSkills: [[Game.Skills.Run, 1], [Game.Skills.Bash, 1], [Game.Skills.Regenerate, 1], [Game.Skills.WhirlwindAttack, 1], [Game.Skills.FlameBurst, 1]],
+    baseSkills: Game.Skills.GiveAllSkillsAtLevelOne(),
  
 }
 
