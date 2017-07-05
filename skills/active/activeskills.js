@@ -109,7 +109,7 @@ Game.Skills.Templates.CorruptionWave = {
 	name: "Wave of Corruption",
 	coolDownDuration: 20,
 	costs: {
-
+		MP: 10
 	},
 	activateMsg: "you conjure a wave of corruption",
 	targetingType: 'AoEAroundCaster',

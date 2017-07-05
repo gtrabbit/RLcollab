@@ -334,6 +334,7 @@ Game.Entity.prototype.modifyStamina = function(amount){
     this._stamina += amount;
 }
 
+
 Game.Entity.prototype.setSpeed = function(speed) {
     this._speed = speed;
 };
