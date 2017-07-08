@@ -90,63 +90,63 @@ Game.Skills.Templates.WhirlwindAttack = {
 }
 
 
-Game.Skills.Templates.FlameBurst = {
-	name: "Flame Burst",
-	coolDownDuration: -1,
-	costs: {
-		MP: 13
-	},
-	activateMsg: "You send out a wave of flames",
-	targetingType: 'AoEAroundCaster',
-	determineTargetingProps: function(actor, level){
-		let radius = 3 + level
-		return {
-			radius: radius,
-			excludeCenter: true
-		}
-	},
-	activate: function(){
-		this.extractCosts();
-		let targets = this.getTargets(this.actor, this.targetingProps);
-		targets.forEach((a)=>{
-			if (a.hasMixin('Destructible')){
-				let damage = 20;
-				let msg = "wall of flame"
-				a.takeDamage(this.actor, damage, msg)
-			}
-		})
-	}
-}
+// Game.Skills.Templates.FlameBurst = {
+// 	name: "Flame Burst",
+// 	coolDownDuration: -1,
+// 	costs: {
+// 		MP: 13
+// 	},
+// 	activateMsg: "You send out a wave of flames",
+// 	targetingType: 'AoEAroundCaster',
+// 	determineTargetingProps: function(actor, level){
+// 		let radius = 3 + level
+// 		return {
+// 			radius: radius,
+// 			excludeCenter: true
+// 		}
+// 	},
+// 	activate: function(){
+// 		this.extractCosts();
+// 		let targets = this.getTargets(this.actor, this.targetingProps);
+// 		targets.forEach((a)=>{
+// 			if (a.hasMixin('Destructible')){
+// 				let damage = 20;
+// 				let msg = "wall of flame"
+// 				a.takeDamage(this.actor, damage, msg)
+// 			}
+// 		})
+// 	}
+// }
 
-Game.Skills.Templates.CorruptionWave = {
-	name: "Wave of Corruption",
-	coolDownDuration: -1,
-	costs: {
-		MP: 10
-	},
-	activateMsg: "you conjure a wave of corruption",
-	targetingType: 'AoEAroundCaster',
-	determineTargetingProps: function(actor, level){
-		let radius = 1 + level + Math.round(actor.getArcana() / 5)
-		return {
-			radius: radius,
-			excludeCenter: true
-		}
-	},
-	activate: function(){
-		this.extractCosts();
-		let targets = this.getTargets(this.actor, this.targetingProps);
-		let msg = "wave of corruption";
-		let damage = (this.level + Math.round(this.actor.getArcana() / 5)) * 2;
-		targets.forEach((a)=>{
-			if (a.hasMixin('Destructible')){
-				a.takeDamage(this.actor, damage, msg)
-				Game.StatusEffects.makeStatus('blindness', this.level, a)
-				Game.StatusEffects.makeStatus('weakness', this.level, a)
-			}
-		})
-	}
-}
+// Game.Skills.Templates.CorruptionWave = {
+// 	name: "Wave of Corruption",
+// 	coolDownDuration: -1,
+// 	costs: {
+// 		MP: 10
+// 	},
+// 	activateMsg: "you conjure a wave of corruption",
+// 	targetingType: 'AoEAroundCaster',
+// 	determineTargetingProps: function(actor, level){
+// 		let radius = 1 + level + Math.round(actor.getArcana() / 5)
+// 		return {
+// 			radius: radius,
+// 			excludeCenter: true
+// 		}
+// 	},
+// 	activate: function(){
+// 		this.extractCosts();
+// 		let targets = this.getTargets(this.actor, this.targetingProps);
+// 		let msg = "wave of corruption";
+// 		let damage = (this.level + Math.round(this.actor.getArcana() / 5)) * 2;
+// 		targets.forEach((a)=>{
+// 			if (a.hasMixin('Destructible')){
+// 				a.takeDamage(this.actor, damage, msg)
+// 				Game.StatusEffects.makeStatus('blindness', this.level, a)
+// 				Game.StatusEffects.makeStatus('weakness', this.level, a)
+// 			}
+// 		})
+// 	}
+// }
 
 
 
@@ -242,3 +242,39 @@ Game.Skills.Templates.Iceshard = {
 }
 
 
+//==========Ranged AoE===========>>>>>>
+
+Game.Skills.Templates.Fireball = {
+	name: 'Fireball',
+	coolDownDuration: 10,
+	costs: {
+		MP: 14
+	},
+	activateMsg: "You evoke a ball of fire",
+	targetingType: 'singleTarget',
+	determineTargetingProps: function(actor, level){
+		return {
+			maxRange: 6,
+			allowSelfTarget: true,
+			canTargetGround: true,
+			aoe: 3,
+			aoeColor: 'red'
+		}
+	},
+	activate: function(){
+        let callback = (targets)=>{
+			Game.sendMessage(this.actor, this.activateMsg)
+			let msg = "fireball"
+			targets.forEach(a=>{
+				let entity = a.getOccupant();
+				if (entity){
+					entity.takeDamage(this.actor, damage, msg)
+				}
+				
+			})
+			this.extractCosts();
+		}
+		let damage = (this.level + 1) * 5;
+		this.getTargets(this.actor, this.targetingProps, callback);
+	}
+}

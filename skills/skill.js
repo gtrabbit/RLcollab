@@ -22,7 +22,7 @@ Game.Skills.extractCosts = function(){
 	}
 
 }
-
+ 
 Game.Skills.targeting = {
 	singleTarget: function(actor, properties, callback){
 		let offsets = Game.Screen.playScreen.getScreenOffsets();

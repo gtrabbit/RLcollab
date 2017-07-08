@@ -90,6 +90,24 @@ Game.Map.prototype.getEntitiesInVisibleRadius = function(point, radius, excludeC
 
 }
 
+Game.Map.prototype.getTilesInVisibleRadius = function(point, radius){
+
+    let targets = []
+    let fov = new ROT.FOV.PreciseShadowcasting( (x, y)=>{
+        if (this.getTile(x, y, point[2])){
+                return !this.getTile(x, y, point[2]).isBlockingLight();
+            }
+    }, {topology: 4});
+
+    fov.compute(point[0], point[1], radius, (x, y, r, visibility)=>{
+        let coords = [x,y,point[2]];
+        if (this.getTile(x, y, point[2])){
+            targets.push(coords);
+        }
+    })
+    return targets;
+}
+
 
 
 Game.Map.prototype._setupExploredArray = function(){

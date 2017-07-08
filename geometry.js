@@ -101,29 +101,6 @@ Game.Geometry = {
 
         } //close while loop
 
-
-
-
-        // while (count < radius){
-        //     count++
-        //     for (let i= y- count ; i<= y+ count; i++){
-        //         for(let k = x- count; k<= x+ count; k++){
-        //             let target = map.getTile(k, i, z).getOccupant();
-        //             if (target && !(k === x && i === y)){
-        //                 if (actor && actor.canSee(target)){
-        //                     return target;
-        //                 } else {
-        //                     continue;
-        //                 }
-        //                 return target;
-        //             }
-
-
-        //         }
-        //     }
-
-        // }
-
         Game.sendMessage(map._player, "No visible targets");
     }
 

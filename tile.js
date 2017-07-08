@@ -1,6 +1,7 @@
 
 
 Game.Tile = function(properties){
+
 	this._occupant = null;
 	this._loot = [];
 	properties = properties || {};
@@ -11,6 +12,7 @@ Game.Tile = function(properties){
 	this._description = properties['description'] || '';
 	this._blocksLight = (properties['blocksLight'] !== undefined) ?
 		properties['blocksLight'] : true;
+
 };
 
 Game.Tile.extend(Game.Glyph);

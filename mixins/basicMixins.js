@@ -87,6 +87,18 @@ Game.Mixins.Sight = {
             });
         return found;
     },
+    canSeeLocation: function(point){
+        let found = false;
+        this.getMap().getFov(this.getZ()).compute(
+            this.getX(), this.getY(), 
+            this.getSightRadius(), 
+            function(x, y, radius, visibility) {
+                if (x == point[0] && y == point[1]) {
+                    found = true;
+                }
+            });
+        return found;
+    },
     increaseSightRadius: function(value) {
         // If no value was passed, default to 1.
         value = value || 1;
