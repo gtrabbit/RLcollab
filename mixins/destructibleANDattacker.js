@@ -239,18 +239,20 @@ Game.Mixins.Attacker = {
         }
 
     },
-    getWeaponAttackValue: function(mainHand, offHand) {
+    getWeaponAttackValue: function(mainHand, offhand) {
         var modifier = 0;
-        // If we can equip items, then have to take into 
-        // consideration weapon and armor
-        if (this.hasMixin(Game.Mixins.Equipper)) {
-         
-//need code here eventually
 
+        if (this.hasMixin(Game.Mixins.Equipper)) {
+            if (mainHand && this._equipment.mainHand){
+                modifier += this._equipment.mainHand.getAttackValue();
+            }
+            if (offhand && this._equipment.offhand){
+                modifier += this._equipment.offhand.getAttackValue();
+            }
         }
         return modifier;
     }
-   
+  
 
 }
 

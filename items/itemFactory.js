@@ -118,7 +118,12 @@ Equipment: class Equipment {
 Weapons: class Weapon {
 	constructor(template){
 		this.baseStat = 'attackValue';
-		this.EQSlot = ['mainHand', "offhand"];
+		if (!template.twoHand){
+			this.EQSlot = ['mainHand', "offhand"];
+		} else {
+			this.EQSlot = ['mainHand']
+		}
+		
 		this.EQType = "weapon"
 		for (let key in template){
 			this[key] = template[key] || 0;		

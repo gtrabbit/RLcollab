@@ -92,7 +92,7 @@ Game.Items.Equipment.Weapons.Swords = {
 
 //staves
 Game.Items.Equipment.Weapons.Staves = {
-	yewstaff: {
+	staff: {
 	character: ")",
 	foreground: 'blue',
 	attackValue: 6,
@@ -100,6 +100,7 @@ Game.Items.Equipment.Weapons.Staves = {
 	EQsubtype: "Staff",
 	weight: 6,
 	variance: 3,
+	twoHand: true,
 	bonuses: {   
 		arcana: 2
 }

@@ -175,14 +175,14 @@ Game.Skills.Templates.Bash = {
 	},
 	activate: function(){
         let callback = (target)=>{
+        	let damage = (this.level + 1) * 5;
 			Game.sendMessage(this.actor, this.activateMsg)
 			let msg = "bash"
-			// add daze somehow to this: target.getOccupant().takeDamage(this.actor, damage, msg)
+			target.getOccupant().takeDamage(this.actor, damage, msg)
+			Game.StatusEffects.makeStatus('daze', this.level, this.actor);
 			this.extractCosts();		
 		}
-		let damage = (this.level + 1) * 5;
-		this.getTargets(this.actor, this.targetingProps, callback);
-		Game.StatusEffects.makeStatus('daze', this.level, this.actor);	
+		this.getTargets(this.actor, this.targetingProps, callback);	
 	}
 }
 

@@ -20,6 +20,9 @@ Game.Mixins.Equipper = {
         item.EQSlot.forEach(a => {
             if (this.getEquipment(a) === null && !changed){
                 this._equipment[a] = item;
+                if (this._equipment.mainHand.twoHand){
+                    this._equipment.offhand = false;
+                }
                 changed = true;
 
             }
@@ -33,6 +36,9 @@ Game.Mixins.Equipper = {
 
     },
     unwield: function(slot) {
+        if (this._equipment[slot].twoHand){
+            this._equipment.offhand = null;
+        }
         this._equipment[slot] = null;
     },
     isWearingShields: function (){
