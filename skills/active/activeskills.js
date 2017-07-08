@@ -262,7 +262,7 @@ Game.Skills.Templates.Fireball = {
 		}
 	},
 	activate: function(){
-        let callback = (targets)=>{
+        let callback = (targets, center)=>{
 			Game.sendMessage(this.actor, this.activateMsg)
 			let msg = "fireball"
 			targets.forEach(a=>{
@@ -272,6 +272,44 @@ Game.Skills.Templates.Fireball = {
 				}
 				
 			})
+			this.extractCosts();
+		}
+		let damage = (this.level + 1) * 5;
+		this.getTargets(this.actor, this.targetingProps, callback);
+	}
+}
+
+
+Game.Skills.Templates.Charge = {
+	name: 'Charge',
+	coolDownDuration: 5,
+	costs: {
+		Stamina: 6
+	},
+	activateMsg: "You run like hell",
+	targetingType: 'singleTarget',
+	determineTargetingProps: function(actor, level){
+		return {
+			maxRange: 4,
+			allowSelfTarget: false,
+			canTargetGround: true,
+			mustTargetGround: true,
+			aoe: 2,
+			aoeColor: 'cyan'
+		}
+	},
+	activate: function(){
+        let callback = (targets, center)=>{
+			Game.sendMessage(this.actor, this.activateMsg);
+			let msg = "charge"
+			targets.forEach(a=>{
+				let entity = a.getOccupant();
+				if (entity){
+					entity.takeDamage(this.actor, damage, msg)
+				}
+				
+			})
+			this.actor.setPosition(center[0], center[1], this.actor.getZ())
 			this.extractCosts();
 		}
 		let damage = (this.level + 1) * 5;

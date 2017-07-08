@@ -124,6 +124,12 @@ Game.Screen.TargetBasedScreen.prototype.render = function(display) {
         indication = cacheInd;
     }
 
+    if (this._properties.mustTargetGround && this._player.getMap().getTile(point2.x, point2.y, this._player.getZ()).getOccupant()){
+        this.isPossible = false;
+        indication = '%c{grey}*';
+        display.drawText(3, Game.getScreenHeight()-3, "You must target an empty location")
+    }
+
   //  if (this._player.canSeeLocation([point2.x, point2.y])){
 
         if (this._properties.hasOwnProperty('aoe') && distance < this._properties.maxRange){
@@ -233,7 +239,7 @@ Game.Screen.singleProjectile = new Game.Screen.TargetBasedScreen({
                         this.targets.forEach(a=>{
                             targetedTiles.push(this._player.getMap().getTile(a[0], a[1], a[2]));
                         })
-                        this._callback(targetedTiles);
+                        this._callback(targetedTiles, [this._cursorX + this._offsetX, this._cursorY + this._offsetY]);
                     } else {
                         this._callback(this.specifiedTarget);
                     }
