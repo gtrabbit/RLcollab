@@ -233,11 +233,12 @@ Game.Skills.Templates.Iceshard = {
 			Game.sendMessage(this.actor, this.activateMsg)
 			let msg = "ice shard"
 			target.getOccupant().takeDamage(this.actor, damage, msg)
+			Game.StatusEffects.makeStatus('chilled', this.level, target.getOccupant());
 			this.extractCosts();
 		}
 		let damage = (this.level + 1) * 5;
 		this.getTargets(this.actor, this.targetingProps, callback);
-		//somehow add chilled to the target: Game.StatusEffects.makeStatus('chilled', this.level, this.actor);
+	
 	}
 }
 
