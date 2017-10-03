@@ -4,29 +4,29 @@ window.onload = function(){
 	} else {
 		Game.init();
 
-		const gameDisplay = Game.getDisplay().getContainer();
-		const statusDisplay = Game.getStatusDisplay().getContainer();
-		const msgDisp = Game.getMsgDisplay().getContainer();
+		// const gameDisplay = Game.getDisplay().getContainer();
+		// const statusDisplay = Game.getStatusDisplay().getContainer();
+		// const msgDisp = Game.getMsgDisplay().getContainer();
 
-		gameDisplay.id = "gameDisplay";
-		gameDisplay.className = "gameDsp centered-block";
-		msgDisp.className = "centered-block msg";
-		statusDisplay.className = "centered-block status";
-		Game.skillBar = document.createElement('div');
-		Game.skillBar.className = "skillBar";
-		Game.skillBar.innerHTML = "Skills: <hr>"
-		const main = document.getElementById('mainDisplays');
-		const allScreens = document.getElementById('allScreens');
+		// gameDisplay.id = "gameDisplay";
+		// gameDisplay.className = "gameDsp centered-block";
+		// msgDisp.className = "centered-block msg";
+		// statusDisplay.className = "centered-block status";
+		// Game.skillBar = document.createElement('div');
+		// Game.skillBar.className = "skillBar";
+		// Game.skillBar.innerHTML = "Skills: <hr>"
+		// const main = document.getElementById('mainDisplays');
+		// const allScreens = document.getElementById('allScreens');
 
-		allScreens.insertBefore(Game.skillBar, main);
+		// allScreens.insertBefore(Game.skillBar, main);
 
-		main.appendChild(gameDisplay);
-		main.appendChild(statusDisplay);
-		main.appendChild(msgDisp);
+		// main.appendChild(gameDisplay);
+		// main.appendChild(statusDisplay);
+		// main.appendChild(msgDisp);
 	
 
-
-		Game.switchScreen(Game.Screen.startScreen);
+		document.getElementById('intro').style.display = "block"
+	//	Game.switchScreen(Game.Screen.startScreen);
 	}
 
 }

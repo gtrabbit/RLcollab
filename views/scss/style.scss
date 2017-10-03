@@ -1,36 +1,41 @@
-p{
-	position: absolute;
-	bottom: 5vh;
-	font-family: 'Courier', 'sans-serif';
-	font-size: 12px;
-	text-indent: 20vw;
-
-}
 
 body{
 	margin: 0;
 	background-color: black;
 }
 
-.allScreens{
-	display: flex;
-	margin: auto ;
-	height: 100vh;
-	align-items: center;
-	justify-content: flex-start;
-	counter-reset: skillIcon;
+
+.intro-screen {
+	display: none;
+	.title {
+		color: white;
+		text-align: center;
+
+	}
+	.main-menu {
+		width: 50%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		background-color: grey;
+		margin: auto;
+		* {
+			width: 50%;
+			margin: 2% 25%;
+		}
+	}
 }
 
 
 
-.centered-block{
-	margin: auto;
-	display: block;
-}
 
-.mainDisplays{
 
-}
+
+
+
+
+
+
 
 .skillIcon{
 	color: white;

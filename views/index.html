@@ -2,25 +2,44 @@
 <html>
     <head>
         <title>Rogue-Like Proto 1</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="./src/style.css">
   
     </head>
     <body>
 
 
-<div id="allScreens" class="allScreens">
 
-    <div id="mainDisplays" class="mainDisplays">
-        
-    </div>
+        <div class="game-content">
+            <div class="intro-screen" id="intro">
+                <h1 class="title">TITLE OF GAME</h1>
+                <div class="main-menu">
+                    <button id="new-game">New Game</button>
+                    <button id="continue">Continue</button>
+                    <button id="options">Options</button>
+                </div>
+            </div>
+
+            <div class="character-creation">
+                
+            </div>
 
 
-</div>
+        </div>
 
 
-<button onClick="Game.Items.Selector.buildItem(80, 5)" > Test </button>
 
-<button onClick="console.log(Game.Screen.playScreen._player)" > Player check </button>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <script type="text/javascript" src="../libs/rot.min.js"></script>
@@ -66,7 +85,5 @@
         
 
 
-
-        <p>Press '?' for help screen</p>
     </body>
 </html>
