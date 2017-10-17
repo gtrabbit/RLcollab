@@ -25,10 +25,16 @@ window.onload = function(){
 		// main.appendChild(msgDisp);
 	
 
-		document.getElementById('intro').style.display = "block"
+		document.getElementById('intro').style.display = "block";
+		document.getElementById('new-game').addEventListener('click', startNewGame)
+
 	//	Game.switchScreen(Game.Screen.startScreen);
 	}
 
+}
+
+const startNewGame = function(){
+	
 }
 
 
